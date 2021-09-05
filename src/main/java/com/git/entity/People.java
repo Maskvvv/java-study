@@ -16,4 +16,9 @@ public class People {
      */
     private String pop1;
 
+    /**
+     * pop2
+     */
+    private String pop2;
+
 }
