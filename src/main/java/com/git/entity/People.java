@@ -11,9 +11,4 @@ public class People {
 
     private int age;
 
-    /**
-     * zhy1
-     */
-    private String zhy1;
-
 }
