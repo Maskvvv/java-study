@@ -11,4 +11,9 @@ public class People {
 
     private int age;
 
+    /**
+     * pop1
+     */
+    private String pop1;
+
 }
