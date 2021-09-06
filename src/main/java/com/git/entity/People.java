@@ -32,7 +32,4 @@ public class People {
     private String pop3;
 
 
-
-    private String revert;
-
 }
