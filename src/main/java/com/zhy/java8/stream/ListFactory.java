@@ -2,6 +2,7 @@ package com.zhy.java8.stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @description:
@@ -84,5 +85,18 @@ class People {
                 ", age=" + age +
                 ", theClass=" + theClass +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof People)) return false;
+        People people = (People) o;
+        return age == people.age && theClass == people.theClass && Objects.equals(name, people.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, theClass);
     }
 }

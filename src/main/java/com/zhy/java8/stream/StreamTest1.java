@@ -116,6 +116,47 @@ public class StreamTest1 {
     public void streamTest7(){
         List<Integer> list;
 
-        System.out.println(ListUtils.emptyIfNull(list));
+        Integer[] intArray = {1};
+        Integer tem = intArray[0];
+        System.out.println(tem);
+
+        intArray[0] =2;
+
+        System.out.println(tem);
+
+        System.out.println(intArray[0]);
+
+        System.out.println("---------------------------------");
+        Integer[] intArray2 = intArray;
+        System.out.println(intArray2);
+        System.out.println(intArray);
+        intArray = null;
+        System.out.println(intArray2);
+        System.out.println(intArray);
+        System.out.println("---------------------------------");
+
+
+        List<People> peopleList = ListFactory.getPeopleList();
+
+        People people = peopleList.get(0);
+
+        System.out.println(people);
+
+        peopleList.get(0).setName("指针测试");
+
+        System.out.println(people);
+
+        List<People> peopleList2 = peopleList;
+
+        System.out.println(peopleList2);
+
+        peopleList2 = null;
+
+        System.out.println(peopleList2);
+
+
+        System.out.println(Runtime.getRuntime().availableProcessors());
+
+        //System.out.println(ListUtils.emptyIfNull(list));
     }
 }

@@ -2,6 +2,7 @@ package com.zhy.java8.stream;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,8 @@ public class StreamTest4 {
     @Test
     public void streamTest1(){
         List<People> peopleList = ListFactory.getPeopleList();
-        peopleList.stream().collect(Collectors.groupingBy(People::getAge))
+        List<People> nullList = new ArrayList<>();
+        nullList.stream().collect(Collectors.groupingBy(People::getAge))
                 .forEach((key, value) -> System.out.println(key+":"+value));
     }
 
