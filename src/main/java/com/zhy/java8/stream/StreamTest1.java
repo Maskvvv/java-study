@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/8/10 15:25
+ *  
+ * @author zhouhongyin
+ * @since 2021/8/10 15:25
  */
 
 public class StreamTest1 {

@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/8/26 17:24
+ *  
+ * @author zhouhongyin
+ * @since 2021/8/26 17:24
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

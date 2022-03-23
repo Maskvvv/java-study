@@ -15,15 +15,21 @@ public class ReflectionTest {
         // 获取private字段"grade":
         System.out.println(stdClass.getDeclaredField("grade"));
 
+        System.out.println("----------getDeclaredFields-----------");
+        Field[] declaredFields = stdClass.getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            System.out.println(declaredField);
+        }
+        System.out.println("----------getDeclaredFields-----------");
 
         Object p = new Person("Xiao Ming");
         // 获取该类 Class 对象
-        Class c = p.getClass();
+        Class<? extends Object> c = p.getClass();
         // 获取该类 属性 Field
         Field f = c.getDeclaredField("name");
         // 通过 Field 后去该类的 实列的 属性的值
         Object value = f.get(p);
-        System.out.println(value); // "Xiao Ming"
+        System.out.println(value)  ; // "Xiao Ming"
     }
 
 }

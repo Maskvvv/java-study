@@ -10,9 +10,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * @description:分组分片
- * @author: zhouhongyin
- * @time: 2021/8/12 11:25
+ *  分组分片
+ * @author zhouhongyin
+ * @since 2021/8/12 11:25
  */
 
 public class StreamTest4 {

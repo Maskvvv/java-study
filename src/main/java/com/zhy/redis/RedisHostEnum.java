@@ -1,9 +1,9 @@
 package com.zhy.redis;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/7/27 11:35
+ *  
+ * @author zhouhongyin
+ * @since 2021/7/27 11:35
  */
 
 public enum RedisHostEnum {

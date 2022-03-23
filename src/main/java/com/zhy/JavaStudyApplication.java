@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/8/3 16:42
+ *  
+ * @author zhouhongyin
+ * @since 2021/8/3 16:42
  */
 
 @SpringBootApplication

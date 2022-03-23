@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/7/26 16:32
+ *  
+ * @author zhouhongyin
+ * @since 2021/7/26 16:32
  */
 
 @Data

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @description:生成器模式练习
+ *  生成器模式练习
  * 用Builder模式编写一个URLBuilder
  *
  * String url = URLBuilder.builder() // 创建Builder
@@ -17,8 +17,8 @@ import java.util.Map;
  *         .build(); // 完成build
  *
  *
- * @author: zhouhongyin
- * @time: 2021/8/13 15:24
+ * @author zhouhongyin
+ * @since 2021/8/13 15:24
  */
 
 public class URLBuilder {

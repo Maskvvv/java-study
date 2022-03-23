@@ -3,9 +3,9 @@ package com.zhy.java基础.继承;
 import org.junit.Test;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/8/25 15:02
+ *  
+ * @author zhouhongyin
+ * @since 2021/8/25 15:02
  */
 public class InheritTest {
 

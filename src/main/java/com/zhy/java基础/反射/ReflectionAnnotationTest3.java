@@ -2,6 +2,7 @@ package com.zhy.java基础.反射;
 
 import com.zhy.java基础.反射.annotation.ReflectAnnotation;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Method;
 
@@ -17,6 +18,9 @@ public class ReflectionAnnotationTest3 {
             String name = annotation.name();
             System.out.println(name);
         }
+
+        ReflectAnnotation annotation = student3Class.getAnnotation(ReflectAnnotation.class);
+        System.out.println(annotation);
 
 
     }

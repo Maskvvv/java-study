@@ -1,9 +1,9 @@
 package com.zhy.java基础.Thread;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/8/1 12:04
+ *  
+ * @author zhouhongyin
+ * @since 2021/8/1 12:04
  */
 
 public class ThreadTest {

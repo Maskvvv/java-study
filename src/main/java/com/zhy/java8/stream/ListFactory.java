@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/8/10 15:27
+ *  
+ * @author zhouhongyin
+ * @since 2021/8/10 15:27
  */
 
 public class ListFactory {

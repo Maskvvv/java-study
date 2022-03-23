@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/8/30 15:23
+ *  
+ * @author zhouhongyin
+ * @since 2021/8/30 15:23
  */
 public class SimpleDateFormatTest {
     public static void main(String[] args) {

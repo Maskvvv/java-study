@@ -12,9 +12,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * @description: 收集(collect)
- * @author: zhouhongyin
- * @time: 2021/8/12 10:19
+ *   收集(collect)
+ * @author zhouhongyin
+ * @since 2021/8/12 10:19
  */
 
 public class StreamTest3 {
@@ -40,7 +40,7 @@ public class StreamTest3 {
      */
     @Test
     public void streamTest2(){
-        List<String> list = Arrays.asList(new String[]{"3","1","414","8","58"});
+        List<String> list = Arrays.asList("3","1","414","8","58");
 
         String collect = list.stream().collect(Collectors.joining(","));
         System.out.println(collect);
@@ -79,6 +79,9 @@ public class StreamTest3 {
 
     }
 
+    /**
+     * 转 Map
+     */
     @Test
     public void streamTest4(){
         List<People> peopleList = ListFactory.getPeopleList();

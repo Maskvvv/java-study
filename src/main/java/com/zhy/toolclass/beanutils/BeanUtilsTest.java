@@ -5,9 +5,9 @@ import com.zhy.toolclass.beanutils.bean.Student2;
 import org.springframework.beans.BeanUtils;
 
 /**
- * @description:
- * @author: zhouhongyin
- * @time: 2021/7/26 16:29
+ *  
+ * @author zhouhongyin
+ * @since 2021/7/26 16:29
  */
 
 public class BeanUtilsTest {
