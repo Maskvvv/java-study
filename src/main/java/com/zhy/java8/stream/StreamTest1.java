@@ -8,15 +8,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *  
+ * 过滤、映射、跳过，限制、去重、排序
+ *
  * @author zhouhongyin
  * @since 2021/8/10 15:25
  */
 
 public class StreamTest1 {
 
+    /**
+     * 过滤
+     */
     @Test
-    public void streamTest1(){
+    public void streamTest1() {
         List<Integer> list = ListFactory.getIntegerList();
         long count = list.stream().filter(number -> number > 20).count();
         System.out.println(count);
@@ -25,8 +29,11 @@ public class StreamTest1 {
 
     }
 
+    /**
+     * 过滤
+     */
     @Test
-    public void streamTest2(){
+    public void streamTest2() {
         List<Integer> list = ListFactory.getIntegerList();
         List<Integer> collect = list.stream().filter(number -> number > 20).collect(Collectors.toList());
         System.out.println(collect);
@@ -34,8 +41,11 @@ public class StreamTest1 {
 
     }
 
+    /**
+     * 映射
+     */
     @Test
-    public void streamTest3(){
+    public void streamTest3() {
         List<Integer> list = ListFactory.getIntegerList();
         List<String> collect = list.stream().map(i -> String.valueOf(i)).collect(Collectors.toList());
         System.out.println(collect);
@@ -53,7 +63,7 @@ public class StreamTest1 {
      * 映射不修改原集合对象的方式
      */
     @Test
-    public void streamTest3_1(){
+    public void streamTest3_1() {
 
         List<People> peopleList = ListFactory.getPeopleList();
 
@@ -71,38 +81,49 @@ public class StreamTest1 {
      * 映射不修改原集合对象的方式
      */
     @Test
-    public void streamTest3_2(){
+    public void streamTest3_2() {
 
         List<People> peopleList = ListFactory.getPeopleList();
 
-        System.out.println("增加后："+peopleList);
+        System.out.println("增加后：" + peopleList);
 
         List<People> collect = peopleList.stream().map(people -> {
             People people1 = new People(people.getName(), people.getAge() + 10, people.getTheClass());
             return people1;
         }).collect(Collectors.toList());
 
-        System.out.println("增加后："+peopleList);
+        System.out.println("增加后：" + peopleList);
     }
 
+    /**
+     * 跳过，限制
+     */
     @Test
-    public void streamTest4(){
+    public void streamTest4() {
+        System.out.println("skip");
         List<Integer> list = ListFactory.getIntegerList();
         list.stream().skip(3).forEach(System.out::println);
 
+        System.out.println("limit");
         List<Integer> list1 = ListFactory.getIntegerList();
         list1.stream().limit(3).forEach(System.out::println);
     }
 
+    /**
+     * 去重
+     */
     @Test
-    public void streamTest5(){
+    public void streamTest5() {
         List<Integer> list = ListFactory.getIntegerList();
         List<Integer> collect = list.stream().distinct().collect(Collectors.toList());
         System.out.println(collect);
     }
 
+    /**
+     * 排序
+     */
     @Test
-    public void streamTest6(){
+    public void streamTest6() {
         List<Integer> list = ListFactory.getIntegerList();
         List<Integer> collect = list.stream().sorted((i1, i2) -> Integer.compare(i1, i2)).collect(Collectors.toList());
         System.out.println(collect);
@@ -113,14 +134,14 @@ public class StreamTest1 {
     }
 
     @Test
-    public void streamTest7(){
+    public void streamTest7() {
         List<Integer> list;
 
         Integer[] intArray = {1};
         Integer tem = intArray[0];
         System.out.println(tem);
 
-        intArray[0] =2;
+        intArray[0] = 2;
 
         System.out.println(tem);
 

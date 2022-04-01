@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *  
+ *  最大最小值、
  * @author zhouhongyin
  * @since 2021/8/11 8:34
  */
 
 public class StreamTest2 {
+
+    /**
+     * 最大最小值
+     */
     @Test
     public void streamTest1(){
         List<Integer> list = ListFactory.getIntegerList();

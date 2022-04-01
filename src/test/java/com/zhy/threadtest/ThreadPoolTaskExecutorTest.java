@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.Vector;
 
 /**
- *  
  * @author zhouhongyin
  * @since 2021/8/3 16:44
  */
@@ -31,18 +30,18 @@ public class ThreadPoolTaskExecutorTest {
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Test
-    public void ThreadTest(){
+    public void ThreadTest() {
 
 
         threadPoolTaskExecutor.execute(() -> {
             for (int i = 0; i < 10000; i++) {
-                System.out.println(Thread.currentThread().getName()+"->"+i);
+                System.out.println(Thread.currentThread().getName() + "->" + i);
             }
         });
 
 
         for (int i = 0; i < 10000; i++) {
-            System.out.println(Thread.currentThread().getName()+"->"+i);
+            System.out.println(Thread.currentThread().getName() + "->" + i);
         }
 
         int[] ints = new int[1];
@@ -50,7 +49,7 @@ public class ThreadPoolTaskExecutorTest {
     }
 
     @Test
-    public void parallelStreamTest(){
+    public void parallelStreamTest() {
         List<Integer> integerList = new ArrayList<>();
 
         for (int i = 0; i < 20000; i++) {
@@ -58,11 +57,11 @@ public class ThreadPoolTaskExecutorTest {
         }
 
         integerList.parallelStream().forEach(integer -> {
-            System.out.println(Thread.currentThread().getName()+">>"+integer);
+            System.out.println(Thread.currentThread().getName() + ">>" + integer);
         });
 
         for (int i = 0; i < 10000; i++) {
-            System.out.println(Thread.currentThread().getName()+">>"+"c"+i);
+            System.out.println(Thread.currentThread().getName() + ">>" + "c" + i);
         }
 
     }
@@ -70,34 +69,38 @@ public class ThreadPoolTaskExecutorTest {
     @Test
     public void parallelStreamTest2() {
 
-        Map<String,String> map = new HashMap<>();
-        map.put("1","2");//1
-        List<Map<String,Integer>> mapsL = new ArrayList<>();//2
+        long startTime = System.currentTimeMillis();
 
-        for(int i=0;i<100000;i++){//3
-            Map<String,Integer> map1 = new HashMap<>();
-            map1.put("key",i);
+        List<Map<String, Integer>> mapsL = new ArrayList<>();
+
+        for (int i = 0; i < 500000; i++) {
+            Map<String, Integer> map1 = new HashMap<>();
+            map1.put("key", i);
             mapsL.add(map1);
         }
 
-        List<Map<String,Integer>> maps2 = new Vector<>();
-        mapsL.parallelStream().filter(iter-> {
+        //List<Map<String, Integer>> maps2 = new Vector<>();
+        List<Map<String, Integer>> maps2 = new ArrayList<>();
+
+        mapsL.parallelStream().filter(iter -> {
 
             //System.out.println(Thread.currentThread().getName()+">>"+iter.get("key"));
 
-            return iter.get("key") <20000;
+            return iter.get("key") < 50000;
         }).forEach(maps2::add);//4
 
-        if(maps2.size()<20000){//5
-            System.out.println("forEach Error !"+maps2.size());//6
+        if (maps2.size() < 50000) {//5
+            System.out.println("forEach Error !" + maps2.size());
         }
+
+        System.out.println("消耗时间：" + (System.currentTimeMillis() - startTime));
     }
 
     @Test
     public void annotationThreadTest1() {
 
         for (int i = 0; i < 10000; i++) {
-            System.out.println(Thread.currentThread().getName()+"->"+i);
+            System.out.println(Thread.currentThread().getName() + "->" + i);
         }
 
         //threadPoolTaskExecutor.execute(() -> annotationThreadTest2());
@@ -107,22 +110,21 @@ public class ThreadPoolTaskExecutorTest {
         new Thread(this::annotationThreadTest2).start();
 
 
-
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
-        System.out.println(Thread.currentThread().getName()+"parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
+        System.out.println(Thread.currentThread().getName() + "parallelStream下方↓");
     }
 
     @Async
@@ -133,7 +135,7 @@ public class ThreadPoolTaskExecutorTest {
         System.out.println("@Async");
         System.out.println("@Async");
         for (int i = 0; i < 10000; i++) {
-            System.out.println(Thread.currentThread().getName()+"->"+i);
+            System.out.println(Thread.currentThread().getName() + "->" + i);
         }
 
         System.out.println("@Async");
