@@ -6,6 +6,7 @@ import org.springframework.core.io.InputStreamSource;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,6 +28,8 @@ public class ByteArrayOutputStreamTest {
         // 输出流转输入流
         InputStreamSource inputStreamSource = new ByteArrayResource(arrayOutputStream.toByteArray());
         InputStream inputStream = inputStreamSource.getInputStream();
+        InputStream byteArrayInputStream = new ByteArrayInputStream(arrayOutputStream.toByteArray());
+
 
         InputStream bufferedInputStream = new BufferedInputStream(inputStreamSource.getInputStream());
     }
