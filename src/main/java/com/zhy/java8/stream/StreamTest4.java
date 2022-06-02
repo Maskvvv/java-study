@@ -24,7 +24,7 @@ public class StreamTest4 {
     public void streamTest1(){
         List<People> peopleList = ListFactory.getPeopleList();
         List<People> nullList = new ArrayList<>();
-        nullList.stream().collect(Collectors.groupingBy(People::getAge))
+        peopleList.stream().collect(Collectors.groupingBy(People::getAge))
                 .forEach((key, value) -> System.out.println(key+":"+value));
     }
 
