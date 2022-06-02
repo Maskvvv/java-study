@@ -1,20 +1,14 @@
 package com.zhy.java基础.IO.zip;
 
-import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.compress.utils.IOUtils;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 /**
  * @author zhouhongyin
@@ -22,7 +16,7 @@ import java.util.zip.ZipOutputStream;
  */
 public class ZipTest1 {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         List<FileInputStream> fileInputStreams = new ArrayList<>();
         List<String> paths = new ArrayList<>();
@@ -34,14 +28,17 @@ public class ZipTest1 {
             fileInputStreams.add(new FileInputStream(file1));
             paths.add(file1.getName());
         }
+        InputStream zip = null;
+        try (FileOutputStream fileOutputStream = new FileOutputStream("F:\\压缩文件\\sadfasdf.zip")) {
+            zip = ZipUtil.zip(paths.toArray(new String[0]), fileInputStreams.toArray(new FileInputStream[0]));
+            IOUtils.copy(zip, fileOutputStream);
 
-        String[] pathArray = paths.toArray(new String[0]);
-
-        try (OutputStream outputStream = new FileOutputStream("F:/压缩文件/test.zip")) {
-            ZipUtil.zip(outputStream, pathArray, fileInputStreams.toArray(new FileInputStream[0]));
+            //System.out.println(zip);
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            zip.close();
         }
     }
 

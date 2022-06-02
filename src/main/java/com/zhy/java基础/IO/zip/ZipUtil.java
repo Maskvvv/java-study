@@ -1,6 +1,5 @@
 package com.zhy.java基础.IO.zip;
 
-import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,6 +18,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * 文件压缩工具类
+ *
  * @author zhouhongyin
  * @since 2022/6/1 15:01
  */
