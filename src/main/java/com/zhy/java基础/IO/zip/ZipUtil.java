@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -22,6 +23,8 @@ import java.util.zip.ZipOutputStream;
  * @since 2022/6/1 15:01
  */
 public class ZipUtil {
+
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
 
     /**
@@ -112,16 +115,35 @@ public class ZipUtil {
         if (target == null || !target.exists()) {
             throw new IOException("带压缩文件为空");
         }
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream)) {
+
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream)) {
             if (target.isFile()) {
                 zipFile(target, bufferedOutputStream);
             } else if (target.isDirectory()) {
                 zipDirectory(target, bufferedOutputStream);
             }
+            return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         }
-        return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
     }
+
+    /**
+     * 将文件流压缩返回输入流
+     *
+     * @param paths        流数据在压缩文件中的路径或文件名
+     * @param inputStreams 要压缩的源，添加完成后自动关闭流
+     */
+    public static InputStream zip(List<String> paths, List<InputStream> inputStreams) throws IOException {
+        if (ObjectUtils.isEmpty(paths) || ObjectUtils.isEmpty(inputStreams)) {
+            throw new IllegalArgumentException("Paths or inputStreams is empty !");
+        }
+        if (paths.size() != inputStreams.size()) {
+            throw new IllegalArgumentException("Paths length is not equals to inputStreams length !");
+        }
+
+        return zip(paths.toArray(new String[0]), inputStreams.toArray(new InputStream[0]));
+    }
+
 
     /**
      * 将文件流压缩返回输入流
@@ -131,12 +153,12 @@ public class ZipUtil {
      */
     public static InputStream zip(String[] paths, InputStream[] inputStreams) throws IOException {
 
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream)) {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream)) {
             zip(bufferedOutputStream, paths, inputStreams);
+            return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         }
 
-        return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
     }
 
     /**
@@ -157,7 +179,7 @@ public class ZipUtil {
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream)) {
             for (int i = 0; i < paths.length; i++) {
                 zipOutputStream.putNextEntry(new ZipEntry(paths[i]));
-                byte[] bytes = new byte[1024];
+                byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
                 try {
                     while (true) {
                         int read = inputStreams[i].read(bytes);
@@ -276,7 +298,7 @@ public class ZipUtil {
 
         zipOutputStream.putNextEntry(new ZipEntry(prefixPath + File.separator + target.getName()));
 
-        byte[] bytes = new byte[1024];
+        byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
 
         try (FileInputStream fileInputStream = new FileInputStream(target)) {
             while (true) {
