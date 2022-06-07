@@ -27,7 +27,8 @@ public class FileController {
     public void downloadFile(HttpServletResponse response) throws IOException {
         ServletOutputStream outputStream = response.getOutputStream();
 
-        List<FileInputStream> fileInputStreams = new ArrayList<>();
+        // 创建流压缩需要的集合
+        List<InputStream> fileInputStreams = new ArrayList<>();
         List<String> paths = new ArrayList<>();
 
         File file = new File("F:\\压缩测试");
@@ -38,11 +39,14 @@ public class FileController {
             paths.add(file1.getName());
         }
 
-
         response.setHeader("content-disposition", "attachment;fileName=" + URLEncoder.encode("test.zip", "UTF-8"));
         response.setContentType("text/plain;charset=UTF-8");
 
-        ZipUtil.zip(outputStream, paths.toArray(new String[0]), fileInputStreams.toArray(new FileInputStream[0]));
+        // 方式一：
+        ZipUtil.zip(outputStream, paths.toArray(new String[0]), fileInputStreams.toArray(new InputStream[0]));
+
+        // 方式二：
+        //IOUtils.copy(ZipUtil.zip(paths, fileInputStreams), outputStream);
 
         IOUtils.closeQuietly(outputStream);
     }
