@@ -28,6 +28,8 @@ public class URLEncoderTest {
         String encode = URLEncodeUtil.encode("有空格 you空格.doc");
         System.out.println(encode);
 
+        System.out.println(URLEncodeUtil.encodeAll("有空格 you空格.doc"));
+
 
     }
 }
