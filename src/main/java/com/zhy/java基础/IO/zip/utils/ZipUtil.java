@@ -1,4 +1,4 @@
-package com.zhy.java基础.IO.zip;
+package com.zhy.java基础.IO.zip.utils;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
