@@ -59,10 +59,12 @@ public class FileController {
     public void zipFiles(HttpServletResponse response) throws IOException {
         ServletOutputStream outputStream = response.getOutputStream();
 
-        response.setHeader("content-disposition", "attachment;fileName=" + URLEncoder.encode("test.zip", "UTF-8"));
+        String encode = URLEncoder.encode("+UTF-8''不送充电器？苹果被判赔巴西一消费者7000元,数%20码,数码综合,好看视频.zip", "UTF-8");
+        response.setHeader("content-disposition", "attachment;fileName=" + encode);
+        System.out.println(encode);
         response.setContentType("text/plain;charset=UTF-8");
 
-        ZipUtil.zip("F:\\安装包" ,outputStream);
+        ZipUtil.zip("E:\\需求文档" ,outputStream);
 
         IOUtils.closeQuietly(outputStream);
     }
