@@ -14,7 +14,7 @@ public class ZipTest3 {
 
         //ZipUtil.zip("F:\\压缩测试", "F:\\压缩文件\\目录空.zip");
 
-        ZipUtil.zip("F:\\压缩测试", "F:\\压缩文件\\目录空.zip");
+        ZipUtil.zip("E:\\需求文档\\文件压缩", "E:\\需求文档\\目录空.zip");
     }
 
 

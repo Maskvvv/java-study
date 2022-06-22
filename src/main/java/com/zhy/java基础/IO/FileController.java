@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("file")
 public class FileController {
 
-    @GetMapping("download")
+    @GetMapping("zip/stream")
     public void downloadFile(HttpServletResponse response) throws IOException {
         ServletOutputStream outputStream = response.getOutputStream();
 
@@ -31,7 +31,7 @@ public class FileController {
         List<InputStream> fileInputStreams = new ArrayList<>();
         List<String> paths = new ArrayList<>();
 
-        File file = new File("F:\\压缩测试");
+        File file = new File("E:\\需求文档\\文件压缩");
         File[] files = file.listFiles(File::isFile);
 
         for (File file1 : files) {
@@ -69,7 +69,7 @@ public class FileController {
         System.out.println(encode);
         response.setContentType("text/plain;charset=UTF-8");
 
-        ZipUtil.zip("E:\\需求文档" ,outputStream);
+        ZipUtil.zip("E:\\需求文档\\文件压缩", outputStream);
 
         IOUtils.closeQuietly(outputStream);
     }

@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class IOFileDemo2 {
     public static void main(String[] args) throws IOException {
 
-        File file = new File("F:\\压缩测试");
+        File file = new File("E:\\需求文档");
         System.out.println(file.getName());
         System.out.println(file);
         System.out.println(file.getPath());
