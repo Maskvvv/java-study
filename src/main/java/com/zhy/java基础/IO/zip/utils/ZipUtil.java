@@ -1,5 +1,6 @@
 package com.zhy.java基础.IO.zip.utils;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,63 +31,65 @@ public class ZipUtil {
     /**
      * 通过文件字符串路径压缩文件或目录
      *
-     * @param target 待压缩文件全路径
-     * @param zip    压缩包存放全路径 （----.zip）
+     * @param targetSrc 待压缩文件全路径
+     * @param zipSrc    压缩包存放目录 (E:\xx\xxxx\xxxxx)
+     * @param zipName   压缩包名 （----.zip）
      */
-    public static void zip(String target, String zip) throws IOException {
-        if (StringUtils.isBlank(target) || StringUtils.isBlank(zip)) {
+    public static void zip(String targetSrc, String zipSrc, String zipName) throws IOException {
+        if (StringUtils.isBlank(targetSrc) || StringUtils.isBlank(zipSrc)) {
             throw new IOException("压缩路径不能为空");
         }
-        zip(new File(target), new File(zip));
+        zip(new File(targetSrc), new File(zipSrc), zipName);
     }
 
     /**
      * 通过 File 对象压缩文件或目录
      *
-     * @param target 待压缩文件位置
-     * @param zip    压缩包存放位置
+     * @param targetSrc 待压缩文件位置
+     * @param zipSrc    压缩包存放目录 (E:\xx\xxxx\xxxxx)
+     * @param zipName   压缩包文件名 （----.zip）
      */
-    public static void zip(File target, File zip) throws IOException {
-        if (target == null || !target.exists()) {
+    public static void zip(File targetSrc, File zipSrc, String zipName) throws IOException {
+        if (targetSrc == null || !targetSrc.exists()) {
             throw new IOException("带压缩文件为空");
         }
-        if (target.isFile()) {
-            zipFile(target, zip);
-        } else if (target.isDirectory()) {
-            zipDirectory(target, zip);
+        if (targetSrc.isFile()) {
+            zipFile(targetSrc, zipSrc, zipName);
+        } else if (targetSrc.isDirectory()) {
+            zipDirectory(targetSrc, zipSrc, zipName);
         }
     }
 
     /**
      * 有输出流的压缩文件或目录
      *
-     * @param target       待压缩文件全路径
+     * @param targetSrc       待压缩文件全路径
      * @param outputStream 输出流
      * @return 输出流
      */
-    public static OutputStream zip(String target, OutputStream outputStream) throws IOException {
-        if (StringUtils.isBlank(target)) {
+    public static OutputStream zip(String targetSrc, OutputStream outputStream) throws IOException {
+        if (StringUtils.isBlank(targetSrc)) {
             throw new IOException("带压缩文件为空");
         }
-        return zip(new File(target), outputStream);
+        return zip(new File(targetSrc), outputStream);
     }
 
     /**
      * 有输出流的压缩文件或目录
      *
-     * @param target       待压缩文件
+     * @param targetSrc       待压缩文件
      * @param outputStream 输出流
      * @return 输出流
      */
-    public static OutputStream zip(File target, OutputStream outputStream) throws IOException {
-        if (target == null || !target.exists()) {
+    public static OutputStream zip(File targetSrc, OutputStream outputStream) throws IOException {
+        if (targetSrc == null || !targetSrc.exists()) {
             throw new IOException("带压缩文件为空");
         }
 
-        if (target.isFile()) {
-            zipFile(target, outputStream);
-        } else if (target.isDirectory()) {
-            zipDirectory(target, outputStream);
+        if (targetSrc.isFile()) {
+            zipFile(targetSrc, outputStream);
+        } else if (targetSrc.isDirectory()) {
+            zipDirectory(targetSrc, outputStream);
         }
 
         return outputStream;
@@ -95,33 +98,33 @@ public class ZipUtil {
     /**
      * 压缩文件或目录到内存后转为输入流
      *
-     * @param target 待压缩文件
+     * @param targetSrc 待压缩文件
      * @return 输入流
      */
-    public static InputStream zipToInputStream(String target) throws IOException {
-        if (StringUtils.isBlank(target)) {
+    public static InputStream zipToInputStream(String targetSrc) throws IOException {
+        if (StringUtils.isBlank(targetSrc)) {
             throw new IOException("带压缩文件为空");
         }
-        return zipToInputStream(new File(target));
+        return zipToInputStream(new File(targetSrc));
     }
 
     /**
      * 压缩文件或目录到内存后转为输入流
      *
-     * @param target 待压缩文件
+     * @param targetSrc 待压缩文件
      * @return 输入流
      */
-    public static InputStream zipToInputStream(File target) throws IOException {
-        if (target == null || !target.exists()) {
+    public static InputStream zipToInputStream(File targetSrc) throws IOException {
+        if (targetSrc == null || !targetSrc.exists()) {
             throw new IOException("带压缩文件为空");
         }
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream)) {
-            if (target.isFile()) {
-                zipFile(target, bufferedOutputStream);
-            } else if (target.isDirectory()) {
-                zipDirectory(target, bufferedOutputStream);
+            if (targetSrc.isFile()) {
+                zipFile(targetSrc, bufferedOutputStream);
+            } else if (targetSrc.isDirectory()) {
+                zipDirectory(targetSrc, bufferedOutputStream);
             }
             return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         }
@@ -184,7 +187,7 @@ public class ZipUtil {
                     while (true) {
                         int read = inputStreams[i].read(bytes);
                         if (read == -1) break;
-                        zipOutputStream.write(bytes);
+                        zipOutputStream.write(bytes, 0, read);
                     }
                     zipOutputStream.closeEntry();
                 } catch (Exception e) {
@@ -204,30 +207,32 @@ public class ZipUtil {
     /**
      * 通过 File 对象压缩文件
      *
-     * @param target 待压缩文件位置
-     * @param zip    压缩包存放位置
+     * @param targetSrc 待压缩文件位置
+     * @param zipSrc    压缩包存放目录 (E:\xx\xxxx\xxxxx)
+     * @param zipName   压缩包名 （----.zip）
      */
-    private static void zipFile(File target, File zip) throws IOException {
-        if (!zip.exists()) {
-            zip.mkdirs();
+    private static void zipFile(File targetSrc, File zipSrc, String zipName) throws IOException {
+        if (!zipSrc.exists()) {
+            zipSrc.mkdirs();
         }
-        try (FileOutputStream fileOutputStream = new FileOutputStream(zip)) {
-            zipFile(target, fileOutputStream);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(zipSrc.getAbsolutePath() + File.separator + zipName)) {
+            zipFile(targetSrc, fileOutputStream);
         }
     }
 
     /**
      * 通过 File 对象压缩目录
      *
-     * @param target 待压缩文件位置
-     * @param zip    压缩包存放位置
+     * @param targetSrc 待压缩文件位置
+     * @param zipSrc    压缩包存放目录 (E:\xx\xxxx\xxxxx)
+     * @param zipName   压缩包名 （----.zip）
      */
-    private static void zipDirectory(File target, File zip) throws IOException {
-        if (!zip.exists()) {
-            zip.mkdirs();
+    private static void zipDirectory(File targetSrc, File zipSrc, String zipName) throws IOException {
+        if (!zipSrc.exists()) {
+            zipSrc.mkdirs();
         }
-        try (FileOutputStream fileOutputStream = new FileOutputStream(zip)) {
-            zipDirectory(target, fileOutputStream);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(zipSrc.getAbsolutePath() + File.separator + zipName)) {
+            zipDirectory(targetSrc, fileOutputStream);
         }
 
     }
@@ -235,60 +240,76 @@ public class ZipUtil {
     /**
      * 通过 File 对象压缩文件
      *
-     * @param target       待压缩文件位置
+     * @param targetSrc       待压缩文件位置
      * @param outputStream 压缩包输出流
      */
-    private static void zipFile(File target, OutputStream outputStream) throws IOException {
+    private static void zipFile(File targetSrc, OutputStream outputStream) throws IOException {
         if (outputStream == null) {
             throw new IOException("outputStream为空");
         }
 
-        try (ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream)) {
-            zipFile(target, zipOutputStream);
-        }
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+        zipFile(targetSrc, zipOutputStream);
+
 
     }
 
     /**
      * 通过 File 对象压缩目录
      *
-     * @param target       待压缩文件位置
+     * @param targetSrc       待压缩文件位置
      * @param outputStream 压缩包输出流
      */
-    private static void zipDirectory(File target, OutputStream outputStream) throws IOException {
+    private static void zipDirectory(File targetSrc, OutputStream outputStream) throws IOException {
         if (outputStream == null) {
             throw new IOException("outputStream为空");
         }
 
-        try (ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream)) {
-            zipDirectory(target, zipOutputStream);
-        }
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+        zipDirectory(targetSrc, zipOutputStream);
+
 
     }
 
     /**
      * 压缩文件
      */
-    private static void zipFile(File target, ZipOutputStream zipOutputStream) throws IOException {
-        zipFile(target, "", zipOutputStream);
+    private static void zipFile(File targetSrc, ZipOutputStream zipOutputStream) throws IOException {
+        try {
+            zipFile(targetSrc, "", zipOutputStream);
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            if (zipOutputStream != null) {
+                zipOutputStream.close();
+            }
+        }
     }
 
     /**
      * 压缩目录
      */
-    private static void zipDirectory(File target, ZipOutputStream zipOutputStream) throws IOException {
-        zipDirectory(target, "", zipOutputStream);
+    private static void zipDirectory(File targetSrc, ZipOutputStream zipOutputStream) throws IOException {
+        try {
+            zipDirectory(targetSrc, "", zipOutputStream);
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            if (zipOutputStream != null) {
+                zipOutputStream.close();
+            }
+        }
     }
 
     /**
      * 压缩文件
      *
-     * @param target     待压缩文件
+     * @param targetSrc     待压缩文件
      * @param prefixPath 压缩包内相对路径
      */
-    private static void zipFile(File target, String prefixPath, ZipOutputStream zipOutputStream) throws IOException {
+    private static void zipFile(File targetSrc, String prefixPath, ZipOutputStream zipOutputStream) throws IOException {
 
-        if (target == null || !target.isFile()) {
+        if (targetSrc == null || !targetSrc.isFile()) {
             throw new IOException("zipOutputStream为空");
         }
 
@@ -296,15 +317,14 @@ public class ZipUtil {
             throw new IOException("zipOutputStream为空");
         }
 
-        zipOutputStream.putNextEntry(new ZipEntry(prefixPath + File.separator + target.getName()));
-
         byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
+        zipOutputStream.putNextEntry(new ZipEntry(prefixPath + File.separator + targetSrc.getName()));
 
-        try (FileInputStream fileInputStream = new FileInputStream(target)) {
+        try (FileInputStream fileInputStream = new FileInputStream(targetSrc)) {
             while (true) {
                 int read = fileInputStream.read(bytes);
                 if (read == -1) break;
-                zipOutputStream.write(bytes);
+                zipOutputStream.write(bytes, 0, read);
             }
             zipOutputStream.closeEntry();
         }
@@ -315,16 +335,16 @@ public class ZipUtil {
     /**
      * 压缩目录
      *
-     * @param target     待压缩文件
+     * @param targetSrc     待压缩文件
      * @param prefixPath 压缩包内相对路径
      */
-    private static void zipDirectory(File target, String prefixPath, ZipOutputStream zipOutputStream) throws IOException {
-        if (target == null || !target.exists()) {
+    private static void zipDirectory(File targetSrc, String prefixPath, ZipOutputStream zipOutputStream) throws IOException {
+        if (targetSrc == null || !targetSrc.exists()) {
             throw new IOException("待压缩目录不存在");
         }
 
         // 带压缩文件的目录和文件
-        File[] files = target.listFiles();
+        File[] files = targetSrc.listFiles();
         if (ObjectUtils.isEmpty(files)) {
             return;
         }
