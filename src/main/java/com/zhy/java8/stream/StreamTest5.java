@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -119,6 +120,12 @@ public class StreamTest5 {
             });
         });
 
+        //Thread.sleep(5000);
+
+        System.out.println(map3.get(1));
+        System.out.println(map3.get(2));
+        System.out.println(map3.get(3));
+        System.out.println(map3.get(4));
         endTime = System.currentTimeMillis();
         System.out.println("并行流 forEach 循环" + (endTime - startTime));
 
