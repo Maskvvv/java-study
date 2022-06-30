@@ -14,8 +14,8 @@ import java.io.IOException;
  * @author zhouhongyin
  * @since 2022/6/29 14:30
  */
-//@WebFilter(value = "/filter/path1")
-@Component
+@WebFilter(value = "/filter/path1")
+//@Component
 public class MyOncePerRequestFilter extends OncePerRequestFilter {
 
     @Override

@@ -23,14 +23,14 @@ public class FilterConfiguration {
     //}
 
 
-    @Bean
-    public FilterRegistrationBean<MyOncePerRequestFilter> myFilterFilterRegistrationBean(MyOncePerRequestFilter myOncePerRequestFilter) {
-        FilterRegistrationBean<MyOncePerRequestFilter> myFilterRegistrationBean = new FilterRegistrationBean<>();
-        myFilterRegistrationBean.setFilter(myOncePerRequestFilter);
-        myFilterRegistrationBean.setOrder(1);
-        myFilterRegistrationBean.addUrlPatterns("/filter/path1");
-
-        return myFilterRegistrationBean;
-    }
+    //@Bean
+    //public FilterRegistrationBean<MyOncePerRequestFilter> myFilterFilterRegistrationBean(MyOncePerRequestFilter myOncePerRequestFilter) {
+    //    FilterRegistrationBean<MyOncePerRequestFilter> myFilterRegistrationBean = new FilterRegistrationBean<>();
+    //    myFilterRegistrationBean.setFilter(myOncePerRequestFilter);
+    //    myFilterRegistrationBean.setOrder(1);
+    //    myFilterRegistrationBean.addUrlPatterns("/filter/path1");
+    //
+    //    return myFilterRegistrationBean;
+    //}
 
 }

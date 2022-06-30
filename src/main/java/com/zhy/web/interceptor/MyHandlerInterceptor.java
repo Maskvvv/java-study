@@ -9,8 +9,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 /**
  * @author zhouhongyin
@@ -22,23 +20,28 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String body = ((MyServletRequestWrapper) request).getBody();
+        //String body = ((MyServletRequestWrapper) request).getBody();
+
+        MyServletRequestWrapper requestWrapper = (MyServletRequestWrapper) request;
 
         //System.out.println(body);
 
-        JSONObject jsonObject = JSON.parseObject(body);
-        for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-            String key = entry.getKey();
-            String value = (String) entry.getValue();
+        //JSONObject jsonObject = JSON.parseObject(body);
+        //for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+        //    String key = entry.getKey();
+        //    String value = (String) entry.getValue();
+        //
+        //    if (Base64.isBase64(value)) {
+        //        jsonObject.put(key, Base64.decodeStr(value));
+        //    }
+        //}
+        //
+        //
+        //byte[] bytes = jsonObject.toJSONString().getBytes(StandardCharsets.UTF_8);
 
-            if (Base64.isBase64(value)) {
-                jsonObject.put(key, Base64.decodeStr(value));
-            }
-        }
+        byte[] decode = Base64.decode(requestWrapper.getBody());
 
-
-        byte[] bytes = jsonObject.toJSONString().getBytes(StandardCharsets.UTF_8);
-        ((MyServletRequestWrapper) request).setBody(bytes);
+        ((MyServletRequestWrapper) request).setBody(decode);
 
         //System.out.println(((MyServletRequestWrapper) request).getBody());
 
