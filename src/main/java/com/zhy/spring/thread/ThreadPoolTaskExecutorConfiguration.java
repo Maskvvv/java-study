@@ -1,4 +1,4 @@
-package com.zhy.springstudy.thread;
+package com.zhy.spring.thread;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
