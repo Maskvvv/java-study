@@ -22,16 +22,15 @@ public class HttpServerTest {
     public void httpServerTest1() throws IOException {
         HttpUtil.createServer(8888)
                 .addAction("/", (req, res) -> {
-                    OutputStream out = res.getOut();
 
-                    res.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=a.exe");
+                    res.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=review2.pdf");
                     res.setHeader(HttpHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE);
 
-                    File file = new File("F:\\安装包\\Docker Desktop Installer.exe");
+                    File file = new File("D:\\UserFiles\\桌面\\review2.pdf");
                     FileInputStream fileInputStream = new FileInputStream(file);
 
-                    IoUtil.copy(fileInputStream, out);
-                    IoUtil.close(out);
+                    res.write(fileInputStream);
+
                     IoUtil.close(fileInputStream);
 
                 })
