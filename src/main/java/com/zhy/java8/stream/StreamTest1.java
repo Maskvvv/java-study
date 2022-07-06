@@ -96,6 +96,18 @@ public class StreamTest1 {
     }
 
     /**
+     * 映射flatMap
+     */
+    @Test
+    public void streamTest3_3() {
+        List<People> peopleList = ListFactory.getPeopleList();
+
+        List<Integer> collect = peopleList.stream().flatMap(people -> people.getList().stream()).collect(Collectors.toList());
+        collect.forEach(System.out::println);
+    }
+
+
+    /**
      * 跳过，限制
      */
     @Test
