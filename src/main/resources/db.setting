@@ -1,0 +1,3 @@
+url = jdbc:mysql://121.36.97.250:3306/ourea?allowMultiQueries=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+user = root
+pass = E4qKF-Foyf2jWPmWY_f7Xsks9PW
