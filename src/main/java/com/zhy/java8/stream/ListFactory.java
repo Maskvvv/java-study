@@ -1,11 +1,18 @@
 package com.zhy.java8.stream;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- *  
+ *
  * @author zhouhongyin
  * @since 2021/8/10 15:27
  */
@@ -43,10 +50,16 @@ public class ListFactory {
     }
 }
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 class People {
     private String name;
     private int age;
     private int theClass;
+    private List<Integer> list;
+    private final Random random = new Random();
 
     public People(String name, int age, int theClass) {
         this.name = name;
@@ -78,25 +91,14 @@ class People {
         this.theClass = theClass;
     }
 
-    @Override
-    public String toString() {
-        return "People{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", theClass=" + theClass +
-                '}';
+    public List<Integer> getList() {
+        List<Integer> collect = Stream.generate(() -> random.nextInt(100)).limit(10).collect(Collectors.toList());
+        this.setList(collect);
+        return list;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof People)) return false;
-        People people = (People) o;
-        return age == people.age && theClass == people.theClass && Objects.equals(name, people.name);
+    public void setList(List<Integer> list) {
+        this.list = list;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, age, theClass);
-    }
 }
