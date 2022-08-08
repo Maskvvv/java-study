@@ -1,5 +1,6 @@
 package com.zhy.web.interceptor;
 
+import com.zhy.web.interceptor.annotation.AnnotationHandlerInterceptor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,8 +19,12 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
     @Resource
     private MyHandlerInterceptor myHandlerInterceptor;
 
+    @Resource
+    private AnnotationHandlerInterceptor annotationHandlerInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(myHandlerInterceptor).addPathPatterns("/filter/path2");
+        registry.addInterceptor(annotationHandlerInterceptor).addPathPatterns("/annotation/**");
     }
 }
