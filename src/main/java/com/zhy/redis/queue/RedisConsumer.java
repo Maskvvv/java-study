@@ -35,7 +35,7 @@ public class RedisConsumer {
             try {
                 String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY);
                 if (StringUtils.isNotBlank(s)) {
-                    log.info("RedisConsumer:{}", s);
+                    log.info(Thread.currentThread() + "RedisConsumer:{}", s);
                 }
 
             } catch (Exception e) {
