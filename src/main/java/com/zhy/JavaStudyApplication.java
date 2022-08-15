@@ -13,9 +13,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @since 2021/8/3 16:42
  */
 
-@SpringBootApplication
 @EnableAsync
 @ServletComponentScan
+@SpringBootApplication(scanBasePackages = {"org.jodconverter", "com.zhy"})
 public class JavaStudyApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaStudyApplication.class, args);

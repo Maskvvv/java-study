@@ -29,6 +29,28 @@
     </build>
 
     <dependencies>
+        <!--jodconverter 核心包 -->
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-core</artifactId>
+            <version>4.4.2</version>
+        </dependency>
+
+        <!--springboot支持包，里面包括了自动配置类 -->
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-spring-boot-starter</artifactId>
+            <version>4.4.2</version>
+        </dependency>
+
+
+        <!--jodconverter 本地支持包 -->
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-local</artifactId>
+            <version>4.4.2</version>
+        </dependency>
+
         <!--mysql数据库驱动 -->
         <dependency>
             <groupId>mysql</groupId>

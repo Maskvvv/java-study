@@ -5,3 +5,17 @@ spring:
     host: 39.106.49.241
     port: 6380
     password: 1234567788
+  profiles:
+    include: jodconverter
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+
+jodconverter:
+  local:
+    enabled: true
+    max-tasks-per-process: 10
+    port-numbers: 8100,8101,8102,8103
+    taskExecutionTimeout: 200000
+    officeHome: C:\Program Files\LibreOffice
