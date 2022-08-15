@@ -27,13 +27,13 @@ public class RedisConsumer {
 
     @PostConstruct
     public void initConsumer() {
-        //redisQueueTaskExecutor.execute(this::consumer);
+        redisQueueTaskExecutor.execute(this::consumer);
     }
 
     public void consumer() {
         while (true) {
             try {
-                String s = stringRedisTemplate.opsForValue().get(REDIS_ROUTING_KEY);
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY);
                 if (StringUtils.isNotBlank(s)) {
                     log.info("RedisConsumer:{}", s);
                 }
