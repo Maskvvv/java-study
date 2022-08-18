@@ -39,7 +39,7 @@ public class RedisConsumer {
                 }
 
             } catch (Exception e) {
-                log.error(e.getMessage());
+                //log.error(e.getMessage());
             }
         }
 
