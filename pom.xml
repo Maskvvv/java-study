@@ -33,14 +33,14 @@
         <dependency>
             <groupId>org.jodconverter</groupId>
             <artifactId>jodconverter-core</artifactId>
-            <version>4.4.2</version>
+            <version>4.2.4</version>
         </dependency>
 
         <!--springboot支持包，里面包括了自动配置类 -->
         <dependency>
             <groupId>org.jodconverter</groupId>
             <artifactId>jodconverter-spring-boot-starter</artifactId>
-            <version>4.4.2</version>
+            <version>4.2.4</version>
         </dependency>
 
 
@@ -48,8 +48,16 @@
         <dependency>
             <groupId>org.jodconverter</groupId>
             <artifactId>jodconverter-local</artifactId>
-            <version>4.4.2</version>
+            <version>4.2.4</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jodconverter/jodconverter-online -->
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-online</artifactId>
+            <version>4.2.4</version>
+        </dependency>
+
 
         <!--mysql数据库驱动 -->
         <dependency>
