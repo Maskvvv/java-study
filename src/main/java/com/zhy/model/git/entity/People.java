@@ -1,7 +1,7 @@
-package com.git.entity;
+package com.zhy.model.git.entity;
 
 /**
- *  
+ *
  * @author zhouhongyin
  * @since 2021/9/5 16:51
  */

@@ -1,6 +1,6 @@
 package com.zhy.java8.functional;
 
-import com.git.entity.People;
+import com.zhy.model.git.entity.People;
 import org.junit.Test;
 
 import java.util.function.Supplier;

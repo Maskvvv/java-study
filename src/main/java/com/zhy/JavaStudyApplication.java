@@ -1,9 +1,7 @@
 package com.zhy;
 
-import com.zhy.web.filter.MyOncePerRequestFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.ConditionalOnMissingFilterBean;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -15,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @ServletComponentScan
-@SpringBootApplication(scanBasePackages = {"org.jodconverter", "com.zhy"})
+@SpringBootApplication(scanBasePackages = {"org.jodconverter.boot.autoconfigure", "org.jodconverter", "com.zhy"})
 public class JavaStudyApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaStudyApplication.class, args);
