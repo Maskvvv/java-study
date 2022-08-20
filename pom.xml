@@ -29,6 +29,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!--jodconverter 核心包 -->
         <dependency>
             <groupId>org.jodconverter</groupId>
