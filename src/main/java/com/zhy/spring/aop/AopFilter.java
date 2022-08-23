@@ -16,8 +16,7 @@ import java.io.IOException;
  * @since 2022/8/22 17:14
  */
 @Slf4j
-@Component
-@WebFilter(value = "/aop")
+@WebFilter(value = "/aop/**")
 public class AopFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

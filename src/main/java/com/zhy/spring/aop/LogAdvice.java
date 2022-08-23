@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
@@ -36,19 +37,22 @@ public class LogAdvice {
      * 匹配 类里所有方法
      */
     @Pointcut("within(com.zhy.spring.aop.controller.AopController)")
-    public void matchType(){}
+    public void matchType() {
+    }
 
     /**
      * 匹配 包及子包下所有类方法
      */
     @Pointcut("within(com.zhy.spring.aop.controller..*)")
-    public void matchPackage(){}
+    public void matchPackage() {
+    }
 
     /**
      *
      */
     @Pointcut("@annotation(com.zhy.spring.aop.AopAnnotation)")
-    public void matchAnnotation(){}
+    public void matchAnnotation() {
+    }
 
 
     /**
@@ -96,6 +100,10 @@ public class LogAdvice {
         log.info("Scheme:{}", request.getScheme());
         log.info("ServerName:{}", request.getServerName());
         log.info("ServerPort:{}", request.getServerPort());
+
+        // 目标方法名
+        Signature signature = joinPoint.getSignature();
+        log.info("目标方法:{}, 对应的类名:{}", signature.getName(), signature.getDeclaringType().getSimpleName());
 
 
         log.info("-----------------doBefore-end-----------------\n");

@@ -12,13 +12,16 @@ spring:
 
 jodconverter:
   local:
-    enabled: false
+    enabled: true
     max-tasks-per-process: 10
-    port-numbers: 8100,8101,8102,8103
+    port-numbers: 8100
+    # 一个任务执行的时间
     taskExecutionTimeout: 200000
+    # 一个任务在队列中等待的时间
+    taskQueueTimeout: 200000
     officeHome: C:\Program Files\LibreOffice
   online:
-    enabled: true
+    enabled: false
     url: http://81.70.239.72:9980/
     taskExecutionTimeout: 200000
     taskQueueTimeout: 200000
