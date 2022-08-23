@@ -3,8 +3,10 @@ package com.zhy.spring.aop;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -27,14 +29,32 @@ public class LogAdvice {
      * 切点
      */
     @Pointcut("execution(* com.zhy.spring.aop..*.*Controller.*(..))")
-    public void pointCurt() {
+    public void matchExecution() {
     }
+
+    /**
+     * 匹配 类里所有方法
+     */
+    @Pointcut("within(com.zhy.spring.aop.controller.AopController)")
+    public void matchType(){}
+
+    /**
+     * 匹配 包及子包下所有类方法
+     */
+    @Pointcut("within(com.zhy.spring.aop.controller..*)")
+    public void matchPackage(){}
+
+    /**
+     *
+     */
+    @Pointcut("@annotation(com.zhy.spring.aop.AopAnnotation)")
+    public void matchAnnotation(){}
 
 
     /**
      * 前置操作
      */
-    @Before("pointCurt()")
+    @Before("matchAnnotation()")
     public void doBefore(JoinPoint joinPoint) throws ServletException, IOException {
         HttpServletRequest request = getRequest();
         log.info("-----------------doBefore-begin-----------------");
@@ -77,16 +97,17 @@ public class LogAdvice {
         log.info("ServerName:{}", request.getServerName());
         log.info("ServerPort:{}", request.getServerPort());
 
-        log.info("-----------------doBefore-end-----------------");
+
+        log.info("-----------------doBefore-end-----------------\n");
 
     }
 
     /**
      * 后置操作
      */
-    @After("pointCurt()")
+    @After("matchAnnotation()")
     public void doAfter(JoinPoint joinPoint) throws IOException {
-        log.info("-----------------doAfter-end-----------------");
+        log.info("-----------------doAfter-begin-----------------");
 
         HttpServletResponse response = getResponse();
 
@@ -98,19 +119,35 @@ public class LogAdvice {
         OutputStream outputStream = response.getOutputStream();
         log.info("OutputStream:{}", outputStream);
 
-        log.info("-----------------doAfter-end-----------------");
+        log.info("-----------------doAfter-end-----------------\n");
     }
 
     /**
      * 返回通知
      */
-    @AfterReturning(returning = "ret", pointcut = "pointCurt()")
-    public void doAfterReturning(Object ret) throws Throwable {
+    @AfterReturning(returning = "ret", pointcut = "matchAnnotation()")
+    public void doAfterReturning(Object ret) {
         log.info("-------------doAfterReturning-begin------------------");
 
         log.info("doAfterReturning:{}", ret);
 
-        log.info("-------------doAfterReturning-begin------------------");
+        log.info("-------------doAfterReturning-begin------------------\n");
+    }
+
+    /**
+     * 返回通知
+     */
+    @Around("matchAnnotation()")
+    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        log.info("-------------doAround-begin------------------");
+
+        Object result = joinPoint.proceed();
+        log.info("doAround:{}", JSON.toJSONString(result));
+
+
+        log.info("-------------doAround-end------------------\n");
+
+        return result;
     }
 
 

@@ -1,6 +1,7 @@
 package com.zhy.spring.aop.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.zhy.spring.aop.AopAnnotation;
 import com.zhy.spring.aop.AopParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +20,10 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("aop")
+@AopAnnotation
 public class AopController {
 
+    @AopAnnotation
     @PostMapping("test1/{pathParam}")
     public Map<String, String> test1(String queryParam, @PathVariable String pathParam, @RequestBody AopParam aopParam) {
         log.info(this.getClass().getName() + "---------begin----------");
