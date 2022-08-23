@@ -27,13 +27,48 @@ public class RedisConsumer {
 
     @PostConstruct
     public void initConsumer() {
-        redisQueueTaskExecutor.execute(this::consumer);
+        redisQueueTaskExecutor.execute(this::consumer1);
+        redisQueueTaskExecutor.execute(this::consumer2);
+        redisQueueTaskExecutor.execute(this::consumer3);
     }
 
-    public void consumer() {
+    public void consumer1() {
+        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer");
         while (true) {
             try {
-                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY);
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 1);
+                if (StringUtils.isNotBlank(s)) {
+                    log.info(Thread.currentThread() + "RedisConsumer:{}", s);
+                }
+
+            } catch (Exception e) {
+                //log.error(e.getMessage());
+            }
+        }
+
+    }
+
+    public void consumer2() {
+        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer");
+        while (true) {
+            try {
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 2);
+                if (StringUtils.isNotBlank(s)) {
+                    log.info(Thread.currentThread() + "RedisConsumer:{}", s);
+                }
+
+            } catch (Exception e) {
+                //log.error(e.getMessage());
+            }
+        }
+
+    }
+
+    public void consumer3() {
+        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer");
+        while (true) {
+            try {
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 3);
                 if (StringUtils.isNotBlank(s)) {
                     log.info(Thread.currentThread() + "RedisConsumer:{}", s);
                 }

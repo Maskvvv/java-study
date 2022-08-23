@@ -1,32 +1,24 @@
 package com.zhy.redis.queue;
 
-import com.zhy.JavaStudyApplication;
-import junit.framework.TestCase;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
+import redis.clients.jedis.Jedis;
 
 /**
  * @author zhouhongyin
  * @since 2022/8/10 9:23
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = JavaStudyApplication.class)
-public class RedisConsumerTest extends TestCase {
-
-
-    @Resource
-    private StringRedisTemplate stringRedisTemplate;
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = JavaStudyApplication.class)
+public class RedisConsumerTest {
 
     @Test
     public void testConsumer() {
 
+        Jedis jedis = new Jedis("127.0.0.1", 6379);
+
         for (int i = 0; i < 10; i++) {
-            stringRedisTemplate.opsForList().rightPush(RedisConsumer.REDIS_ROUTING_KEY, "我是消息" + i);
+
+            jedis.rpush(RedisConsumer.REDIS_ROUTING_KEY + 2, "我是消息" + i);
         }
 
 
