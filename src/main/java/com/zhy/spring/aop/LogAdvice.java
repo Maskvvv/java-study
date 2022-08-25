@@ -14,8 +14,11 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -173,8 +176,19 @@ public class LogAdvice {
 
         Object[] args = joinPoint.getArgs();
 
+        Object[] filterArgs = new Object[args.length]; // 创建一个新的集合，初始化长度
+        // 只要是ServletRequest、ServletResponse、MultipartFile都不会添加到filterArgs中
+        for(int i = 0; i < args.length; i++) {
+            if(args[i] instanceof ServletRequest
+                    || args[i] instanceof ServletResponse
+                    || args[i] instanceof MultipartFile) {
+                continue;
+            }
+            filterArgs[i] = args[i];
+        }
+        log.info("doAround-param: {}", JSON.toJSONString(filterArgs));
 
-        log.info("doAround-param: {}", JSON.toJSONString(args));
+
         //log.info("doAround-body: {}", JSON.toJSONString(result));
 
 
