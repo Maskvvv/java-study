@@ -1,18 +1,31 @@
 server:
   port: 8080
 spring:
-#  redis:
-#    host: 39.106.49.241
-#    port: 6380
-#    password: 1234567788
+  #  redis:
+  #    host: 39.106.49.241
+  #    port: 6380
+  #    password: 1234567788
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 1000MB
+  rabbitmq:
+    host: 81.70.239.72
+    port: 5672
+    password: guest
+    username: guest
+    virtual-host: /
+    listener:
+      type: simple
+      simple:
+        acknowledge-mode: manual
+        # 没此获取多少条消息
+        prefetch: 10
+        concurrency: 1
 
 jodconverter:
   local:
-    enabled: true
+    enabled: false
     max-tasks-per-process: 10
     port-numbers: 8100
     # 一个任务执行的时间
