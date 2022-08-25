@@ -2,7 +2,7 @@ package com.zhy.spring.aop.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zhy.spring.aop.AopAnnotation;
-import com.zhy.spring.aop.AopParam;
+import com.zhy.spring.aop.AopBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,13 +25,13 @@ public class AopController {
 
     @AopAnnotation
     @PostMapping("test1/{pathParam}")
-    public Map<String, String> test1(String queryParam, @PathVariable String pathParam, @RequestBody AopParam aopParam) {
+    public Map<String, String> test1(String queryParam, @PathVariable String pathParam, @RequestBody AopBody aopBody) {
         log.info(this.getClass().getName() + "---------begin----------");
 
         Map<String, String> response = new HashMap<>();
-        response.put("queryParam", queryParam);
-        response.put("pathParam", pathParam);
-        response.put("aopParam", JSON.toJSONString(aopParam));
+        response.put("result1", queryParam);
+        response.put("result2", pathParam);
+        response.put("result3", JSON.toJSONString(aopBody));
 
         log.info(this.getClass().getName() + "---------end----------");
 

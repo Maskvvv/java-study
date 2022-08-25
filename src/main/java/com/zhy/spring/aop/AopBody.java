@@ -7,10 +7,10 @@ import lombok.Data;
  * @since 2022/8/19 16:35
  */
 @Data
-public class AopParam {
+public class AopBody {
 
-    private String name;
+    private String bodyName;
 
-    private Integer age;
+    private Integer bodyAge;
 
 }

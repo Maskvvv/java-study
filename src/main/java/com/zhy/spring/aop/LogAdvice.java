@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 
 @Aspect
 @Component
@@ -59,7 +60,7 @@ public class LogAdvice {
      * 前置操作
      */
     @Before("matchAnnotation()")
-    public void doBefore(JoinPoint joinPoint) throws ServletException, IOException {
+    public void doBefore(JoinPoint joinPoint) throws ServletException, IOException, ClassNotFoundException, NoSuchMethodException {
         HttpServletRequest request = getRequest();
         log.info("-----------------doBefore-begin-----------------");
 
@@ -103,6 +104,22 @@ public class LogAdvice {
 
         // 目标方法名
         Signature signature = joinPoint.getSignature();
+        String declaringTypeName = signature.getDeclaringTypeName();
+        String name = signature.getName();
+
+
+
+        Class<?> targetClass = Class.forName(declaringTypeName);
+        Method[] declaredMethods = targetClass.getDeclaredMethods();
+        //Method method = targetClass.getDeclaredMethod(name);
+        //Parameter[] parameters = method.getParameters();
+
+
+        Object[] args = joinPoint.getArgs();
+        Object target = joinPoint.getTarget();
+        Object aThis = joinPoint.getThis();
+        JoinPoint.StaticPart staticPart = joinPoint.getStaticPart();
+
         log.info("目标方法:{}, 对应的类名:{}", signature.getName(), signature.getDeclaringType().getSimpleName());
 
 
@@ -133,24 +150,33 @@ public class LogAdvice {
     /**
      * 返回通知
      */
-    @AfterReturning(returning = "ret", pointcut = "matchAnnotation()")
-    public void doAfterReturning(Object ret) {
+    @AfterReturning(returning = "result", pointcut = "matchAnnotation()")
+    public void doAfterReturning(Object result) {
         log.info("-------------doAfterReturning-begin------------------");
 
-        log.info("doAfterReturning:{}", ret);
+        log.info("doAfterReturning:{}", result);
 
         log.info("-------------doAfterReturning-begin------------------\n");
     }
 
     /**
-     * 返回通知
+     * 环绕通知
      */
     @Around("matchAnnotation()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("-------------doAround-begin------------------");
 
         Object result = joinPoint.proceed();
-        log.info("doAround:{}", JSON.toJSONString(result));
+        log.info("doAround-result:{}", JSON.toJSONString(result));
+
+        Signature signature = joinPoint.getSignature();
+
+        Object[] args = joinPoint.getArgs();
+
+
+        log.info("doAround-param: {}", JSON.toJSONString(args));
+        //log.info("doAround-body: {}", JSON.toJSONString(result));
+
 
 
         log.info("-------------doAround-end------------------\n");
