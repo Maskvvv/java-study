@@ -1,11 +1,14 @@
 package com.zhy.rabbitmq;
 
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,5 +66,18 @@ public class RabbitMQConfig {
     //    container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
     //    return container;
     //}
+
+
+    //@Bean("fileTransListenerContainer")
+    //public MessageListenerContainer fileTransListenerContainer(@Qualifier("connectionFactory") ConnectionFactory connectionFactory,
+    //                                                           @Qualifier("transFileConsumer") TransFileConsumer transFileConsumer) {
+    //    SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
+    //    container.setQueueNames(rabbitMQProperties.getFileTrans().get("queueName"));
+    //    container.setExposeListenerChannel(true);
+    //    container.setAcknowledgeMode(AcknowledgeMode.AUTO);
+    //    container.setMessageListener(transFileConsumer);
+    //    return container;
+    //}
+
 
 }

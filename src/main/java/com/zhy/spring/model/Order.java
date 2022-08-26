@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Order {
 
-    public String purchaseName;
+    private String purchaseName;
 
 
 }

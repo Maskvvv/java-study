@@ -2,6 +2,7 @@ package com.zhy.spring.spEL;
 
 import com.zhy.spring.model.Order;
 import org.junit.Test;
+import org.slf4j.MDC;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
