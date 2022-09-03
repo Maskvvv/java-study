@@ -10,7 +10,7 @@ spring:
       max-file-size: 100MB
       max-request-size: 1000MB
   rabbitmq:
-    host: 81.70.239.72
+    host: 127.0.0.1
     port: 5672
     password: guest
     username: guest
@@ -22,6 +22,15 @@ spring:
         # 没此获取多少条消息
         prefetch: 10
         concurrency: 1
+#        max-concurrency: 10
+
+  sleuth:
+    sampler:
+      probability: 1 #百分之多少的sleuth信息需要输出到zipkin（1代表全部100%）
+  zipkin:
+    enabled: false
+    base-url: http://127.0.0.1:9411/  #指定zipkin的地址
+
 
 jodconverter:
   local:
