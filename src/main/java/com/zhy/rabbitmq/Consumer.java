@@ -10,6 +10,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Random;
 
 @Component
 public class Consumer {
@@ -22,14 +23,14 @@ public class Consumer {
      */
     @RabbitListener(queues = RabbitMQConfig.RABBITMQ_QUEUE,
             ackMode = "MANUAL",
-            concurrency = "1",
+            concurrency = "2",
             errorHandler = "myRabbitListenerErrorHandler")
     public void onMessage(String msg, Channel channel, Message message) throws IOException {
 
         try {
             System.out.println("consumer1" + Thread.currentThread() + ":" + msg);
-
-            //Thread.sleep(3000);
+            Random random = new Random();
+            Thread.sleep(random.nextInt(3000));
 
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
         } catch (Exception e) {

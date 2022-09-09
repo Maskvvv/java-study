@@ -10,7 +10,7 @@ spring:
       max-file-size: 100MB
       max-request-size: 1000MB
   rabbitmq:
-    host: 127.0.0.1
+    host: 81.70.239.72
     port: 5672
     password: guest
     username: guest
@@ -22,7 +22,7 @@ spring:
         # 没此获取多少条消息
         prefetch: 10
         concurrency: 1
-#        max-concurrency: 10
+        max-concurrency: 10
 
   sleuth:
     sampler:
