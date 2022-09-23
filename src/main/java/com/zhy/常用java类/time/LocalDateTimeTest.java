@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 /**
- *  
+ *
  * @author zhouhongyin
  * @since 2021/7/23 16:28
  */
@@ -22,8 +22,9 @@ public class LocalDateTimeTest {
         System.out.println(date);
         System.out.println(LocalTime.now());
 
-        Date date1 = new Date(20205959919L);
 
+        Date date1 = new Date(1567267200000L);
+        System.out.println(date1.getYear());
         System.out.println(date1);
     }
 

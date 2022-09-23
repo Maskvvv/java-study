@@ -14,7 +14,19 @@ import java.util.Date;
 public class CalendarTest {
     public static void main(String[] args) {
         int july = Calendar.JULY;
-        Calendar instance = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(new Date(1654099199000L));
+        System.out.println(calendar.get(Calendar.YEAR));
+        calendar.get(Calendar.MONTH);					//获取月份
+        calendar.get(Calendar.DATE);					//获取日
+
+        calendar.get(Calendar.HOUR);					//时（12小时制）
+        calendar.get(Calendar.HOUR_OF_DAY);				//时（24小时制）
+        calendar.get(Calendar.MINUTE);					//分
+        calendar.get(Calendar.SECOND);					//秒
+        calendar.get(Calendar.DAY_OF_WEEK);				//一周的第几天
+
 
         Date date = DateUtils.addDays(new Date(1654099199000L), 14);
         System.out.println(date.getTime());
