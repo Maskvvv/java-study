@@ -19,5 +19,15 @@ public class IntegerTest {
 
         String s1 = Integer.toHexString(anInt);
         System.out.println(s1);
+
+
+
+        Integer z = 1;
+        Integer q = 2;
+
+        Double cv = Double.valueOf(z) / q;
+
+        System.out.println(cv);
+
     }
 }
