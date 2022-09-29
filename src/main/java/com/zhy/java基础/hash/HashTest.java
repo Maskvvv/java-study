@@ -11,7 +11,7 @@ public class HashTest {
     @Test
     public void hashTest() {
 
-        String key = "ssfasdfajkfjagkajlsjgkfjal;ksdflskgjasdfalkssdfasdg";
+        String key = "ssfaskjasdfjgkfjal;ksdflskgjasdfalkssdfasdg";
 
         System.out.println(key.hashCode());
 
@@ -22,8 +22,7 @@ public class HashTest {
 
         int length = 16;
         System.out.println(hash & (length - 1));
-        System.out.println(hash % (length - 1));
-
+        System.out.println(Math.abs(hash) % length);
     }
 
     @Test
