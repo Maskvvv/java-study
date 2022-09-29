@@ -44,7 +44,9 @@ public class ListFactory {
         peopleList.add(new People("jone2",56,3));
         peopleList.add(new People("tom1",32,2));
         peopleList.add(new People("tom2",32,3));
-        peopleList.add(new People("tom3",32,4));
+        peopleList.add(new People("tom3",32,4, 1));
+        peopleList.add(new People("tom4",32,4, 2));
+        peopleList.add(new People("tom5",32,4, 3));
 
         return peopleList;
     }
@@ -58,6 +60,7 @@ class People {
     private String name;
     private int age;
     private int theClass;
+    private Integer nullValue;
     private List<Integer> list;
     private final Random random = new Random();
 
@@ -67,38 +70,12 @@ class People {
         this.theClass = theClass;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public People(String name, int age, int theClass, Integer nullValue) {
         this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
         this.age = age;
-    }
-
-    public int getTheClass() {
-        return theClass;
-    }
-
-    public void setTheClass(int theClass) {
         this.theClass = theClass;
+        this.nullValue = nullValue;
     }
 
-    public List<Integer> getList() {
-        List<Integer> collect = Stream.generate(() -> random.nextInt(100)).limit(10).collect(Collectors.toList());
-        this.setList(collect);
-        return list;
-    }
-
-    public void setList(List<Integer> list) {
-        this.list = list;
-    }
 
 }

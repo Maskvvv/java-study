@@ -104,4 +104,15 @@ public class StreamTest3 {
         System.out.println("设置Map的类型："+map3);
 
     }
+
+    @Test
+    public void streamTest5(){
+        List<People> peopleList = ListFactory.getPeopleList();
+        List<Integer> collect = peopleList.stream().map(People::getNullValue).collect(Collectors.toList());
+
+        collect.forEach(System.out::println);
+
+    }
+
+
 }
