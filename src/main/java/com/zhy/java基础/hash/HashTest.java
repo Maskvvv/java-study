@@ -1,5 +1,6 @@
 package com.zhy.java基础.hash;
 
+import cn.hutool.core.util.HashUtil;
 import org.junit.Test;
 
 /**
@@ -40,6 +41,17 @@ public class HashTest {
         }
         System.out.println(result);
 
+        System.out.println(key.hashCode());
+    }
+
+    @Test
+    public void hashTest2() {
+
+        String key = "glskadjflakjf52asdkjflasdjglshgjklahsgalshdlfkasdhflaksdfhasldhgjhoiirutwi" +
+                "oeurq093457298345-1231;lgsdfglks;l&()*^^%^&#^_:nasfhworeLKjlksdjf;ladgya9oiuwrwerwerwerkas";
+
+        int hash = HashUtil.javaDefaultHash(key);
+        System.out.println(hash);
         System.out.println(key.hashCode());
     }
 
