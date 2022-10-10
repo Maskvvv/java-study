@@ -12,7 +12,7 @@ public class HashTest {
     @Test
     public void hashTest() {
 
-        String key = "ssfaskjasdfjgkfjal;ksdflskgjasdfalkssdfasdg";
+        String key = "ssfaskjasdfjgkfjal;ksdfgsdfgsdfgdflskgjasdfalkssdfasdg";
 
         System.out.println(key.hashCode());
 
@@ -23,22 +23,24 @@ public class HashTest {
 
         int length = 16;
         System.out.println(hash & (length - 1));
-        System.out.println(Math.abs(hash) % length);
+        System.out.println(hash % length);
     }
 
     @Test
     public void hashTest1() {
 
-        String key = "glskadjflakjf52asdkjflasdjglshgjklahsgalshdlfkasdhflaksdfhasldhgjhoiirutwi" +
+        String key = "glskadjflakjf52asdkjflasdjglshgjklasdfgsdfgsdfghsgalshdlfkasdhflaksdfhasldhgjhoiirutwi" +
                 "oeurq093457298345-1231;lgsdfglks;l&()*^^%^&#^_:nasfhworeLKjlksdjf;ladgya9oiuwrwerwerwerkas";
 
-        char[] chars = key.toCharArray();
 
-        int result = 1;
-        for (char cha : chars) {
-            result = 31 * result + cha;
+        int h = 0;
+        char[] value = key.toCharArray();
+
+        for (int i = 0; i < value.length; i++) {
+            h = 31 * h + value[i];
         }
-        System.out.println(result);
+
+        System.out.println(h);
 
         System.out.println(key.hashCode());
     }
@@ -51,6 +53,13 @@ public class HashTest {
 
         int hash = HashUtil.javaDefaultHash(key);
         System.out.println(hash);
+        System.out.println(key.hashCode());
+    }
+
+    @Test
+    public void hashTest3() {
+
+        String key = null;
         System.out.println(key.hashCode());
     }
 
