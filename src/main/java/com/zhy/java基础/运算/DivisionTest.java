@@ -15,10 +15,13 @@ public class DivisionTest {
         double a = 2.6893;
         double b = 2.9017;
 
+        int c = 3;
+
         System.out.println(a / b);
         System.out.println(BigDecimal.valueOf(a).divide(BigDecimal.valueOf(b), 4));
 
-
+        System.out.println(a / c);
+        System.out.println(c / a);
     }
 
 
