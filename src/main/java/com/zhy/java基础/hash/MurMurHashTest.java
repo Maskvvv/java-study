@@ -69,10 +69,9 @@ public class MurMurHashTest {
         list.add("00b9dce4ec2747c0aea6eb0494e38717");
         for (String city : list) {
 
-
-
             HashFunction hashFunction = Hashing.sha256();
             long hash = hashFunction.hashString(city, StandardCharsets.UTF_8).asLong();
+            System.out.println(hashFunction.hashString(city, StandardCharsets.UTF_8));
             System.out.println(hash);
             System.out.println(hash % 10);
         }
