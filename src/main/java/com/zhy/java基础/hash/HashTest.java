@@ -1,6 +1,7 @@
 package com.zhy.java基础.hash;
 
 import cn.hutool.core.util.HashUtil;
+import com.google.common.hash.Hashing;
 import org.junit.Test;
 
 /**
@@ -60,7 +61,9 @@ public class HashTest {
     public void hashTest3() {
 
         String key = null;
-        System.out.println(key.hashCode());
+        //System.out.println(key.hashCode());
+
+        System.out.println(Hashing.hmacMd5("askdjflklasdjflkasjdflkakasjdf".getBytes()));
     }
 
 }
