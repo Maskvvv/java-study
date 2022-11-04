@@ -1,6 +1,5 @@
 package com.zhy.java8.stream;
 
-import org.apache.commons.collections4.ListUtils;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -140,8 +139,8 @@ public class StreamTest1 {
         List<Integer> collect = list.stream().sorted((i1, i2) -> Integer.compare(i1, i2)).collect(Collectors.toList());
         System.out.println(collect);
 
-        List<Integer> list1 = ListFactory.getIntegerList();
-        List<Integer> collect1 = list1.stream().sorted(Comparator.comparingInt(i -> i)).collect(Collectors.toList());
+        List<People> list1 = ListFactory.getPeopleList();
+        List<People> collect1 = list1.stream().sorted(Comparator.comparing(i -> i.getAge())).collect(Collectors.toList());
         System.out.println(collect1);
     }
 
