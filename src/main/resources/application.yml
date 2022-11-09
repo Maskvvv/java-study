@@ -1,10 +1,10 @@
 server:
   port: 8080
 spring:
-  #  redis:
-  #    host: 39.106.49.241
-  #    port: 6380
-  #    password: 1234567788
+  redis:
+    host: 39.106.49.241
+    port: 6380
+    password: 1234567788
   servlet:
     multipart:
       max-file-size: 100MB

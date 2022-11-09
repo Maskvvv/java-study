@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.xml.datatype.Duration;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhouhongyin
@@ -33,10 +35,11 @@ public class RedisConsumer {
     }
 
     public void consumer1() {
-        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer");
+        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer1");
         while (true) {
             try {
-                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 1);
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 1, 0, TimeUnit.SECONDS);
+
                 if (StringUtils.isNotBlank(s)) {
                     log.info(Thread.currentThread() + "RedisConsumer:{}", s);
                 }
@@ -49,10 +52,11 @@ public class RedisConsumer {
     }
 
     public void consumer2() {
-        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer");
+        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer2");
         while (true) {
             try {
-                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 2);
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 2, 0, TimeUnit.SECONDS);
+
                 if (StringUtils.isNotBlank(s)) {
                     log.info(Thread.currentThread() + "RedisConsumer:{}", s);
                 }
@@ -65,10 +69,11 @@ public class RedisConsumer {
     }
 
     public void consumer3() {
-        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer");
+        log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer3");
         while (true) {
             try {
-                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 3);
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 3, 0, TimeUnit.SECONDS);
+
                 if (StringUtils.isNotBlank(s)) {
                     log.info(Thread.currentThread() + "RedisConsumer:{}", s);
                 }
