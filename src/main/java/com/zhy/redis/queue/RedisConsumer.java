@@ -72,7 +72,7 @@ public class RedisConsumer {
         log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer3");
         while (true) {
             try {
-                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 3, 0, TimeUnit.SECONDS);
+                String s = stringRedisTemplate.opsForList().leftPop(REDIS_ROUTING_KEY + 3);
 
                 if (StringUtils.isNotBlank(s)) {
                     log.info(Thread.currentThread() + "RedisConsumer:{}", s);
