@@ -17,7 +17,7 @@ public class RedisQueueThreadPool {
     public ThreadPoolTaskExecutor redisQueueTaskExecutor(){
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         // 核心线程数
-        taskExecutor.setCorePoolSize(1);
+        taskExecutor.setCorePoolSize(3);
         // 最大线程数
         taskExecutor.setMaxPoolSize(15);
         // 队列大小 默认使用LinkedBlockingQueue
