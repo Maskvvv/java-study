@@ -12,7 +12,6 @@ import com.alibaba.otter.canal.protocol.Message;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -23,7 +22,7 @@ public class SimpleCanalClientExample implements Runnable{
     @Resource
     private ThreadPoolTaskExecutor canalThreadPool;
 
-    @PostConstruct
+    //@PostConstruct
     public void initCanalClient() {
         canalThreadPool.execute(this);
 
