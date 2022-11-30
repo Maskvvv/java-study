@@ -63,5 +63,10 @@ public class CalendarTest {
         calendar.add(Calendar.YEAR, 4);
 
         System.out.println(sdf.format(calendar.getTime()));
+
+
+        Object da = "2020.0";
+
+        System.out.println( Double.valueOf((String) da).intValue());
     }
 }
