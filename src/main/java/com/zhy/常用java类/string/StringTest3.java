@@ -1,6 +1,6 @@
 package com.zhy.常用java类.string;
 
-import java.util.Scanner;
+import org.junit.Test;
 
 /**
  * @author zhouhongyin
@@ -25,6 +25,18 @@ public class StringTest3 {
 
 
         System.out.println("a".matches("[0-9a-fA-F]"));
+
+    }
+
+
+    @Test
+    public void subString() {
+        String s = "aaa  bbbbcc";
+
+        System.out.println(s.length());
+
+
+        System.out.println(s.substring(0, 8));
 
     }
 }

@@ -69,4 +69,30 @@ public class CalendarTest {
 
         System.out.println( Double.valueOf((String) da).intValue());
     }
+
+    @Test
+    public void test3() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:ss");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+
+        System.out.println(calendar.get(Calendar.YEAR));
+        calendar.add(Calendar.YEAR, -20);
+        System.out.println(calendar.get(Calendar.YEAR));
+
+        calendar.set(Calendar.MONTH, 0);
+        calendar.set(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+
+
+        System.out.println(sdf.format(calendar.getTime()));
+        System.out.println(calendar.getTimeInMillis());
+
+
+    }
+
+
 }
