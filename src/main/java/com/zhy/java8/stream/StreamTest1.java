@@ -2,8 +2,10 @@ package com.zhy.java8.stream;
 
 import org.junit.Test;
 
+import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -142,6 +144,11 @@ public class StreamTest1 {
         List<People> list1 = ListFactory.getPeopleList();
         List<People> collect1 = list1.stream().sorted(Comparator.comparing(i -> i.getAge())).collect(Collectors.toList());
         System.out.println(collect1);
+
+        List<People> list2 = ListFactory.getPeopleList();
+
+        list2 = list2.stream().sorted(Comparator.comparing(People::getAge, Comparator.reverseOrder()).thenComparing(People::getName, Collator.getInstance(Locale.CHINA))).collect(Collectors.toList());
+
     }
 
     @Test
