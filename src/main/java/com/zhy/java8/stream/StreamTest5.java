@@ -3,13 +3,10 @@ package com.zhy.java8.stream;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -208,6 +205,20 @@ public class StreamTest5 {
     }
 
 
+    @Test
+    public void test4() {
+        List<Integer> list = new ArrayList<>();
+
+        list.add(1);
+        //list.add(2);
+        //list.add(3);
+        //list.add(4);
+
+        System.out.println(list);
+
+        System.out.println(list.stream().limit(2));
+
+    }
 
 
 

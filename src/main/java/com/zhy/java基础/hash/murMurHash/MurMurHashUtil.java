@@ -1,4 +1,4 @@
-package com.zhy.java基础.hash;
+package com.zhy.java基础.hash.murMurHash;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

@@ -1,7 +1,10 @@
 package com.zhy.常用java类.time;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -35,4 +38,61 @@ public class CalendarTest {
         System.out.println(date1);
         System.out.println(date1.getTime());
     }
+
+    @Test
+    public void test1() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date(1533052800000L));
+
+
+        System.out.println(calendar.get(Calendar.YEAR));
+    }
+
+
+    @Test
+    public void test2() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+
+        //修改日历的指定时间
+        calendar.setTime(sdf.parse("2018-09-01"));
+        System.out.println(calendar.getTime());
+        System.out.println(calendar.get(Calendar.YEAR));
+
+
+        calendar.add(Calendar.YEAR, 4);
+
+        System.out.println(sdf.format(calendar.getTime()));
+
+
+        Object da = "2020.0";
+
+        System.out.println( Double.valueOf((String) da).intValue());
+    }
+
+    @Test
+    public void test3() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:ss");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+
+        System.out.println(calendar.get(Calendar.YEAR));
+        calendar.add(Calendar.YEAR, -20);
+        System.out.println(calendar.get(Calendar.YEAR));
+
+        calendar.set(Calendar.MONTH, 0);
+        calendar.set(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+
+
+        System.out.println(sdf.format(calendar.getTime()));
+        System.out.println(calendar.getTimeInMillis());
+
+
+    }
+
+
 }
