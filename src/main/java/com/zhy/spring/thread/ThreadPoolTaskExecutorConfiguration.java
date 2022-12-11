@@ -2,8 +2,13 @@ package com.zhy.spring.thread;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.SchedulingTaskExecutor;
+import org.springframework.scheduling.concurrent.ScheduledExecutorTask;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -31,6 +36,15 @@ public class ThreadPoolTaskExecutorConfiguration {
         //交给spring托管的会自动初始化，因为实现了InitializingBean接口
         //taskExecutor.initialize();
         return taskExecutor;
+    }
+
+    @Bean
+    public ScheduledExecutorService scheduledExecutorService(){
+        ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(5);
+        //核心线程池大小
+        scheduledThreadPoolExecutor.setCorePoolSize(20);
+
+        return scheduledThreadPoolExecutor;
     }
 
 }
