@@ -142,7 +142,7 @@ public class StreamTest1 {
         System.out.println(collect);
 
         List<People> list1 = ListFactory.getPeopleList();
-        List<People> collect1 = list1.stream().sorted(Comparator.comparing(i -> i.getAge())).collect(Collectors.toList());
+        List<People> collect1 = list1.stream().sorted(Comparator.comparingInt(i -> i.getAge())).collect(Collectors.toList());
         System.out.println(collect1);
 
         List<People> list2 = ListFactory.getPeopleList();

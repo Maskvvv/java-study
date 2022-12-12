@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
@@ -47,6 +45,7 @@ public class ListFactory {
         peopleList.add(new People("tom3",32,4, 1));
         peopleList.add(new People("tom4",32,4, 2));
         peopleList.add(new People("tom5",32,4, 3));
+        peopleList.add(new People("tom5",null,4, 3));
 
         return peopleList;
     }
@@ -58,19 +57,19 @@ public class ListFactory {
 @EqualsAndHashCode
 class People {
     private String name;
-    private int age;
-    private int theClass;
+    private Integer age;
+    private Integer theClass;
     private Integer nullValue;
     private List<Integer> list;
     private final Random random = new Random();
 
-    public People(String name, int age, int theClass) {
+    public People(String name, Integer age, Integer theClass) {
         this.name = name;
         this.age = age;
         this.theClass = theClass;
     }
 
-    public People(String name, int age, int theClass, Integer nullValue) {
+    public People(String name, Integer age, Integer theClass, Integer nullValue) {
         this.name = name;
         this.age = age;
         this.theClass = theClass;
