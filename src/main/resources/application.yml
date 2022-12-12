@@ -49,3 +49,11 @@ jodconverter:
     taskQueueTimeout: 200000
     ssl:
       enabled: false
+
+zhy:
+  canal:
+    enable: false
+  redis-consumer:
+    enable: false
+  rabbitmq:
+    enable: false

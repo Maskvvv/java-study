@@ -7,11 +7,13 @@ import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Random;
 
+@ConditionalOnProperty(prefix = "zhy", name = "rabbitmq.enable", havingValue = "true", matchIfMissing = false)
 @Component
 public class Consumer {
 

@@ -2,13 +2,13 @@ package com.zhy.redis.queue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.xml.datatype.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
+@ConditionalOnProperty(prefix = "zhy", name = "redis-consumer.enable", havingValue = "true")
 public class RedisConsumer {
 
     public static final String REDIS_ROUTING_KEY = "file:transfer";

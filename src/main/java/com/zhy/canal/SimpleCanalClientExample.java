@@ -9,20 +9,23 @@ import com.alibaba.otter.canal.protocol.CanalEntry.EventType;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowChange;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowData;
 import com.alibaba.otter.canal.protocol.Message;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.net.InetSocketAddress;
 import java.util.List;
 
+@ConditionalOnProperty(prefix = "zhy", name = "canal.enable", havingValue = "true", matchIfMissing = false)
 @Component
 public class SimpleCanalClientExample implements Runnable{
 
     @Resource
     private ThreadPoolTaskExecutor canalThreadPool;
 
-    //@PostConstruct
+    @PostConstruct
     public void initCanalClient() {
         canalThreadPool.execute(this);
 
