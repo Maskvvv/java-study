@@ -20,8 +20,6 @@ public class reflectionTest3 {
 
         Hello hello = (Hello) Proxy.newProxyInstance(Hello.class.getClassLoader(), new Class[]{Hello.class}, invocationHandler);
         hello.morning("zhy");
-
-
     }
 
 

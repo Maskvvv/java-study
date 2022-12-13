@@ -1,10 +1,4 @@
-package com.zhy.java基础.反射;
-
-import com.zhy.java基础.反射.annotation.ReflectAnnotation;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedType;
-import java.lang.reflect.Method;
+package com.zhy.java基础.反射.annotation;
 
 /**
  * 获取方法
