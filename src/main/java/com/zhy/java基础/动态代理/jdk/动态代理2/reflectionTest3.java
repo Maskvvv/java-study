@@ -1,4 +1,4 @@
-package com.zhy.java基础.反射.动态代理;
+package com.zhy.java基础.动态代理.jdk.动态代理2;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

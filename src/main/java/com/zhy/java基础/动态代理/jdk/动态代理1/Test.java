@@ -1,4 +1,4 @@
-package com.zhy.java基础.反射.动态代理.动态代理测试1;
+package com.zhy.java基础.动态代理.jdk.动态代理1;
 
 import java.lang.reflect.Proxy;
 
