@@ -1,5 +1,7 @@
 package com.zhy.java基础.动态代理.jdk.动态代理3;
 
+import com.zhy.java基础.动态代理.modle.People;
+import com.zhy.java基础.动态代理.modle.Student;
 import org.junit.Test;
 
 /**
@@ -10,8 +12,8 @@ public class DynamicProxyTest {
 
     @Test
     public void test1() {
-        PeopleFactory peopleFactory = new PeopleFactory(new Student());
-        People people = ((People) peopleFactory.getPeople());
+        JdkPeopleFactory jdkPeopleFactory = new JdkPeopleFactory(new Student());
+        People people = ((People) jdkPeopleFactory.getPeople());
         people.say();
     }
 

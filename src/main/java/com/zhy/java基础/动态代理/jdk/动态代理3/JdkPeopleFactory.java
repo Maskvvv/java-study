@@ -1,5 +1,8 @@
 package com.zhy.java基础.动态代理.jdk.动态代理3;
 
+import com.zhy.java基础.动态代理.modle.People;
+import com.zhy.java基础.动态代理.modle.PeopleFactory;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -8,11 +11,11 @@ import java.lang.reflect.Proxy;
  * @author zhouhongyin
  * @since 2022/12/15 15:54
  */
-public class PeopleFactory implements InvocationHandler {
+public class JdkPeopleFactory implements InvocationHandler, PeopleFactory {
 
     private Object target;
 
-    public PeopleFactory(Object target) {
+    public JdkPeopleFactory(Object target) {
         this.target = target;
     }
 
