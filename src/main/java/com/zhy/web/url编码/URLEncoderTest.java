@@ -11,11 +11,13 @@ import java.net.URLEncoder;
  */
 public class URLEncoderTest {
     public static void main(String[] args) throws Exception {
-        System.out.println(URLEncoder.encode("/有空/格 you空格.doc"));
+        String fileName = "/?+!@#有空格 you空格.doc";
+
+        System.out.println(URLEncoder.encode(fileName));
         //
-        //System.out.println(URLEncoder.encode("有空格 you空格.doc","UTF-8"));
+        System.out.println(URLEncoder.encode(fileName,"UTF-8"));
         //
-        //System.out.println(URLEncoder.encode("有空格 you空格.doc","GBK"));
+        System.out.println(URLEncoder.encode(fileName,"GBK"));
         //
         //String encode = URLEncoder.encode("有空格 you空格.doc", "UTF-8");
         //
@@ -25,7 +27,7 @@ public class URLEncoderTest {
         //String gbk = new String(encode.getBytes(StandardCharsets.UTF_8), "GBK");
         //System.out.println(gbk);
 
-        String encode = URLEncodeUtil.encode("/有空/格 you空格.doc");
+        String encode = URLEncodeUtil.encode(fileName);
         System.out.println(encode);
 
 
