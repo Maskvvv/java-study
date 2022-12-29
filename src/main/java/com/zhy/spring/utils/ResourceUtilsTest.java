@@ -1,7 +1,6 @@
 package com.zhy.spring.utils;
 
 import org.junit.Test;
-import org.springframework.util.ResourceUtils;
 
 /**
  * @author zhouhongyin
@@ -11,7 +10,7 @@ public class ResourceUtilsTest {
 
     @Test
     public void test1() {
-        ResourceUtils.getFile()
+        //ResourceUtils.getFile()
     }
 
 }
