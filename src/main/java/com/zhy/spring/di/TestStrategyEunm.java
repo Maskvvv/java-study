@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum TestStrategyEunm {
+    Parent("parent", "0"),
     Select("select", "1"),
     Insert("insert", "2"),
     Update("update", "3"),

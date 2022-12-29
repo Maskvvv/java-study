@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeleteStrategy extends TestStrategy{
 
-    public final TestStrategyEunm strategyEunm = TestStrategyEunm.Delete;
+    private final TestStrategyEunm strategyEunm = TestStrategyEunm.Delete;
 
     @Override
     public Object strategy() {
