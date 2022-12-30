@@ -30,4 +30,12 @@ public class BitOperationTest {
 
     }
 
+    @Test
+    public void bitOperationTest2() {
+        long a = -2L;
+
+        System.out.println(a & Long.MAX_VALUE);
+        System.out.println(Long.MAX_VALUE);
+    }
+
 }
