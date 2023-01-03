@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 @Aspect
 @Component
@@ -108,14 +109,18 @@ public class LogAdvice {
         // 目标方法名
         Signature signature = joinPoint.getSignature();
         String declaringTypeName = signature.getDeclaringTypeName();
-        String name = signature.getName();
+        String methodName = signature.getName();
+        log.info("declaringTypeName:{}", declaringTypeName);
+        log.info("methodName:{}", methodName);
 
 
 
         Class<?> targetClass = Class.forName(declaringTypeName);
         Method[] declaredMethods = targetClass.getDeclaredMethods();
-        //Method method = targetClass.getDeclaredMethod(name);
-        //Parameter[] parameters = method.getParameters();
+        Method method = targetClass.getDeclaredMethod(methodName);
+        Parameter[] parameters = method.getParameters();
+        AopAnnotation annotation = method.getAnnotation(AopAnnotation.class);
+        log.info("annotation:{}", annotation.value());
 
 
         Object[] args = joinPoint.getArgs();

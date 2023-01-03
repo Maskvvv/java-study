@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.zhy.spring.aop.AopAnnotation;
 import com.zhy.spring.aop.AopBody;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,6 +77,17 @@ public class AopController {
 
         IoUtil.copy(file.getInputStream(), outputStream);
     }
+
+
+    @AopAnnotation("annotation")
+    @GetMapping("test5")
+    public void test5() {
+        log.info(this.getClass().getName() + "---------begin----------");
+
+
+        log.info(this.getClass().getName() + "---------end----------");
+    }
+
 
 
 }
