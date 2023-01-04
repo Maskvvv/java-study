@@ -1,13 +1,11 @@
 package com.zhy.spring.ioc.lifecycle;
 
-import org.springframework.stereotype.Component;
-
 /**
  *
  * @author zhouhongyin
  * @since 2023/1/3 15:49
  */
-@Component
+//@Component
 public class LifeCycleCallbacksBean {
 
     public void init() {
