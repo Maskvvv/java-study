@@ -6,11 +6,7 @@ package com.zhy.spring.di;
  */
 public abstract class TestStrategy {
 
-    private TestStrategyEunm strategyEunm;
-
     public abstract Object strategy();
 
-    public TestStrategyEunm getStrategyEunm() {
-        return strategyEunm;
-    }
+    public abstract TestStrategyEunm getStrategyEunm();
 }
