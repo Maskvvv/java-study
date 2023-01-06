@@ -1,5 +1,6 @@
 package com.zhy.spring.di;
 
+import com.zhy.spring.di.qualifier.MyQualifier;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,10 @@ public class TestStrategyController {
     private final Map<TestStrategyEunm, TestStrategy> strategyMap;
     private final List<TestStrategy> strategyList;
     private final Map<String, TestStrategy> strategyDefaultMap;
+
+    @MyQualifier("selectStrategy")
+    @Autowired
+    private TestStrategy selectStrategy;
 
     @Autowired
     public TestStrategyController(List<TestStrategy> strategyList, Map<String, TestStrategy> strategyDefaultMap) {
@@ -50,6 +55,14 @@ public class TestStrategyController {
         //Object strategy = strategyList.stream().filter(s -> s.getStrategyEunm().equals(strategyEunm)).findFirst().orElse(null).strategy();
         //return (String) strategy;
         return (String) strategyMap.get(strategyEunm).strategy();
+    }
+
+    @GetMapping("qualifier")
+    public String qualifier() {
+
+        System.out.println(selectStrategy.getStrategyEunm().getName());
+
+        return (String) selectStrategy.strategy();
     }
 
 }
