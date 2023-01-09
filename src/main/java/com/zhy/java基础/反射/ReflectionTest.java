@@ -1,5 +1,7 @@
 package com.zhy.java基础.反射;
 
+import lombok.Data;
+
 import java.lang.reflect.Field;
 
 /**
@@ -22,6 +24,13 @@ public class ReflectionTest {
         }
         System.out.println("----------getDeclaredFields-----------");
 
+        System.out.println("----------getFields-----------");
+        Field[] fields = stdClass.getFields();
+        for (Field declaredField : fields) {
+            System.out.println(declaredField);
+        }
+        System.out.println("----------getFields-----------");
+
         Object p = new Person("Xiao Ming");
         // 获取该类 Class 对象
         Class<? extends Object> c = p.getClass();
@@ -30,10 +39,18 @@ public class ReflectionTest {
         // 通过 Field 后去该类的 实列的 属性的值
         Object value = f.get(p);
         System.out.println(value)  ; // "Xiao Ming"
+
+
+        Student zhy = new Student("zhy");
+
+        zhy.setScore(0);
+        zhy.setGrade(0);
+
     }
 
 }
 
+@Data
 class Student extends Person {
     public int score;
     private int grade;
@@ -46,6 +63,7 @@ class Student extends Person {
 
 class Person {
     public String name;
+    private String age;
 
     public Person(String name) {
         this.name = name;
@@ -54,4 +72,6 @@ class Person {
     public Person() {
 
     }
+
+
 }
