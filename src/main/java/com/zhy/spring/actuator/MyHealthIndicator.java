@@ -6,12 +6,11 @@ import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
 
-@Component
+//@Component
 public class MyHealthIndicator extends AbstractHealthIndicator implements InitializingBean {
 
 	private JdbcTemplate jdbcTemplate;
