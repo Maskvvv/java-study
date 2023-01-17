@@ -2,7 +2,9 @@ package com.zhy.spring.ioc.extensionpoint;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor {
+public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor, BeanFactoryPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
@@ -26,5 +28,12 @@ public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor 
             log.info("BeanPostProcessorBean-postProcessAfterInitialization:" + "Bean '" + beanName + "' created : " + bean.toString());
         }
         return bean;
+    }
+
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+
+
+
     }
 }
