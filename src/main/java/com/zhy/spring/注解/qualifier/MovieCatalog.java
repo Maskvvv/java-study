@@ -11,6 +11,7 @@ public class MovieCatalog {
 
     private String name;
 
+    private Integer age;
     //private MovieQualifier.Format format;
 
 }

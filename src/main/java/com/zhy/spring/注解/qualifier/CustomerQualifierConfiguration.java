@@ -1,8 +1,5 @@
 package com.zhy.spring.注解.qualifier;
 
-import com.zhy.spring.di.qualifier.MyQualifier;
-import org.checkerframework.framework.qual.QualifierArgument;
-import org.checkerframework.framework.qual.QualifierForLiterals;
 import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -34,5 +31,23 @@ public class CustomerQualifierConfiguration {
         //actionVhsCatalog.setFormat(MovieQualifier.Format.VHS);
         return actionVhsCatalog;
     }
+
+    @Bean
+    @Qualifier("actionVhsCatalog2")
+    public MovieCatalog actionVhsCatalog1() {
+        MovieCatalog actionVhsCatalog = new MovieCatalog();
+        actionVhsCatalog.setName("actionVhsCatalog2");
+        actionVhsCatalog.setAge(1);
+        return actionVhsCatalog;
+    }
+
+    //@Bean
+    //@Qualifier("actionVhsCatalog3")
+    //public MovieCatalog actionVhsCatalog2(@Value("#{actionVhsCatalog1.age}") Integer age) {
+    //    MovieCatalog actionVhsCatalog = new MovieCatalog();
+    //    actionVhsCatalog.setName("actionVhsCatalog2");
+    //    actionVhsCatalog.setAge(age + 1);
+    //    return actionVhsCatalog;
+    //}
 
 }
