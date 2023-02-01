@@ -2,6 +2,7 @@ package com.zhy.常用java类.string;
 
 import org.junit.Test;
 
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -19,6 +20,16 @@ public class StringTest4 {
 
         String s1 = new String(bytes, StandardCharsets.UTF_8);
         System.out.println(s1);
+
+    }
+
+    @Test
+    public void urlEncoder() {
+        String s = "{0}你好，你预约的\"{1}\"即将开始，请安排好时间准时参加。\n" + "开始时间：{2}\n" + "地址：青岛海信财智谷1号楼青岛海信财智谷1号楼青岛海信财智谷1号楼青岛海信财智谷1号楼青岛";
+
+        System.out.println(URLEncoder.encode(s));
+        System.out.println(URLEncoder.encode(s).length());
+        System.out.println(s.length());
 
     }
 
