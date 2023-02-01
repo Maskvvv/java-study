@@ -12,4 +12,7 @@ public interface InterfaceTest {
         System.out.println("ennennene");
     }
 
+    static void method3() {
+        System.out.println("11111");
+    }
 }
