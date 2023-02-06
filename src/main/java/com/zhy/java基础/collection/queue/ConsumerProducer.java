@@ -8,6 +8,7 @@ public class ConsumerProducer {
 
     public static void main(String[] args) {
 // 使用较小的队列，以更好地在输出中展示其影响
+//        BlockingQueue<String> queue = new LinkedBlockingDeque<>(3);
         BlockingQueue<String> queue = new ArrayBlockingQueue<>(3);
         Producer producer = new Producer(queue);
         Consumer consumer = new Consumer(queue);
