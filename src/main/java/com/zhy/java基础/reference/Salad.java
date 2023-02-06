@@ -19,6 +19,9 @@ public class Salad extends WeakReference<Apple> {
         salad.refersTo(new Apple("红富士111"));
         //Apple apple = salad.get();
 
+        salad.clear();
+
+        System.out.println("clear-Apple:" + salad.get());
         System.gc();
         try {
             //休眠一下，在运行的时候加上虚拟机参数-XX:+PrintGCDetails，输出gc信息，确定gc发生了。

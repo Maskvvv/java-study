@@ -1,6 +1,7 @@
 package com.zhy.java基础.Thread.threadlocal;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,11 +24,34 @@ public class ThreadLocalController {
 
         threadLocal.set(s);
         threadLocal.set("2");
+        threadLocal.remove();
 
         log.info("{}:{}", Thread.currentThread().getName(), threadLocal.get());
 
         Thread.sleep(4000);
         return s;
+    }
+
+    @Test
+    public void test2() {
+
+        threadLocal.set(Thread.currentThread().getName());
+        System.out.println(Thread.currentThread().getName() + ":" + threadLocal.get());
+
+        new Thread(() -> {
+            System.out.println(Thread.currentThread().getName() + ":" + threadLocal.get());
+            threadLocal.set(Thread.currentThread().getName());
+            System.out.println(Thread.currentThread().getName() + ":" + threadLocal.get());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(Thread.currentThread().getName() + ":" + threadLocal.get());
+            threadLocal.set(Thread.currentThread().getName());
+            System.out.println(Thread.currentThread().getName() + ":" + threadLocal.get());
+        }).start();
+
+        System.out.println(Thread.currentThread().getName() + ":" + threadLocal.get());
+
     }
 
 }
