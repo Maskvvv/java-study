@@ -48,6 +48,11 @@ public class T15_FullGC_Problem01 {
         //System.in.read();
     }
 
+    /**
+     * OOM 原因分析：
+     * 引用关系：queue -> runnable -> cardInfo
+     *
+     */
     private static void modelFit(){
         List<CardInfo> taskList = getAllCardInfo();
         taskList.forEach(info -> {
@@ -60,6 +65,9 @@ public class T15_FullGC_Problem01 {
         });
     }
 
+    /**
+     * 引用关系：queue -> runnable -/-> cardInfo
+     */
     private static void correctModelFit(){
         executor.scheduleWithFixedDelay(() -> {
             List<CardInfo> taskList = getAllCardInfo();
