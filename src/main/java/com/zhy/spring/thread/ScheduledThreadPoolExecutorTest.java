@@ -13,6 +13,7 @@ public class ScheduledThreadPoolExecutorTest {
 
     public static void main(String[] args) throws IOException {
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2, new ThreadPoolExecutor.DiscardOldestPolicy());
+        executor.setMaximumPoolSize(2);
 
         executor.scheduleWithFixedDelay(() -> {
             System.out.println(Thread.currentThread().getName() + ":1");
