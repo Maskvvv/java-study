@@ -12,10 +12,18 @@ import java.util.concurrent.TimeUnit;
 public class ScheduledThreadPoolExecutorTest {
 
     public static void main(String[] args) throws IOException {
-        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1, new ThreadPoolExecutor.DiscardOldestPolicy());
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2, new ThreadPoolExecutor.DiscardOldestPolicy());
 
         executor.scheduleWithFixedDelay(() -> {
-            System.out.println(Thread.currentThread().getName());
+            System.out.println(Thread.currentThread().getName() + ":1");
+        }, 2, 3, TimeUnit.SECONDS);
+
+        executor.scheduleWithFixedDelay(() -> {
+            System.out.println(Thread.currentThread().getName() + ":2");
+        }, 2, 3, TimeUnit.SECONDS);
+
+        executor.scheduleWithFixedDelay(() -> {
+            System.out.println(Thread.currentThread().getName() + ":3");
         }, 2, 3, TimeUnit.SECONDS);
 
         System.in.read();
