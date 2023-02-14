@@ -1,9 +1,16 @@
 package com.zhy.spring.ioc.lifecycle;
 
+import com.zhy.spring.ioc.extensionpoint.BeanPostProcessorBean;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.lang.reflect.Field;
 
 /**
  * bean 的初始化和销毁
@@ -13,8 +20,28 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class LifeCycleCallbacks implements InitializingBean, DisposableBean {
+public class LifeCycleCallbacks implements InitializingBean, DisposableBean, BeanPostProcessor {
 
+    @SneakyThrows
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+
+        if (bean instanceof BeanPostProcessorBean processorBean) {
+            log.info("LifeCycleCallbacks-postProcessBeforeInitialization:" + "Bean '" + beanName + "' created : " + bean.toString());
+
+            Class<? extends BeanPostProcessorBean> processorBeanClass = processorBean.getClass();
+            Field nameFiled = processorBeanClass.getDeclaredField("name");
+            nameFiled.setAccessible(true);
+            nameFiled.set(processorBean, "postProcessAfterInitialization");
+        }
+
+        return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        log.info("LifeCycleCallbacks-postConstruct");
+    }
 
     /**
      * 在 spring 容器设置完当前 bean 的必要属性后会执行改方法
