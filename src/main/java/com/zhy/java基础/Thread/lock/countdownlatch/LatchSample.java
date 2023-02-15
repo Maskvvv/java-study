@@ -2,6 +2,12 @@ package com.zhy.java基础.Thread.lock.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ *  CountDownLatch 锁的使用（这个例子不好）
+ *
+ * @author zhouhongyin
+ * @since 2023/2/15 22:46
+ */
 public class LatchSample {
     public static void main(String[] args) throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(6);
