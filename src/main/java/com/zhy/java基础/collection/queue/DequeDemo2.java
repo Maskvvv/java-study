@@ -1,4 +1,4 @@
-package com.zhy.java基础.集合.Deque;
+package com.zhy.java基础.collection.queue;
 
 import org.junit.Test;
 

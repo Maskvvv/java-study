@@ -1,4 +1,4 @@
-package com.zhy.java基础.集合.iterator;
+package com.zhy.java基础.collection.iterator;
 
 import java.util.Iterator;
 import java.util.List;
