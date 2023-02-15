@@ -5,6 +5,12 @@ import java.util.Vector;
 import java.util.concurrent.Semaphore;
 import java.util.function.Function;
 
+/**
+ * 通过信号量创建对象池
+ *
+ * @author zhouhongyin
+ * @since 2023/2/15 15:45
+ */
 class ObjPool<T, R> {
     final List<T> pool;
     // 用信号量实现限流器
