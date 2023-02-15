@@ -5,7 +5,7 @@ import java.util.Vector;
 import java.util.concurrent.Semaphore;
 import java.util.function.Function;
 
-class ObjPool<T, R> implements {
+class ObjPool<T, R> {
     final List<T> pool;
     // 用信号量实现限流器
     final Semaphore sem;
