@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.wait;
+package com.zhy.java基础.Thread.waitandnotify;
 
 import java.util.List;
 

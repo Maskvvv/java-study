@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.semaphore;
+package com.zhy.java基础.Thread.lock.semaphore;
 
 import java.util.List;
 import java.util.Vector;

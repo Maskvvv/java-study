@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.countdownlatch;
+package com.zhy.java基础.Thread.lock.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
 
