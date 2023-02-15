@@ -1,6 +1,8 @@
 package com.zhy.java基础.Thread.wait;
 
 /**
+ * wait 和 notify 的使用
+ *
  * @author zhouhongyin
  * @since 2023/2/14 16:01
  */

@@ -2,6 +2,13 @@ package com.zhy.java基础.Thread.wait;
 
 import java.util.List;
 
+/**
+ * wait 和 notify 实现多资源申请
+ *
+ * @author zhouhongyin
+ * @since 2023/2/15 15:51
+ */
+
 class Allocator {
     private List<Object> als;
 
