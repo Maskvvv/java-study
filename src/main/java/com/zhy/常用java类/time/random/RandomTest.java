@@ -1,10 +1,5 @@
 package com.zhy.常用java类.time.random;
 
-import com.zhy.layui.entity.TreeNode;
-import org.apache.commons.collections4.list.TransformedList;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
