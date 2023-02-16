@@ -1,24 +1,30 @@
 package com.zhy.java基础.Thread.lock.countdownlatch;
 
-import java.util.concurrent.CountDownLatch;
+import lombok.SneakyThrows;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ *  CountDownLatch 锁的使用
+ *
+ * @author zhouhongyin
+ * @since 2023/2/15 22:46
+ */
 public class LatchSample {
     public static void main(String[] args) throws InterruptedException {
-        CountDownLatch latch = new CountDownLatch(6);
-        for (int i = 0; i < 5; i++) {
-            Thread t = new Thread(new FirstBatchWorker(latch));
-            t.start();
-        }
-        for (int i = 0; i < 5; i++) {
-            Thread t = new Thread(new SecondBatchWorker(latch));
-            t.start();
-        }
-        // 注意这里也是演示目的的逻辑，并不是推荐的协调方式
-        while (latch.getCount() != 1) {
-            Thread.sleep(100L);
-        }
-        System.out.println("Wait for first batch finish");
-        latch.countDown();
+        ExecutorService threadPool = Executors.newFixedThreadPool(2);
+        CountDownLatch latch = new CountDownLatch(2);
+
+        // 任务一
+        threadPool.execute(new FirstBatchWorker(latch));
+        // 任务一
+        threadPool.execute(new SecondBatchWorker(latch));
+
+        // 等待任务 1 和 2 执行完毕
+        latch.await();
+        System.out.println("first and second batch finish");
     }
 }
 
@@ -43,13 +49,11 @@ class SecondBatchWorker implements Runnable {
         this.latch = latch;
     }
 
+    @SneakyThrows
     @Override
     public void run() {
-        try {
-            latch.await();
-            System.out.println("Second batch executed!");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Second batch executed!");
+        Thread.sleep(1000);
+        latch.countDown();
     }
 }
