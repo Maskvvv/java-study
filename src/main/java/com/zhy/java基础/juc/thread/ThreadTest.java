@@ -1,7 +1,7 @@
-package com.zhy.java基础.Thread;
+package com.zhy.java基础.juc.thread;
 
 /**
- *  
+ *
  * @author zhouhongyin
  * @since 2021/8/1 12:04
  */

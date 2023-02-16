@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.lock.readwritelock;
+package com.zhy.java基础.juc.lock.readwritelock;
 
 import java.util.HashMap;
 import java.util.Map;

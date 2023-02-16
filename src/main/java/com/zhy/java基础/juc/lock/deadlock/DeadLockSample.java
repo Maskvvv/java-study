@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.lock.deadlock;
+package com.zhy.java基础.juc.lock.deadlock;
 
 public class DeadLockSample extends Thread {
     private final String first;

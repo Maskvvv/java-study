@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.lock.cyclicbarrier;
+package com.zhy.java基础.juc.lock.cyclicbarrier;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

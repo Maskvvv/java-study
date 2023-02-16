@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.threadlocal;
+package com.zhy.java基础.juc.threadlocal;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

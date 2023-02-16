@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread;
+package com.zhy.java基础.juc.thread;
 
 /**
  * @author zhouhongyin

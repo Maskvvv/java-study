@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.waitandnotify;
+package com.zhy.java基础.juc.waitandnotify;
 
 /**
  * wait 和 notify 的使用
