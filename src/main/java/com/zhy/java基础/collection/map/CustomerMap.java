@@ -1,14 +1,13 @@
-package com.zhy.java基础.map;
+package com.zhy.java基础.collection.map;
 
-import com.zhy.java基础.map.entity.MapEntity;
+import com.zhy.java基础.collection.map.entity.MapEntity;
 import org.junit.Test;
 
 /**
- *  
  * @author zhouhongyin
- * @since 2021/8/26 16:25
+ * @since 2023/2/16 21:45
  */
-public class MapTest {
+public class CustomerMap {
 
     @Test
     public void mapTest1() {
