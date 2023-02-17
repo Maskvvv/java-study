@@ -1,4 +1,4 @@
-package com.zhy.java基础.juc.threadpool.future;
+package com.zhy.java基础.juc.future.completablefuture;
 
 import java.util.concurrent.CompletableFuture;
 
