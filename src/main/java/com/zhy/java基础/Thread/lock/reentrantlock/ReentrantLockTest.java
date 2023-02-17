@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
  */
 @Slf4j
 public class ReentrantLockTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService threadPool = Executors.newFixedThreadPool(2);
 
         log.info("begin");
@@ -33,6 +33,7 @@ public class ReentrantLockTest {
         });
 
         log.info("end");
+        Thread.sleep(300000);
 
     }
 
