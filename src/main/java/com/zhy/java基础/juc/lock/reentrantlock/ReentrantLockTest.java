@@ -1,4 +1,4 @@
-package com.zhy.java基础.Thread.lock.reentrantlock;
+package com.zhy.java基础.juc.lock.reentrantlock;
 
 import lombok.extern.slf4j.Slf4j;
 
