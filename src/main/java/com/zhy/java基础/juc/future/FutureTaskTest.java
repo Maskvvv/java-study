@@ -1,4 +1,4 @@
-package com.zhy.java基础.juc.future.futrue;
+package com.zhy.java基础.juc.future;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

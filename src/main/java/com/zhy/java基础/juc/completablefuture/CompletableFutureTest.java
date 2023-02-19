@@ -1,4 +1,4 @@
-package com.zhy.java基础.juc.future.completablefuture;
+package com.zhy.java基础.juc.completablefuture;
 
 import org.junit.Test;
 
