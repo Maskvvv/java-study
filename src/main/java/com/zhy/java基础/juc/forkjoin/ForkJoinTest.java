@@ -6,6 +6,8 @@ import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
 /**
+ * 计算数字的和
+ *
  * @author zhouhongyin
  * @since 2022/6/7 22:35
  */
