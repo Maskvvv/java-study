@@ -1,4 +1,4 @@
-package com.zhy.java基础.juc.threadpool;
+package com.zhy.java基础.juc.forkjoin;
 
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
@@ -19,6 +19,7 @@ public class ForkJoinTest {
             expectedSum += array[i];
         }
         System.out.println("Expected sum: " + expectedSum);
+
         // fork/join:
         ForkJoinTask<Long> task = new SumTask(array, 0, array.length);
         long startTime = System.currentTimeMillis();
@@ -64,12 +65,22 @@ class SumTask extends RecursiveTask<Long> {
         // 任务太大,一分为二:
         int middle = (end + start) / 2;
         System.out.println(String.format("split %d~%d ==> %d~%d, %d~%d", start, end, start, middle, middle, end));
+
+        // 创建两个子任务
         SumTask subtask1 = new SumTask(this.array, start, middle);
         SumTask subtask2 = new SumTask(this.array, middle, end);
+
+        // 执行两个子任务
         invokeAll(subtask1, subtask2);
+
+        // 等待两个子任务的结果
         Long subresult1 = subtask1.join();
         Long subresult2 = subtask2.join();
+
+        // 合并结果
         Long result = subresult1 + subresult2;
+
+        // 返回结果
         System.out.println("result = " + subresult1 + " + " + subresult2 + " ==> " + result);
         return result;
     }
