@@ -45,7 +45,7 @@ public class CompletableFutureTest {
         CompletableFuture<Void> combindFuture = CompletableFuture.allOf(future1, future2);
 
         try {
-            combindFuture.get().var;
+            combindFuture.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
