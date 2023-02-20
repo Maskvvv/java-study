@@ -13,9 +13,8 @@ package com.zhy.java基础.juc.pattern.twophasetermination;
 public class Proxy {
 
     // 线程终止标志位
-    // 原因在于我们很可能在线程的 run() 方法中调用第三方类库提供的方法，而我们没有办法保证第三方类库正确处理了线程的中断异常，
+    // 强烈建议你设置自己的线程终止标志位原因在于我们很可能在线程的 run() 方法中调用第三方类库提供的方法，而我们没有办法保证第三方类库正确处理了线程的中断异常，
     // 例如第三方类库在捕获到 Thread.sleep() 方法抛出的中断异常后，没有重新设置线程的中断状态，那么就会导致线程不能够正常终止。
-    // 所以强烈建议你设置自己的线程终止标志位
     volatile boolean terminated = false;
     boolean started = false;
 
