@@ -33,7 +33,7 @@ import java.io.IOException;
  * @since 2023/2/25 20:30
  */
 @Slf4j
-public class ESDoc {
+public class ESDocCRUD {
 
     @Test
     public void insert() throws IOException {
@@ -123,13 +123,18 @@ public class ESDoc {
 
         BulkRequest request = new BulkRequest("user");
 
-        User user = User.builder().name("maik").age(10).gender("男").build();
-        String json = JSON.toJSONString(user);
+        for (int i = 0; i < 6; i++) {
 
-        IndexRequest indexRequest = new IndexRequest().index("user").id("1002");
-        indexRequest.source(json, XContentType.JSON);
 
-        request.add(indexRequest);
+            User user = User.builder().name("张三" + i).age(10 + i).gender("男").build();
+            String json = JSON.toJSONString(user);
+
+            IndexRequest indexRequest = new IndexRequest().index("user").id(String.valueOf(1002 + i));
+            indexRequest.source(json, XContentType.JSON);
+
+            request.add(indexRequest);
+
+        }
 
         BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
 

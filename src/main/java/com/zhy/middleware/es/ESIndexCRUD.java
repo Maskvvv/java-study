@@ -20,7 +20,7 @@ import java.io.IOException;
  * @since 2023/2/25 20:30
  */
 @Slf4j
-public class ESIndex {
+public class ESIndexCRUD {
 
     @Test
     public void create() throws IOException {
