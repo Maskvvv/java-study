@@ -1,6 +1,7 @@
 package com.zhy.spring.注解.value;
 
 import com.zhy.JavaStudyApplication;
+import com.zhy.spring.注解.configurationproperties.ConfigurationPropertiesModel;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,5 +26,15 @@ public class ValueModelTest extends TestCase {
 
         System.out.println(valueModel);
     }
+
+    @Resource
+    private ConfigurationPropertiesModel configurationPropertiesModel;
+
+    @Test
+    public void test2() {
+
+        System.out.println(configurationPropertiesModel);
+    }
+
 
 }

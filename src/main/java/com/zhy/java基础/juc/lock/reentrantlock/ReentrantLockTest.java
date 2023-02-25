@@ -1,6 +1,7 @@
 package com.zhy.java基础.juc.lock.reentrantlock;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,4 +38,9 @@ public class ReentrantLockTest {
 
     }
 
+    @Test
+    public void test() {
+
+
+    }
 }
