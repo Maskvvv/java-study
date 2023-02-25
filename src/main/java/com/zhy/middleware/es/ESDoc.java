@@ -5,6 +5,8 @@ import com.zhy.middleware.es.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
@@ -112,5 +114,50 @@ public class ESDoc {
 
     }
 
+
+    @Test
+    public void batchInsert() throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("localhost", 9200, "http"))
+        );
+
+        BulkRequest request = new BulkRequest("user");
+
+        User user = User.builder().name("maik").age(10).gender("男").build();
+        String json = JSON.toJSONString(user);
+
+        IndexRequest indexRequest = new IndexRequest().index("user").id("1002");
+        indexRequest.source(json, XContentType.JSON);
+
+        request.add(indexRequest);
+
+        BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+
+        System.out.println(response);
+
+        client.close();
+
+    }
+
+
+    @Test
+    public void batchDelete() throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("localhost", 9200, "http"))
+        );
+
+        BulkRequest request = new BulkRequest("user");
+
+        DeleteRequest indexRequest = new DeleteRequest().index("user").id("1002");
+
+        request.add(indexRequest);
+
+        BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
+
+        System.out.println(response);
+
+        client.close();
+
+    }
 
 }
