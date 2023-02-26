@@ -1,4 +1,4 @@
-package com.zhy.middleware.es;
+package com.zhy.middleware.es.option;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;

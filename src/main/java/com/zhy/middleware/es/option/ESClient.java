@@ -1,4 +1,4 @@
-package com.zhy.middleware.es;
+package com.zhy.middleware.es.option;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;

@@ -1,4 +1,4 @@
-package com.zhy.middleware.es;
+package com.zhy.middleware.es.option;
 
 import com.alibaba.fastjson.JSON;
 import com.zhy.middleware.es.model.User;
