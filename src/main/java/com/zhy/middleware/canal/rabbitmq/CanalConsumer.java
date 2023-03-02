@@ -13,20 +13,21 @@ import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.IOException;
 
 @Slf4j
 @Component
+@ConditionalOnProperty(prefix = "zhy", name = "rabbitmq.enable", havingValue = "true", matchIfMissing = false)
 public class CanalConsumer {
 
     @Resource
     private RestHighLevelClient client;
 
-    @PostConstruct
+    //@PostConstruct
     private void createIndex() {
         CreateIndexRequest request = new CreateIndexRequest("canal");
 
