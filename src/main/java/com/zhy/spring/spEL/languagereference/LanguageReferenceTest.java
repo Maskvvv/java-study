@@ -361,5 +361,24 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
 
+    /**
+     *  Expression templating (文字 表达式混排)
+     */
+    @Test
+    public void spELTest18() {
+
+        ExpressionParser parser = new SpelExpressionParser();
+
+        EvaluationContext context = SimpleEvaluationContext.forReadWriteDataBinding().build();
+        context.setVariable("newName", "Mike Tesla");
+
+        TemplateParserContext templateParserContext = new TemplateParserContext();
+        String value = parser.parseExpression("name: #{#newName}", templateParserContext).getValue(context, String.class);
+        System.out.println(value);  // "Mike Tesla"
+
+
+    }
+
+
 
 }
