@@ -12,7 +12,7 @@ public class HelloProxy implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("前置方法！" + method.getName());
-        method.invoke(object,args);
+        method.invoke(object, args);
         System.out.println("后置方法！" + method.getName());
         return null;
     }

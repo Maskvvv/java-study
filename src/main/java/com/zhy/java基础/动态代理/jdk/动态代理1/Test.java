@@ -8,7 +8,10 @@ public class Test {
         Hello hello = new Hello();
         HelloProxy helloProxy = new HelloProxy(hello);
 
-        HelloInterface helloInterface = (HelloInterface) Proxy.newProxyInstance(hello.getClass().getClassLoader(), hello.getClass().getInterfaces(), helloProxy);
+        HelloInterface helloInterface = (HelloInterface) Proxy.newProxyInstance(
+                hello.getClass().getClassLoader(),
+                hello.getClass().getInterfaces(),
+                helloProxy);
         helloInterface.sayHello();
     }
 
