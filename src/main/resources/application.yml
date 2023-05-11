@@ -2,15 +2,15 @@ server:
   port: 8080
 spring:
   redis:
-    host: 39.106.49.241
+    host: ${host}
     port: 6380
-    password: 1234567788
+    password: ${password}
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 1000MB
   rabbitmq:
-    host: 39.106.49.241
+    host: ${host}
     port: 5672
     password: guest
     username: guest
