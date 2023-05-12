@@ -35,6 +35,9 @@ public class RedisConsumer {
         redisQueueTaskExecutor.execute(this::consumer3);
     }
 
+    /**
+     * 加了超时时间代表阻塞方式取值
+     */
     public void consumer1() {
         log.info(Thread.currentThread().getName() + "----------------------- RedisConsumer1");
         while (true) {
