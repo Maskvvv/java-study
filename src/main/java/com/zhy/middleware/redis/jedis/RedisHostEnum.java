@@ -1,4 +1,4 @@
-package com.zhy.middleware.redis;
+package com.zhy.middleware.redis.jedis;
 
 /**
  *

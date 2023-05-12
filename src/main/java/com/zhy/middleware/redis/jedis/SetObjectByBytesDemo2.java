@@ -1,5 +1,6 @@
-package com.zhy.middleware.redis;
+package com.zhy.middleware.redis.jedis;
 
+import com.zhy.middleware.redis.User;
 import org.junit.Test;
 import org.springframework.util.SerializationUtils;
 import redis.clients.jedis.Jedis;

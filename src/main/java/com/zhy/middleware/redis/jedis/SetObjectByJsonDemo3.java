@@ -1,6 +1,7 @@
-package com.zhy.middleware.redis;
+package com.zhy.middleware.redis.jedis;
 
 import com.alibaba.fastjson.JSON;
+import com.zhy.middleware.redis.User;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
 
