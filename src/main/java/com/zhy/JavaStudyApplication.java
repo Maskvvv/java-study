@@ -1,5 +1,6 @@
 package com.zhy;
 
+import com.zhy.spring.scan.EnableMyRegistry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -11,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @since 2021/8/3 16:42
  */
 
+@EnableMyRegistry(basePackages = "com.zhy.spring.scan.model")
 @EnableAsync
 @ServletComponentScan
 @SpringBootApplication(scanBasePackages = {"org.jodconverter.boot.autoconfigure", "org.jodconverter", "com.zhy"})
