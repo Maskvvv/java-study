@@ -13,6 +13,7 @@ public class SpiTest {
 
         for (UploadCDN u : uploadCDN) {
             u.upload("filePath");
+            System.out.println(u.getName());
         }
 
     }
