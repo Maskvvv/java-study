@@ -1,4 +1,4 @@
-package com.zhy.spring.resource;
+package com.zhy.spring.resource.loader;
 
 
 import org.springframework.core.io.FileSystemResourceLoader;
