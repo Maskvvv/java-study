@@ -1,4 +1,4 @@
-package com.zhy.spring.resource;
+package com.zhy.java基础.resource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
