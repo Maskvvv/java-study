@@ -13,17 +13,25 @@ import javax.annotation.PostConstruct;
 import java.lang.reflect.Field;
 
 /**
- * bean 的初始化和销毁
- * InitializingBean 和 BeanPostProcessor 的区别
+ * <p>bean 的初始化和销毁</p>
+ *
+ * <p>InitializingBean 和 BeanPostProcessor 的区别</p>
+ *
+ * <p>
  * 1. 初始化时机不同：InitializingBean 的初始化方法是在 bean 属性设置完毕后，容器实例化该 bean 后立即调用；
- *    而 BeanPostProcessor 的初始化方法是在 bean 实例化后，初始化前调用。
- *    InitializingBean 只会在实现了该接口的 Bean 中执行一次，而 BeanPostProcessor 会在每个 Bean  set 玩属性后都会执行
+ * 而 BeanPostProcessor 的初始化方法是在 bean 实例化后，初始化前调用。
+ * InitializingBean 只会在实现了该接口的 Bean 中执行一次，而 BeanPostProcessor 会在每个 Bean  set 玩属性后都会执行
+ * </p>
  *
+ * <p>
  * 2. 功能不同：InitializingBean 的作用是在 bean 属性设置完毕后，对 bean 进行一些初始化操作；
- *    而 BeanPostProcessor 的作用是在 bean 初始化前后进行一些自定义处理，例如修改 bean 的属性，或者添加一些自定义的初始化逻辑等。
+ * 而 BeanPostProcessor 的作用是在 bean 初始化前后进行一些自定义处理，例如修改 bean 的属性，或者添加一些自定义的初始化逻辑等。
+ * </p>
  *
+ * <p>
  * 3. 使用场景不同：如果需要在 bean 属性设置完毕后进行初始化操作，可以使用 InitializingBean；而
- *    如果需要在 bean 初始化前后进行一些自定义处理，可以使用 BeanPostProcessor。
+ * 如果需要在 bean 初始化前后进行一些自定义处理，可以使用 BeanPostProcessor。
+ * </p>
  *
  * @author zhouhongyin
  * @since 2023/1/3 15:49
