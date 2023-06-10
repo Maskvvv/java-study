@@ -1,44 +1,32 @@
 package com.zhy.middleware.es.option;
 
-import com.alibaba.fastjson.JSON;
-import com.zhy.middleware.es.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
-import org.elasticsearch.action.bulk.BulkRequest;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteRequest;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetRequest;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.update.UpdateRequest;
-import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.Nullable;
 import org.elasticsearch.common.unit.Fuzziness;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.FuzzyQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.metrics.MaxAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.elasticsearch.search.suggest.Suggest;
+import org.elasticsearch.search.suggest.SuggestBuilder;
+import org.elasticsearch.search.suggest.SuggestBuilders;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author zhouhongyin
@@ -393,11 +381,44 @@ public class ESDocSearch {
         SearchHits hits = response.getHits();
 
 
-
         for (SearchHit hit : hits) {
             System.out.println(hit);
         }
 
+        client.close();
+
+    }
+
+    /**
+     * 分组查询
+     */
+    @Test
+    public void suggest() throws IOException {
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("localhost", 9200, "http"))
+        );
+
+        SearchRequest searchRequest = new SearchRequest("company");
+
+        searchRequest.source().suggest(new SuggestBuilder()
+                .addSuggestion("suggest",
+                        SuggestBuilders.completionSuggestion("keyword")
+                                .prefix("泰盈").skipDuplicates(true).size(10)));
+
+        // 构建查询条件
+        SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        Suggest suggest = response.getSuggest();
+
+        List<? extends Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option>> entries = suggest.getSuggestion("suggest").getEntries();
+
+        for (Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option> entry : entries) {
+            for (Suggest.Suggestion.Entry.Option option : entry.getOptions()) {
+                String keyword = option.getText().string();
+                System.out.println(keyword);
+
+            }
+        }
         client.close();
 
     }
