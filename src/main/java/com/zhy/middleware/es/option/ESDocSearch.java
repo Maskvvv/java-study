@@ -23,7 +23,9 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.search.suggest.Suggest;
 import org.elasticsearch.search.suggest.SuggestBuilder;
 import org.elasticsearch.search.suggest.SuggestBuilders;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,14 +37,27 @@ import java.util.List;
 @Slf4j
 public class ESDocSearch {
 
+    RestHighLevelClient client;
+
+    @BeforeEach
+    public void client() {
+        client = new RestHighLevelClient(
+                RestClient.builder(new HttpHost("localhost", 9200, "http"))
+        );
+
+    }
+
+    @AfterEach
+    public void after() throws IOException {
+        client.close();
+    }
+
+
     /**
      * 全量查询
      */
     @Test
     public void matchAllQuery() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -59,8 +74,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
-
     }
 
     /**
@@ -68,9 +81,6 @@ public class ESDocSearch {
      */
     @Test
     public void termQuery() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -87,7 +97,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
 
     }
 
@@ -96,9 +105,7 @@ public class ESDocSearch {
      */
     @Test
     public void pageSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
+
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -117,8 +124,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
-
     }
 
     /**
@@ -126,9 +131,6 @@ public class ESDocSearch {
      */
     @Test
     public void sortSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -147,8 +149,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
-
     }
 
     /**
@@ -156,9 +156,6 @@ public class ESDocSearch {
      */
     @Test
     public void filterSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -179,9 +176,6 @@ public class ESDocSearch {
         for (SearchHit hit : hits) {
             System.out.println(hit);
         }
-
-        client.close();
-
     }
 
     /**
@@ -189,9 +183,6 @@ public class ESDocSearch {
      */
     @Test
     public void combineSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -216,8 +207,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
-
     }
 
     /**
@@ -225,9 +214,6 @@ public class ESDocSearch {
      */
     @Test
     public void rangeSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -250,8 +236,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
-
     }
 
     /**
@@ -259,10 +243,6 @@ public class ESDocSearch {
      */
     @Test
     public void fuzzySearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
-
         SearchRequest searchRequest = new SearchRequest("user");
 
         // 构建查询条件
@@ -282,7 +262,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
 
     }
 
@@ -291,9 +270,6 @@ public class ESDocSearch {
      */
     @Test
     public void highlightSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -318,8 +294,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
-
     }
 
     /**
@@ -327,9 +301,6 @@ public class ESDocSearch {
      */
     @Test
     public void aggSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -351,7 +322,6 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
 
     }
 
@@ -360,9 +330,6 @@ public class ESDocSearch {
      */
     @Test
     public void groupSearch() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
 
         SearchRequest searchRequest = new SearchRequest("user");
 
@@ -385,19 +352,13 @@ public class ESDocSearch {
             System.out.println(hit);
         }
 
-        client.close();
-
     }
 
     /**
-     * 分组查询
+     * suggest 查询
      */
     @Test
     public void suggest() throws IOException {
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(new HttpHost("localhost", 9200, "http"))
-        );
-
         SearchRequest searchRequest = new SearchRequest("company");
 
         searchRequest.source().suggest(new SuggestBuilder()
@@ -419,8 +380,6 @@ public class ESDocSearch {
 
             }
         }
-        client.close();
-
     }
 
 
