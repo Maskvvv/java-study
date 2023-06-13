@@ -18,6 +18,8 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
@@ -371,17 +373,15 @@ public class ESDocSearch {
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
-        for (Aggregation aggregation : response.getAggregations()) {
-            System.out.println(aggregation.getName());
+
+        Aggregations aggregations = response.getAggregations();
+        Terms terms = aggregations.get("maxAge");
+        List<? extends Terms.Bucket> buckets = terms.getBuckets();
+        for (Terms.Bucket bucket : buckets) {
+            String keyAsString = bucket.getKeyAsString();
+            System.out.println(keyAsString);
+
         }
-        SearchHits hits = response.getHits();
-
-
-        for (SearchHit hit : hits) {
-            System.out.println(hit);
-        }
-
-
     }
 
     /**
