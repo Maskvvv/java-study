@@ -7,6 +7,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.FuzzyQueryBuilder;
@@ -18,6 +19,7 @@ import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.search.suggest.Suggest;
 import org.elasticsearch.search.suggest.SuggestBuilder;
@@ -28,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhouhongyin
@@ -339,8 +342,16 @@ public class ESDocSearch {
         System.out.println(hits.getTotalHits());
 
         for (SearchHit hit : hits) {
-            System.out.println(hit);
+
+            Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+            HighlightField highlightField = highlightFields.get("name");
+            Text[] fragments = highlightField.getFragments();
+            for (Text fragment : fragments) {
+                System.out.println(fragment.string());
+            }
         }
+
+
 
     }
 
