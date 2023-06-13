@@ -17,7 +17,6 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.search.suggest.Suggest;
@@ -59,11 +58,13 @@ public class ESDocSearch {
     @Test
     public void matchAllQuery() throws IOException {
 
-        SearchRequest searchRequest = new SearchRequest("user");
+        SearchRequest searchRequest = new SearchRequest("company");
 
         // 构建查询条件
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
-        searchRequest.source(sourceBuilder);
+        //SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
+        //searchRequest.source(sourceBuilder);
+
+        searchRequest.source().query(QueryBuilders.matchAllQuery());
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -85,8 +86,10 @@ public class ESDocSearch {
         SearchRequest searchRequest = new SearchRequest("user");
 
         // 构建查询条件
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.termQuery("age", 10));
-        searchRequest.source(sourceBuilder);
+        //SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.termQuery("age", 10));
+        //searchRequest.source(sourceBuilder);
+
+        searchRequest.source().query(QueryBuilders.termQuery("age", 10));
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -107,13 +110,16 @@ public class ESDocSearch {
     public void pageSearch() throws IOException {
 
 
-        SearchRequest searchRequest = new SearchRequest("user");
+        SearchRequest searchRequest = new SearchRequest("company");
 
         // 构建查询条件
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
-        sourceBuilder.from(0).size(2);
+        //SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
+        //sourceBuilder.from(0).size(2);
+        //searchRequest.source(sourceBuilder);
 
-        searchRequest.source(sourceBuilder);
+        searchRequest.source().query(QueryBuilders.matchAllQuery());
+        searchRequest.source().from(0).size(2);
+
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -132,13 +138,16 @@ public class ESDocSearch {
     @Test
     public void sortSearch() throws IOException {
 
-        SearchRequest searchRequest = new SearchRequest("user");
+        SearchRequest searchRequest = new SearchRequest("company");
 
         // 构建查询条件
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
-        sourceBuilder.sort("age", SortOrder.DESC);
+        //SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
+        //sourceBuilder.sort("age", SortOrder.DESC);
+        //
+        //searchRequest.source(sourceBuilder);
 
-        searchRequest.source(sourceBuilder);
+        searchRequest.source().query(QueryBuilders.matchAllQuery());
+        searchRequest.source().sort("age", SortOrder.DESC);
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -158,15 +167,14 @@ public class ESDocSearch {
     public void filterSearch() throws IOException {
 
         SearchRequest searchRequest = new SearchRequest("user");
-
-        // 构建查询条件
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
-
         String[] includes = {"name"};
         String[] excludes = {};
-        sourceBuilder.fetchSource(includes, excludes);
+        // 构建查询条件
+        //SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
+        //sourceBuilder.fetchSource(includes, excludes);
 
-        searchRequest.source(sourceBuilder);
+        searchRequest.source().query(QueryBuilders.matchAllQuery());
+        searchRequest.source().fetchSource(includes, excludes);
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -193,10 +201,7 @@ public class ESDocSearch {
 
         boolQueryBuilder.should(QueryBuilders.matchQuery("gender", "女"));
 
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(boolQueryBuilder);
-
-
-        searchRequest.source(sourceBuilder);
+        searchRequest.source().query(boolQueryBuilder);
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -222,10 +227,7 @@ public class ESDocSearch {
         rangeQueryBuilder.gte(11);
         rangeQueryBuilder.lt(13);
 
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(rangeQueryBuilder);
-
-
-        searchRequest.source(sourceBuilder);
+        searchRequest.source().query(rangeQueryBuilder);
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -248,10 +250,7 @@ public class ESDocSearch {
         // 构建查询条件
         FuzzyQueryBuilder fuzzyQueryBuilder = QueryBuilders.fuzzyQuery("name", "张").fuzziness(Fuzziness.ONE);
 
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(fuzzyQueryBuilder);
-
-
-        searchRequest.source(sourceBuilder);
+        searchRequest.source().query(fuzzyQueryBuilder);
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
@@ -271,20 +270,18 @@ public class ESDocSearch {
     @Test
     public void highlightSearch() throws IOException {
 
-        SearchRequest searchRequest = new SearchRequest("user");
+        SearchRequest searchRequest = new SearchRequest("company");
 
         // 构建查询条件
-        FuzzyQueryBuilder fuzzyQueryBuilder = QueryBuilders.fuzzyQuery("name", "张三").fuzziness(Fuzziness.ONE);
-
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(fuzzyQueryBuilder);
+        FuzzyQueryBuilder fuzzyQueryBuilder = QueryBuilders.fuzzyQuery("name", "上海").fuzziness(Fuzziness.ONE);
+        searchRequest.source().query(fuzzyQueryBuilder);
 
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.preTags("<front color='red'>");
         highlightBuilder.postTags("</front>");
         highlightBuilder.field("name");
-        sourceBuilder.highlighter(highlightBuilder);
+        searchRequest.source().highlighter(highlightBuilder);
 
-        searchRequest.source(sourceBuilder);
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
         SearchHits hits = response.getHits();
@@ -307,9 +304,9 @@ public class ESDocSearch {
         // 构建查询条件
         AggregationBuilder aggregationBuilder = AggregationBuilders.max("maxAge").field("age");
 
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().aggregation(aggregationBuilder);
+        searchRequest.source().aggregation(aggregationBuilder);
 
-        searchRequest.source(sourceBuilder);
+
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
         for (Aggregation aggregation : response.getAggregations()) {
@@ -336,9 +333,8 @@ public class ESDocSearch {
         // 构建查询条件
         AggregationBuilder aggregationBuilder = AggregationBuilders.terms("groupAge").field("age");
 
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().aggregation(aggregationBuilder);
+        searchRequest.source().aggregation(aggregationBuilder);
 
-        searchRequest.source(sourceBuilder);
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
         for (Aggregation aggregation : response.getAggregations()) {
@@ -361,10 +357,13 @@ public class ESDocSearch {
     public void suggest() throws IOException {
         SearchRequest searchRequest = new SearchRequest("company");
 
-        searchRequest.source().suggest(new SuggestBuilder()
-                .addSuggestion("suggest",
-                        SuggestBuilders.completionSuggestion("keyword")
-                                .prefix("泰盈").skipDuplicates(true).size(10)));
+        SuggestBuilder suggestBuilder = new SuggestBuilder();
+        suggestBuilder.addSuggestion(
+                "suggest",
+                SuggestBuilders.completionSuggestion("keyword")
+                        .prefix("泰盈").skipDuplicates(true).size(10));
+
+        searchRequest.source().suggest(suggestBuilder);
 
         // 构建查询条件
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
