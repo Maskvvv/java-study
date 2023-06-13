@@ -72,9 +72,60 @@ public class ESDocSearch {
         System.out.println(hits.getTotalHits());
 
         for (SearchHit hit : hits) {
-            System.out.println(hit);
+            String sourceAsString = hit.getSourceAsString();
+            System.out.println(sourceAsString);
         }
 
+    }
+
+    /**
+     * match 查询
+     */
+    @Test
+    public void matchQuery() throws IOException {
+
+        SearchRequest searchRequest = new SearchRequest("company");
+
+        // 构建查询条件
+        //SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
+        //searchRequest.source(sourceBuilder);
+
+        searchRequest.source().query(QueryBuilders.matchQuery("name", "上海"));
+
+        SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        SearchHits hits = response.getHits();
+        System.out.println(hits.getTotalHits());
+
+        for (SearchHit hit : hits) {
+            String sourceAsString = hit.getSourceAsString();
+            System.out.println(sourceAsString);
+        }
+    }
+
+    /**
+     * multiMatchQuery 查询
+     */
+    @Test
+    public void multiMatchQuery() throws IOException {
+
+        SearchRequest searchRequest = new SearchRequest("company");
+
+        // 构建查询条件
+        //SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.matchAllQuery());
+        //searchRequest.source(sourceBuilder);
+
+        searchRequest.source().query(QueryBuilders.multiMatchQuery("上海", "name"));
+
+        SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        SearchHits hits = response.getHits();
+        System.out.println(hits.getTotalHits());
+
+        for (SearchHit hit : hits) {
+            String sourceAsString = hit.getSourceAsString();
+            System.out.println(sourceAsString);
+        }
     }
 
     /**
