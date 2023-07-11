@@ -27,19 +27,22 @@ public class HeaderController {
     public void contentDispositionPdf(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream outputStream = response.getOutputStream();
 
-        //response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=a.pdf");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;奥利普奇智.zip");
         //response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=a.pdf");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline;filename="+ new String("富 雨的 简历1653869894.pdf".getBytes(), "ISO8859-1"));
+        //response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline;filename="+ new String("富 雨的 简历1653869894.pdf".getBytes(), "ISO8859-1"));
 
 
         //response.setHeader(HttpHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE);
-        response.setHeader(HttpHeaders.CONTENT_TYPE, "application/pdf");
+        //response.setHeader(HttpHeaders.CONTENT_TYPE, "application/pdf");
 
-        FileInputStream fileInputStream = new FileInputStream("D:\\UserFiles\\桌面\\富雨的简历1653869894.pdf");
+        FileInputStream fileInputStream = new FileInputStream("E:\\需求文档\\file\\奥利普奇智.zip");
         IoUtil.copy(fileInputStream, outputStream);
 
+        System.out.println("copy final");
         IoUtil.close(outputStream);
         IoUtil.close(fileInputStream);
+
+        System.out.println("close final");
     }
 
     @GetMapping("content/disposition/word")
