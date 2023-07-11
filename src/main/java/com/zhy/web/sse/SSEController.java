@@ -4,12 +4,15 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * <p> </p>
@@ -20,6 +23,8 @@ import java.util.Random;
 @RequestMapping("sse")
 @Controller
 public class SSEController {
+
+    private final ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     @GetMapping(value = "test", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public void push(HttpServletResponse response) {
@@ -71,4 +76,30 @@ public class SSEController {
         }
 
     }
+
+
+    @GetMapping(path = "/words", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter getWords() {
+        SseEmitter emitter = new SseEmitter();
+
+        cachedThreadPool.execute(() -> {
+            try {
+                FileReader fileReader = new FileReader("D:\\UserFiles\\桌面\\新建文本文档 (2).txt");
+
+                for (int n = fileReader.read(); n != -1; n = fileReader.read()) {
+                    Thread.sleep(30);
+                    char c = (char) n;
+                    System.out.println(c);
+                    emitter.send(c);
+                }
+
+                emitter.complete();
+            } catch (Exception e) {
+                emitter.completeWithError(e);
+            }
+        });
+
+        return emitter;
+    }
 }
+
