@@ -1,6 +1,5 @@
 package com.zhy.常用java类.time;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -23,7 +22,7 @@ public class LocalDateTimeTest {
         System.out.println(LocalTime.now());
 
 
-        Date date1 = new Date(1567267200000L);
+        Date date1 = new Date(1640966400000L);
         System.out.println(date1.getYear());
         System.out.println(date1);
     }
