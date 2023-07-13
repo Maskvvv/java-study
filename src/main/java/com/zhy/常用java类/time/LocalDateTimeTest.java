@@ -1,8 +1,11 @@
 package com.zhy.常用java类.time;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 /**
@@ -12,7 +15,9 @@ import java.util.Date;
  */
 
 public class LocalDateTimeTest {
-    public static void main(String[] args) {
+
+    @Test
+    public void t1() {
         //        System.out.println(System.currentTimeMillis());
 //        Date date = new Date(System.currentTimeMillis());
 //        System.out.println(date);
@@ -25,6 +30,13 @@ public class LocalDateTimeTest {
         Date date1 = new Date(1640966400000L);
         System.out.println(date1.getYear());
         System.out.println(date1);
+    }
+
+    @Test
+    public void t2() {
+
+        System.out.println(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
+
     }
 
 
