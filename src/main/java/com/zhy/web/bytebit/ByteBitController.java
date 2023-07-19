@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zhouhongyin
  * @since 2023/7/19 15:02
  */
-@RequestMapping("byte_bite")
+@RequestMapping("byte_bit")
 @RestController
-public class ByteBiteController {
+public class ByteBitController {
 
     @GetMapping("string")
     public String string(String s) {
