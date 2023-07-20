@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.ByteBuffer;
 
-public class ByteBufferReadWritTest {
+public class ByteBufferReadWriteTest {
     ByteBuffer buffer = ByteBuffer.allocate(10);
     @Test
     public void test1() {

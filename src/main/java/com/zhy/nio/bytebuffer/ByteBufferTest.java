@@ -19,7 +19,7 @@ public class ByteBufferTest {
 
     @Test
     public void test1() {
-        URL resource = ByteBufferReadWritTest.class.getClassLoader().getResource("file.txt");
+        URL resource = ByteBufferTest.class.getClassLoader().getResource("file.txt");
         try (FileChannel channel = new FileInputStream(resource.getFile()).getChannel()) {
 
             ByteBuffer buffer = ByteBuffer.allocate(10);
