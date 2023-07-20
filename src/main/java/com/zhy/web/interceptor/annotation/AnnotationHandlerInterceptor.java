@@ -1,17 +1,17 @@
 package com.zhy.web.interceptor.annotation;
 
-import cn.hutool.core.io.IoUtil;
 import com.alibaba.fastjson.JSON;
+import com.google.common.util.concurrent.RateLimiter;
 import com.zhy.web.filter.MyServletRequestWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 注解拦截器测试
@@ -41,5 +41,17 @@ public class AnnotationHandlerInterceptor implements HandlerInterceptor {
         log.info("annotationParam:{}", annotationParam);
 
         return true;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        RateLimiter rateLimiter = RateLimiter.create(2);
+
+        Thread.sleep(1000);
+        for (int i = 0; i < 10; i++) {
+            String time = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME);
+            System.out.println(time + ":" + rateLimiter.tryAcquire());
+            //Thread.sleep(250);
+        }
+
     }
 }
