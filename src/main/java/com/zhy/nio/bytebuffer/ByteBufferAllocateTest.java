@@ -16,11 +16,6 @@ import java.nio.ByteBuffer;
 public class ByteBufferAllocateTest {
     @Test
     public void test1() {
-
-        /*
-
-
-        */
         System.out.println(ByteBuffer.allocate(16).getClass());
         System.out.println(ByteBuffer.allocateDirect(16).getClass());
     }
