@@ -1,0 +1,319 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=bar-tick-align&code=PYBwLglsB2AEC8sDeAoWszGAG0iAXMmuhgE4QDmFApqYQOQCGAHhAM70A0x6L7ACsAjQwtQqhIkwATxDUGbABaMAJsADu9HrAC-xHd3QVyK8duzUAZmAYBmAKRdt5Copux6AFkeGSAI2AwTABbOx9tAGMYMEZhABlGP2psQjBSAFdqfV9mAEFWNkIAbW0JSQxZeQ8IxlEKYFJpJ3LYFVrGYoBdX0k-NgAVCAiAazMW3mxKaAB1CDBFBKSUskztdD1JDdhu4ml89mLStYq5BgA3RmxMrU3iHfQ2WghqQtgSyTLJaEZgqvoAEQgpGoETAzXKMlOHj8jFI4MkMNIsxU8wYADYAAzhFptGJdbRbTooHQAbhQ5IupFa7QQbyO41gACJhtRpAB9RhsNlsNLCCiMwiMgBMGKFtgAtBi0ZKAIz9DEY_AKpUYgB0CoxAC1GT1yszWQLYDK0QAOACsZoA7JbMRqMbrJIy1BE2VF0iJDUKZeaZUKHSRGekzobPgymRcrtRDZ4hZbbMd1gTdaHHSz2ZzubzoPzBSKxZLpaL5YrlQr1Qrtf70PrpIbjea0WjPHaFVWmc7XcB3WBPTLbNaAJxtwPBsZh6sRzLR5smhO6JP08Y1jlcnnkbOG4WiiVSyW2YsqlXlrU6uc1uumq1mjHNu3Djtuj2EGUyzwvs3DoMhueOydRwhCmavpzls6zJmeaYrpm645kyeY7oWngHqWaoapWEEGs-l4mrYpotvewAuo-PbPr6Zommin6jkQ44TpcU4AdanggQuHwYemq5ZrBW75ruGJmshJaoRWp4MueWHmgOYoineZ4Pl2T6wEKA62L6JpUd-tHhvR_6wGa_ZCixmzgWJkEZmufKbvBBYFoJR5oaJS5pheFEKgOtoagRREKSRSlomajb2meX5juOjJ_tGNqzgyoG6CZTmslBFkbrm242Rilp2WWDnDs5EmYu5LZBWJ8ndp6tg3gO6nBdRKZLhFhCeNe8YxaxJB1dWZmcTBVlpXxJpZcJJ65ZhRqmmi3pCrenlyYRnZlQBvqeCaMoaaFYbhTp0YGUZJAGIuLTLuZXG9bxhYDoNx7oaZo31miQqmia-Gzd5C1GgOniYqtNWabRm2RtGr4teMsX7WxN0cdBlmpWd4oyhil05exLlorYFoyTNJVzcRdbGrGlE_etYkNUpMaWrtYEHXqXVQylcF9dKL6IyJI21vlnhvh5rYvfNikvrYMZ-oTNF_STD1VRTcVU6miXHT1MMIXDQrM8NyP5WaQpPc9WOvYpsb8cta0i2FJOeJaUmS2D7XsUlJ0KzZfYq9dCVs2NFETRz2tLqVet9uR31iSFxsbabHPMa1xnSwGNPJdx1m7q-TuOYdeVu2iloKlrmPe9jPmek2GKqUbHV6qb5HAy0oPxSnsvddD9OwzKAkofZLNq2nlompaGPczrvO-SKA4qQTge1T-AamxRZqW9X1O17TccM3DaJJ6zKNd7hXuHT7vkyubGLGsX490QDjV9uHINtegJdHXXdM8Yre-r-3d2FUVXn93WGUPZ4R9af9DElI_xnlHTq89Y6nUfgNFu2U24QxchnT601e4511rvAKU0PzCxLr-LahABa2AHCA8GLtbbywbo_C6MChrOxrq7eslo-yay3nqHehoKrLXIn_UWeC9L9mnhHPas8ZaQwgfbXcIpn7wIkt3GUUkWGOjYQBfyTYhzYOPtpU-sBloqWIdbCGZD64Pxsl6KRLsEEVQCgogMSjYAVSHm-bhJteFNX0no6-Ns5ZGPjtKIUytqFXWTnPehpo4zyOsdWWx3dPADmKkuIOOCJ68Kbm-dxwcRGGPvj48UYozF0IQWbE0yC4nb1zm9eGB9-JOJDrwvxA4ZRpJvjHO2FCTFIQCUjaRbtLQBWWhE9sZS-ZNyelg0ev1nFaPFtFS-kcSF0MyYvWGgE8nBIQf5X0_SnSDIHmbKqv91H_1DrYQygjKZzOCQsyBJiV4dLgeYmRcYbSbNsZgjEKlqnExcWjCu5Qq6gKZM08hxiJGZVuarLpDCTRTXfjzHGAEMr6UtB8-qvDCEc0aZ4u-izFaaxWSIhB9SbzPO2Z6fiqkhZjKJiirRtgTQ4QxQYrxWSl7KTxdHW6oSh54Vkn3OFSk-xVVsMiw6pt-IYgZaQpl2KbIVTZWAkJdKMQ4R7iU1hJKAJ9K7sK0uLizYCJmXtFARIUCWAaLAAAFJSWAEBaQYhJNa2AAAeakMRVQWGzPMe1EAADU3qACUItQCQBgKqPIBQigYk6KqXEjBVQgHSEoc1MaigQCjYCvkqo2CTAiNQc1H54Z-r9WSdAQaoDQEzU8F4Eao0xrjQmxQSb2gpqjUGVUf4_XEiAA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+
+
+<script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+
+<script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: [],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: 'Direct',
+                type: 'bar',
+                barWidth: '60%',
+                data: []
+            }
+        ]
+    };
+
+
+    var data = [
+        {
+            "key_as_string": "2023-06-01T00:00:00.000Z",
+            "key": 1685577600000,
+            "doc_count": 218512,
+            "uv": {
+                "value": 4273
+            }
+        },
+        {
+            "key_as_string": "2023-06-02T00:00:00.000Z",
+            "key": 1685664000000,
+            "doc_count": 213779,
+            "uv": {
+                "value": 4408
+            }
+        },
+        {
+            "key_as_string": "2023-06-03T00:00:00.000Z",
+            "key": 1685750400000,
+            "doc_count": 114115,
+            "uv": {
+                "value": 2512
+            }
+        },
+        {
+            "key_as_string": "2023-06-04T00:00:00.000Z",
+            "key": 1685836800000,
+            "doc_count": 112586,
+            "uv": {
+                "value": 2774
+            }
+        },
+        {
+            "key_as_string": "2023-06-05T00:00:00.000Z",
+            "key": 1685923200000,
+            "doc_count": 293128,
+            "uv": {
+                "value": 5372
+            }
+        },
+        {
+            "key_as_string": "2023-06-06T00:00:00.000Z",
+            "key": 1686009600000,
+            "doc_count": 265660,
+            "uv": {
+                "value": 4768
+            }
+        },
+        {
+            "key_as_string": "2023-06-07T00:00:00.000Z",
+            "key": 1686096000000,
+            "doc_count": 230498,
+            "uv": {
+                "value": 4503
+            }
+        },
+        {
+            "key_as_string": "2023-06-08T00:00:00.000Z",
+            "key": 1686182400000,
+            "doc_count": 212481,
+            "uv": {
+                "value": 4372
+            }
+        },
+        {
+            "key_as_string": "2023-06-09T00:00:00.000Z",
+            "key": 1686268800000,
+            "doc_count": 194601,
+            "uv": {
+                "value": 4143
+            }
+        },
+        {
+            "key_as_string": "2023-06-10T00:00:00.000Z",
+            "key": 1686355200000,
+            "doc_count": 116276,
+            "uv": {
+                "value": 2427
+            }
+        },
+        {
+            "key_as_string": "2023-06-11T00:00:00.000Z",
+            "key": 1686441600000,
+            "doc_count": 113422,
+            "uv": {
+                "value": 2698
+            }
+        },
+        {
+            "key_as_string": "2023-06-12T00:00:00.000Z",
+            "key": 1686528000000,
+            "doc_count": 270548,
+            "uv": {
+                "value": 4792
+            }
+        },
+        {
+            "key_as_string": "2023-06-13T00:00:00.000Z",
+            "key": 1686614400000,
+            "doc_count": 213581,
+            "uv": {
+                "value": 4444
+            }
+        },
+        {
+            "key_as_string": "2023-06-14T00:00:00.000Z",
+            "key": 1686700800000,
+            "doc_count": 264031,
+            "uv": {
+                "value": 4583
+            }
+        },
+        {
+            "key_as_string": "2023-06-15T00:00:00.000Z",
+            "key": 1686787200000,
+            "doc_count": 209936,
+            "uv": {
+                "value": 4865
+            }
+        },
+        {
+            "key_as_string": "2023-06-16T00:00:00.000Z",
+            "key": 1686873600000,
+            "doc_count": 179016,
+            "uv": {
+                "value": 4134
+            }
+        },
+        {
+            "key_as_string": "2023-06-17T00:00:00.000Z",
+            "key": 1686960000000,
+            "doc_count": 107264,
+            "uv": {
+                "value": 2264
+            }
+        },
+        {
+            "key_as_string": "2023-06-18T00:00:00.000Z",
+            "key": 1687046400000,
+            "doc_count": 156245,
+            "uv": {
+                "value": 3439
+            }
+        },
+        {
+            "key_as_string": "2023-06-19T00:00:00.000Z",
+            "key": 1687132800000,
+            "doc_count": 304858,
+            "uv": {
+                "value": 5375
+            }
+        },
+        {
+            "key_as_string": "2023-06-20T00:00:00.000Z",
+            "key": 1687219200000,
+            "doc_count": 265649,
+            "uv": {
+                "value": 4893
+            }
+        },
+        {
+            "key_as_string": "2023-06-21T00:00:00.000Z",
+            "key": 1687305600000,
+            "doc_count": 309941,
+            "uv": {
+                "value": 4553
+            }
+        },
+        {
+            "key_as_string": "2023-06-22T00:00:00.000Z",
+            "key": 1687392000000,
+            "doc_count": 72490,
+            "uv": {
+                "value": 1541
+            }
+        },
+        {
+            "key_as_string": "2023-06-23T00:00:00.000Z",
+            "key": 1687478400000,
+            "doc_count": 100105,
+            "uv": {
+                "value": 2291
+            }
+        },
+        {
+            "key_as_string": "2023-06-24T00:00:00.000Z",
+            "key": 1687564800000,
+            "doc_count": 115805,
+            "uv": {
+                "value": 2698
+            }
+        },
+        {
+            "key_as_string": "2023-06-25T00:00:00.000Z",
+            "key": 1687651200000,
+            "doc_count": 247984,
+            "uv": {
+                "value": 4432
+            }
+        },
+        {
+            "key_as_string": "2023-06-26T00:00:00.000Z",
+            "key": 1687737600000,
+            "doc_count": 245093,
+            "uv": {
+                "value": 4353
+            }
+        },
+        {
+            "key_as_string": "2023-06-27T00:00:00.000Z",
+            "key": 1687824000000,
+            "doc_count": 207537,
+            "uv": {
+                "value": 3944
+            }
+        },
+        {
+            "key_as_string": "2023-06-28T00:00:00.000Z",
+            "key": 1687910400000,
+            "doc_count": 205312,
+            "uv": {
+                "value": 3883
+            }
+        },
+        {
+            "key_as_string": "2023-06-29T00:00:00.000Z",
+            "key": 1687996800000,
+            "doc_count": 213983,
+            "uv": {
+                "value": 4050
+            }
+        },
+        {
+            "key_as_string": "2023-06-30T00:00:00.000Z",
+            "key": 1688083200000,
+            "doc_count": 248087,
+            "uv": {
+                "value": 4475
+            }
+        }
+    ]
+
+    for (var i = 0; i < data.length; i++) {
+        option.xAxis[0].data.push(data[i].key_as_string.slice(5, 10));
+        option.series[0].data.push(data[i].uv.value)
+    }
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+</script>
+</body>
+</html>

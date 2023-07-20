@@ -35,7 +35,23 @@ public class BitOperationTest {
         long a = -2L;
 
         System.out.println(a & Long.MAX_VALUE);
+        System.out.println(Long.MIN_VALUE);
         System.out.println(Long.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(Integer.MAX_VALUE);
+
+    }
+
+    @Test
+    public void bitOperationTest3() {
+        long a = 1L << 1;
+        long b = 1L << 2;
+        long c = 4L >>> 1;
+
+        System.out.println(c);
+        System.out.println(a | b);
+        System.out.println(a & b);
+
     }
 
 }
