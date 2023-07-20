@@ -1,4 +1,4 @@
-package com.zhy.nio;
+package com.zhy.nio.bytebuffer;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class ByteBufferTest {
 
     @Test
     public void test1() {
-        URL resource = ByteBufferTest.class.getClassLoader().getResource("cp_id.txt");
+        URL resource = ByteBufferReadWritTest.class.getClassLoader().getResource("file.txt");
         try (FileChannel channel = new FileInputStream(resource.getFile()).getChannel()) {
 
             ByteBuffer buffer = ByteBuffer.allocate(10);
@@ -39,7 +39,6 @@ public class ByteBufferTest {
         } catch (IOException e) {
 
         }
-
     }
 
 }
