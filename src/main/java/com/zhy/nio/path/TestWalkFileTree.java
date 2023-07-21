@@ -1,5 +1,7 @@
 package com.zhy.nio.path;
 
+import org.junit.Test;
+
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -26,7 +28,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 2023/7/21 10:00
  */
 public class TestWalkFileTree {
-    public static void main(String[] args) throws IOException {
+
+    @Test
+    public void test1() throws IOException {
         Path path = Paths.get("E:\\qst\\java-study\\src\\main\\java\\com\\zhy");
         // 文件目录数目
         AtomicInteger dirCount = new AtomicInteger();
@@ -54,4 +58,37 @@ public class TestWalkFileTree {
         System.out.println("文件目录数:" + dirCount.get());
         System.out.println("文件数:" + fileCount.get());
     }
+
+    /**
+     * 删除多级目录
+     */
+    @Test
+    public void test2() throws IOException {
+        Path path = Paths.get("E:\\qst11\\java-study\\src\\main\\java\\com\\zhy");
+
+        Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+            /**
+             * 删文件
+             */
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Files.delete(file);
+                return super.visitFile(file, attrs);
+            }
+
+            /**
+             * 删文件夹
+             */
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+
+                Files.delete(dir);
+                return super.postVisitDirectory(dir, exc);
+            }
+
+        });
+
+    }
+
+
 }
