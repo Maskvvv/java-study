@@ -90,5 +90,29 @@ public class TestWalkFileTree {
 
     }
 
+    /**
+     * 多级目录拷贝
+     */
+    @Test
+    public void test3() throws IOException {
+        String source = "D:\\UserFiles\\桌面\\大赛报名数据";
+        String target = "D:\\UserFiles\\桌面\\大赛报名数据1";
+
+        Files.walk(Paths.get(source)).forEach(path -> {
+
+            try {
+                String targetName = path.toString().replace(source, target);
+                if (Files.isDirectory(path)) {
+                    Files.createDirectories(Paths.get(targetName));
+                } else if (Files.isRegularFile(path)) {
+                    Files.copy(path, Paths.get(targetName));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+    }
 
 }
