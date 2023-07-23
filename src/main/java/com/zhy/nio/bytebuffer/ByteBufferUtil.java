@@ -180,6 +180,7 @@ public class ByteBufferUtil {
     }
 
     public static String println(ByteBuffer buffer) {
+        buffer.flip();
         String cha = Charset.defaultCharset().decode(buffer).toString();
         System.out.println(cha);
         return cha;

@@ -1,4 +1,4 @@
-package com.zhy.nio.selector;
+package com.zhy.nio.selector.basicevent;
 
 import com.zhy.nio.bytebuffer.ByteBufferUtil;
 
@@ -13,7 +13,10 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * <p> Selector </p>
+ * <p> Selector 基础事件处理 </p>
+ * <p>
+ * Read
+ * accept
  *
  * @author zhouhongyin
  * @since 2023/7/21 11:50
