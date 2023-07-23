@@ -23,12 +23,11 @@ public class SelectorClient {
             while (true) {
                 if (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
+                    if (line.equals("close")) break;
                     channel.write(Charset.defaultCharset().encode(line));
                 }
-
-                Thread.sleep(1000);
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

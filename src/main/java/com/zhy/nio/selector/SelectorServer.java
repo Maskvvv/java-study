@@ -44,25 +44,47 @@ public class SelectorServer {
                 Iterator<SelectionKey> iterator = selectionKeys.iterator();
                 while (iterator.hasNext()) {
                     SelectionKey key = iterator.next();
-
+                    iterator.remove();
                     // 判断key的类型
+                    // 处理 Acceptable 事件
                     if(key.isAcceptable()) {
                         // 获得key对应的channel
                         ServerSocketChannel channel = (ServerSocketChannel) key.channel();
                         System.out.println("before accepting...");
 
-        				// 获取连接并处理，而且是必须处理，否则需要取消
+                        // 获取连接并处理，而且是必须处理，否则需要取消
                         SocketChannel socketChannel = channel.accept();
                         System.out.println("after accepting...");
+                        socketChannel.configureBlocking(false);
+                        SelectionKey scKey = socketChannel.register(selector, 0, null);
+                        scKey.interestOps(SelectionKey.OP_READ);
 
-                        socketChannel.read(buffer);
-                        buffer.flip();
-                        ByteBufferUtil.debugAll(buffer);
-                        buffer.clear();
-
-                        // 处理完毕后移除
-                        //iterator.remove();
                     }
+
+                    // 处理 Read 事件
+                    else if (key.isReadable()) {
+                        try {
+                            SocketChannel socketChannel = (SocketChannel) key.channel();
+
+                            // 客户端通过 close 断开链接时，会返回 -1
+                            int read = socketChannel.read(buffer);
+                            if (read == -1) {
+                                System.out.println("客户端断开:" + socketChannel);
+                                key.cancel();
+                                continue;
+                            }
+
+                            buffer.flip();
+                            ByteBufferUtil.println(buffer);
+                            buffer.clear();
+                        } catch (IOException e) {
+                            // 客户端不通过 close 断开会发送 Read 事件，应该捕捉异常取消对该 key 的监听
+                            e.printStackTrace();
+                            key.cancel();
+                        }
+                    }
+
+
                 }
             }
         } catch (IOException e) {

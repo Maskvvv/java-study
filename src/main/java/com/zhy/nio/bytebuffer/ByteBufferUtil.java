@@ -4,6 +4,7 @@ import io.netty.util.internal.MathUtil;
 import io.netty.util.internal.StringUtil;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 
 
 /**
@@ -176,5 +177,11 @@ public class ByteBufferUtil {
 
     public static short getUnsignedByte(ByteBuffer buffer, int index) {
         return (short) (buffer.get(index) & 0xFF);
+    }
+
+    public static String println(ByteBuffer buffer) {
+        String cha = Charset.defaultCharset().decode(buffer).toString();
+        System.out.println(cha);
+        return cha;
     }
 }
