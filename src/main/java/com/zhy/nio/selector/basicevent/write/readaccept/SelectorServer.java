@@ -1,6 +1,6 @@
-package com.zhy.nio.selector.basicevent.readaccept;
+package com.zhy.nio.selector.basicevent.write.readaccept;
 
-import com.zhy.nio.ByteBufferUtil;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -9,14 +9,14 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Set;
 
 /**
  * <p> Selector 基础事件处理 </p>
  * <p>
- * Read
- * accept
+ * Write
  *
  * @author zhouhongyin
  * @since 2023/7/21 11:50
@@ -25,7 +25,7 @@ public class SelectorServer {
     public static void main(String[] args) {
         ByteBuffer buffer = ByteBuffer.allocate(16);
         // 获得服务器通道
-        try(ServerSocketChannel server = ServerSocketChannel.open()) {
+        try (ServerSocketChannel server = ServerSocketChannel.open()) {
             server.bind(new InetSocketAddress(8080));
             // 创建选择器
             Selector selector = Selector.open();
@@ -48,42 +48,44 @@ public class SelectorServer {
                 while (iterator.hasNext()) {
                     SelectionKey key = iterator.next();
                     iterator.remove();
+
+
                     // 判断key的类型
                     // 处理 Acceptable 事件
-                    if(key.isAcceptable()) {
-                        // 获得key对应的channel
+                    if (key.isAcceptable()) {
                         ServerSocketChannel channel = (ServerSocketChannel) key.channel();
-                        System.out.println("before accepting...");
-
-                        // 获取连接并处理，而且是必须处理，否则需要取消
                         SocketChannel socketChannel = channel.accept();
-                        System.out.println("after accepting...");
                         socketChannel.configureBlocking(false);
-                        SelectionKey scKey = socketChannel.register(selector, 0, null);
-                        scKey.interestOps(SelectionKey.OP_READ);
 
+                        SelectionKey sckey = socketChannel.register(selector, 0, null);
+
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < 3000000; i++) {
+                            sb.append("a");
+                        }
+
+                        ByteBuffer byteBuffer = Charset.defaultCharset().encode(sb.toString());
+                        int write = socketChannel.write(byteBuffer);
+                        System.out.println(write);
+
+                        while (buffer.hasRemaining()) {
+                            sckey.interestOps(sckey.interestOps() | SelectionKey.OP_WRITE);
+                            sckey.attach(byteBuffer);
+                        }
                     }
 
-                    // 处理 Read 事件
-                    else if (key.isReadable()) {
-                        try {
-                            SocketChannel socketChannel = (SocketChannel) key.channel();
 
-                            // 客户端通过 close 断开链接时，会返回 -1
-                            int read = socketChannel.read(buffer);
-                            if (read == -1) {
-                                System.out.println("客户端断开:" + socketChannel);
-                                key.cancel();
-                                continue;
-                            }
+                    // 处理写事件
+                    else if (key.isWritable()) {
+                        SocketChannel socketChannel = (SocketChannel) key.channel();
+                        ByteBuffer attachment = (ByteBuffer) key.attachment();
+                        int write = socketChannel.write(attachment);
+                        System.out.println(write);
 
-                            buffer.flip();
-                            ByteBufferUtil.println(buffer);
-                            buffer.clear();
-                        } catch (IOException e) {
-                            // 客户端不通过 close 断开会发送 Read 事件，应该捕捉异常取消对该 key 的监听
-                            e.printStackTrace();
-                            key.cancel();
+                        if (!buffer.hasRemaining()) {
+                            // 无内容可写清除 buffer 和 Write事件
+                            key.attach(null);
+                            key.interestOps(key.interestOps() ^ SelectionKey.OP_WRITE);
                         }
                     }
 
@@ -93,5 +95,11 @@ public class SelectorServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test1() {
+        System.out.println(1 ^ 2);
+
     }
 }
