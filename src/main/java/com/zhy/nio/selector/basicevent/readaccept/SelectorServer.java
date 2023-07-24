@@ -1,4 +1,4 @@
-package com.zhy.nio.selector.stickybag.basicevent;
+package com.zhy.nio.selector.basicevent.readaccept;
 
 import com.zhy.nio.bytebuffer.ByteBufferUtil;
 
@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * <p> 粘包处理 </p>
+ * <p> Selector 基础事件处理 </p>
  * <p>
  * Read
  * accept
@@ -23,9 +23,9 @@ import java.util.Set;
  */
 public class SelectorServer {
     public static void main(String[] args) {
-
+        ByteBuffer buffer = ByteBuffer.allocate(16);
         // 获得服务器通道
-        try (ServerSocketChannel server = ServerSocketChannel.open()) {
+        try(ServerSocketChannel server = ServerSocketChannel.open()) {
             server.bind(new InetSocketAddress(8080));
             // 创建选择器
             Selector selector = Selector.open();
@@ -50,7 +50,7 @@ public class SelectorServer {
                     iterator.remove();
                     // 判断key的类型
                     // 处理 Acceptable 事件
-                    if (key.isAcceptable()) {
+                    if(key.isAcceptable()) {
                         // 获得key对应的channel
                         ServerSocketChannel channel = (ServerSocketChannel) key.channel();
                         System.out.println("before accepting...");
@@ -59,10 +59,7 @@ public class SelectorServer {
                         SocketChannel socketChannel = channel.accept();
                         System.out.println("after accepting...");
                         socketChannel.configureBlocking(false);
-
-                        // 添加附件 attachment
-                        ByteBuffer buffer = ByteBuffer.allocate(16);
-                        SelectionKey scKey = socketChannel.register(selector, 0, buffer);
+                        SelectionKey scKey = socketChannel.register(selector, 0, null);
                         scKey.interestOps(SelectionKey.OP_READ);
 
                     }
@@ -71,26 +68,18 @@ public class SelectorServer {
                     else if (key.isReadable()) {
                         try {
                             SocketChannel socketChannel = (SocketChannel) key.channel();
-                            ByteBuffer attachment = (ByteBuffer) key.attachment();
-
 
                             // 客户端通过 close 断开链接时，会返回 -1
-                            int read = socketChannel.read(attachment);
+                            int read = socketChannel.read(buffer);
                             if (read == -1) {
                                 System.out.println("客户端断开:" + socketChannel);
                                 key.cancel();
                                 continue;
                             }
 
-                            split(attachment);
-
-                            // 消息没结束但是 buffer 满了
-                            if (attachment.limit() == attachment.position()) {
-                                ByteBuffer newByteBuffer = ByteBuffer.allocate(attachment.capacity() * 2);
-                                attachment.flip();
-                                newByteBuffer.put(attachment);
-                                key.attach(newByteBuffer);
-                            }
+                            buffer.flip();
+                            ByteBufferUtil.println(buffer);
+                            buffer.clear();
                         } catch (IOException e) {
                             // 客户端不通过 close 断开会发送 Read 事件，应该捕捉异常取消对该 key 的监听
                             e.printStackTrace();
@@ -105,26 +94,4 @@ public class SelectorServer {
             e.printStackTrace();
         }
     }
-
-
-    private static void split(ByteBuffer source) {
-        source.flip();
-        for (int i = 0; i < source.limit(); i++) {
-
-            // get(i)不会移动 position
-            if (source.get(i) == '\n') {
-                int length = i + 1 - source.position();
-                ByteBuffer byteBuffer = ByteBuffer.allocate(length);
-
-                for (int j = source.position(); j <= i; j++) {
-                    byteBuffer.put(source.get());
-
-                }
-                ByteBufferUtil.println(byteBuffer);
-            }
-        }
-
-        source.compact();
-    }
-
 }
