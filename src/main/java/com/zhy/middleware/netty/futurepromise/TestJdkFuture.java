@@ -1,4 +1,4 @@
-package com.zhy.middleware.netty.futurepromise.future.jdk;
+package com.zhy.middleware.netty.futurepromise;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

@@ -1,4 +1,4 @@
-package com.zhy.middleware.netty.futurepromise.future;
+package com.zhy.middleware.netty.futurepromise;
 
 import io.netty.channel.EventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
