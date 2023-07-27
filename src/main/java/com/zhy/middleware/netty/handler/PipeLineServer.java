@@ -44,9 +44,10 @@ public class PipeLineServer {
                             @Override
                             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                 System.out.println(Thread.currentThread().getName() + " Inbound handler 2");
+                                super.channelRead(ctx, msg);
                                 // 执行write操作，使得Outbound的方法能够得到调用
                                 socketChannel.writeAndFlush(ctx.alloc().buffer().writeBytes("Server...".getBytes(StandardCharsets.UTF_8)));
-                                super.channelRead(ctx, msg);
+                                //ctx.writeAndFlush(ctx.alloc().buffer().writeBytes("Server...".getBytes(StandardCharsets.UTF_8)));
                             }
                         });
                         // Outbound主要处理出站操作，一般为写操作，发生出站操作时会触发Outbound方法
