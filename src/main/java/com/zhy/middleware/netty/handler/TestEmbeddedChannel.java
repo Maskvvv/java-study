@@ -11,7 +11,9 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * <p> EmbeddedChannel </p>
+ *
  * EmbeddedChannel 可以用于测试各个handler，通过其构造函数按顺序传入需要测试handler，然后调用对应的Inbound和Outbound方法即可
+ *
  * @author zhouhongyin
  * @since 2023/7/27 14:27
  */
