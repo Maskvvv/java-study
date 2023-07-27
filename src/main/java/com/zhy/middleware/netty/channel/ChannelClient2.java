@@ -16,9 +16,9 @@ import java.net.InetSocketAddress;
 
 /**
  * <p> channel 常用方法 </p>
- * <p>
+ *
  * addListener
- * <p>
+ *
  * ChannelFuture
  *
  * @author zhouhongyin

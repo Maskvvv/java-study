@@ -16,17 +16,17 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * <p> channel 常用方法 </p>
+ * <pre>
  * close() 可以用来关闭Channel
  * closeFuture() 用来处理 Channel 的关闭
- * sync 方法作用是同步等待 Channel 关闭
- * 而 addListener 方法是异步等待 Channel 关闭
+ *      sync 方法作用是同步等待 Channel 关闭
+ *      而 addListener 方法是异步等待 Channel 关闭
  * pipeline() 方法用于添加处理器
  * write() 方法将数据写入
- * 因为缓冲机制，数据被写入到 Channel 中以后，不会立即被发送
- * 只有当缓冲满了或者调用了flush()方法后，才会将数据通过 Channel 发送出去
- * writeAndFlush() 方法将数据写入并立即发送（刷出）
+ *      因为缓冲机制，数据被写入到 Channel 中以后，不会立即被发送
+ *      只有当缓冲满了或者调用了flush()方法后，才会将数据通过 Channel 发送出去
+ * writeAndFlush() 方法将数据写入并立即发送（刷出）</pre>
  * <p>
- * ChannelFuture
  *
  * @author zhouhongyin
  * @since 2023/7/26 22:46
