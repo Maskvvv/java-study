@@ -1,6 +1,7 @@
 package com.zhy.middleware.redis.queue;
 
 import org.junit.Test;
+import redis.clients.jedis.DefaultJedisClientConfig;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -13,12 +14,14 @@ public class RedisConsumerTest {
 
     @Test
     public void testConsumer() {
-
-        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        String host = System.getProperty("host");
+        String password = System.getProperty("password");
+        DefaultJedisClientConfig config = DefaultJedisClientConfig.builder().password(password).build();
+        Jedis jedis = new Jedis(host, 6380, config);
 
         for (int i = 0; i < 10; i++) {
 
-            jedis.rpush(RedisConsumer.REDIS_ROUTING_KEY + 2, "我是消息" + i);
+            jedis.rpush(RedisConsumer.REDIS_ROUTING_KEY + 1, "我是消息" + i);
         }
 
 
