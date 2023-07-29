@@ -40,7 +40,7 @@ import java.util.Scanner;
  * @since 2023/7/29 15:22
  */
 public class RedisProtocol {
-
+    private static final byte[] LINE = {'\r', '\n'};
     public static void main(String[] args) {
         NioEventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -70,6 +70,7 @@ public class RedisProtocol {
 
             Channel channel = channelFuture.channel().read();
             Scanner scanner = new Scanner(System.in);
+
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (line.equals("exit")) break;
@@ -92,18 +93,17 @@ public class RedisProtocol {
 
     public static void writeRedisCommand(ByteBuf buffer, String command) {
         String[] split = command.split(" ");
-
-        final byte[] LINE = {'\r', '\n'};
-        buffer.writeBytes(("*" + (split.length)).getBytes());
-        buffer.writeBytes(LINE);
-
+        writeLine(buffer, ("*" + split.length));
 
         for (int i = 0; i < split.length; i++) {
             String s = split[i];
-            buffer.writeBytes(("$" + s.length()).getBytes());
-            buffer.writeBytes(LINE);
-            buffer.writeBytes(s.getBytes());
-            buffer.writeBytes(LINE);
+            writeLine(buffer, "$" + s.length());
+            writeLine(buffer, s);
         }
+    }
+
+    public static void writeLine(ByteBuf buffer, String command) {
+        buffer.writeBytes(command.getBytes(StandardCharsets.UTF_8));
+        buffer.writeBytes(LINE);
     }
 }
