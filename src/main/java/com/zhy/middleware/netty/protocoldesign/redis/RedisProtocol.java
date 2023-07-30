@@ -1,4 +1,4 @@
-package com.zhy.middleware.netty.protocoldesign;
+package com.zhy.middleware.netty.protocoldesign.redis;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;

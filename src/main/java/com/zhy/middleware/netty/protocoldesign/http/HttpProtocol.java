@@ -1,4 +1,4 @@
-package com.zhy.middleware.netty.protocoldesign;
+package com.zhy.middleware.netty.protocoldesign.http;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
