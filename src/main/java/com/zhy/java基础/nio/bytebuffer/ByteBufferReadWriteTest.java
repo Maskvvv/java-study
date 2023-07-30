@@ -7,10 +7,20 @@ import java.nio.ByteBuffer;
 
 public class ByteBufferReadWriteTest {
     ByteBuffer buffer = ByteBuffer.allocate(10);
+
+    @Test
+    public void test0() {
+        int a = 1;
+        // 向buffer中写入1个字节的数据
+        buffer.putInt(a);
+        // 使用工具类，查看buffer状态
+        ByteBufferUtil.debugAll(buffer);
+    }
+
     @Test
     public void test1() {
         // 向buffer中写入1个字节的数据
-        buffer.put((byte)97);
+        buffer.put((byte) 97);
         // 使用工具类，查看buffer状态
         ByteBufferUtil.debugAll(buffer);
 
