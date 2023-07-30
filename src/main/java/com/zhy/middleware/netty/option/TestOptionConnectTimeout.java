@@ -16,7 +16,7 @@ import io.netty.channel.ChannelOption;
  * @author zhouhongyin
  * @since 2023/7/30 17:45
  */
-public class TestParam {
+public class TestOptionConnectTimeout {
     public static void main(String[] args) {
 
 
