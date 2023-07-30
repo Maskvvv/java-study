@@ -2,6 +2,7 @@ package com.zhy.middleware.netty.bytebuf;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
+import org.junit.Test;
 
 /**
  * <p> Netty ByteBuf </p>
@@ -26,6 +27,26 @@ public class ByteBufWriteTest {
         ByteBufUtils.log(buffer);
 
         buffer.writeLong(7);
+        ByteBufUtils.log(buffer);
+    }
+
+    @Test
+    public void test1() {
+        ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(16, 20);
+        ByteBufUtils.log(buffer);
+
+        buffer.writeByte(1);
+        ByteBufUtils.log(buffer);
+
+        buffer.writeByte(0x01);
+        ByteBufUtils.log(buffer);
+
+
+        buffer.writeByte(255);
+        ByteBufUtils.log(buffer);
+
+        int a = 0xff;
+        buffer.writeByte(a);
         ByteBufUtils.log(buffer);
     }
 }
