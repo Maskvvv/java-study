@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class FieldValueTestBean {
 
+    /**
+     * 访问系统属性 map
+     */
     @Value("#{ systemProperties['user.region'] }")
     private String defaultLocale;
 
