@@ -16,7 +16,7 @@ public class Salad extends WeakReference<Apple> {
         //通过WeakReference的get()方法获取Apple
         System.out.println("Apple:" + salad.get());
 
-        salad.refersTo(new Apple("红富士111"));
+        //salad.refersTo(new Apple("红富士111"));
         //Apple apple = salad.get();
 
         salad.clear();

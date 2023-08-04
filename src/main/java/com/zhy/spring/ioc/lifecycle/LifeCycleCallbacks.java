@@ -44,7 +44,8 @@ public class LifeCycleCallbacks implements InitializingBean, DisposableBean, Bea
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
-        if (bean instanceof BeanPostProcessorBean processorBean) {
+        if (bean instanceof BeanPostProcessorBean ) {
+            BeanPostProcessorBean processorBean = ((BeanPostProcessorBean) bean);
             log.info("LifeCycleCallbacks-postProcessBeforeInitialization:" + "Bean '" + beanName + "' created : " + bean.toString());
 
             Class<? extends BeanPostProcessorBean> processorBeanClass = processorBean.getClass();
