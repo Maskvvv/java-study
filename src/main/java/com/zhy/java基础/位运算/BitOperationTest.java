@@ -54,4 +54,13 @@ public class BitOperationTest {
 
     }
 
+    @Test
+    public void bitOperationTest4() {
+        long a = 1L << 1;
+        long b = 0b0011;
+
+        System.out.println(a ^ b);
+
+    }
+
 }

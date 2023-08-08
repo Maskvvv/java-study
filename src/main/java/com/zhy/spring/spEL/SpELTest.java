@@ -5,12 +5,15 @@ import com.zhy.spring.spEL.model.Demo;
 import com.zhy.spring.spEL.model.Inventor;
 import com.zhy.spring.spEL.model.Simple;
 import org.junit.Test;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.SimpleEvaluationContext;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.util.GregorianCalendar;
 
@@ -126,6 +129,27 @@ public class SpELTest {
 
         // demo.list will now be a real collection of 4 entries
         // Each entry is a new empty String
+        System.out.println(o);
+    }
+
+    /**
+     * Parser bean
+     */
+    @Test
+    public void spELTest8() {
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        Inventor bean = new Inventor();
+        bean.setName("my-bean");
+        factory.registerSingleton("inventor", bean);
+
+        ExpressionParser parser = new SpelExpressionParser();
+        Expression expression = parser.parseExpression("@inventor");
+
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setBeanResolver(new BeanFactoryResolver(factory));
+
+        Inventor o = expression.getValue(context, Inventor.class);
+
         System.out.println(o);
     }
 
