@@ -1,4 +1,4 @@
-package com.zhy.spring.groovy.loader;
+package com.zhy.other.groovy.loader;
 
 /**
  * 获取加载类名称

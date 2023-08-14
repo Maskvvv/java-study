@@ -1,7 +1,7 @@
-package com.zhy.spring.groovy.controller;
+package com.zhy.other.groovy.controller;
 
-import com.zhy.spring.groovy.loader.GroovyLoader;
-import com.zhy.spring.groovy.loader.ILoader;
+import com.zhy.other.groovy.loader.GroovyLoader;
+import com.zhy.other.groovy.loader.ILoader;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package com.zhy.spring.groovy.loader;
+package com.zhy.other.groovy.loader;
 
 import groovy.lang.GroovyClassLoader;
 import lombok.extern.slf4j.Slf4j;
