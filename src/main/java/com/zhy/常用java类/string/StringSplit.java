@@ -9,7 +9,7 @@ import java.util.List;
  * @author zhouhongyin
  * @since 2022/6/16 16:00
  */
-public class StringTest3 {
+public class StringSplit {
     public static void main(String[] args) {
         char a = '9';
         System.out.println(a);
@@ -54,6 +54,21 @@ public class StringTest3 {
         //List<String> l2 = List.of(split);
 
         System.out.println(l1);
+    }
+
+    @Test
+    public void split1() {
+        String sql = "abw.`topped`, abw.`topped_at` DESC, cp.`publish_at` DESC, cp.`create_at` DESC, tk.`create_at` DESC";
+        String replace = sql.replace(", ", ",");
+
+        System.out.println(replace);
+
+        String[] split = replace.split(",");
+        for (String s : split) {
+            System.out.println(s);
+
+            System.out.println(Arrays.toString(s.split(" ")));
+        }
     }
 
 

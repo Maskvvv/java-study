@@ -1,14 +1,12 @@
 package com.zhy.常用java类.string;
 
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * @author zhouhongyin
  * @since 2022/6/16 16:00
  */
-public class StringTest2 {
+public class StringChar {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
