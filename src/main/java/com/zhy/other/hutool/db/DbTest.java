@@ -5,6 +5,7 @@ import cn.hutool.db.Entity;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +36,32 @@ public class DbTest {
 
             System.out.println();
         }
+    }
+
+    @Test
+    public void city() throws SQLException {
+
+        List<String> res = new ArrayList<>();
+        List<Entity> city = Db.use().findAll("dict_division");
+        for (Entity entity : city) {
+            String level = entity.getStr("level");
+            if (level.equals("1")) continue;
+
+            String name = entity.getStr("name");
+            if (name.endsWith("自治区") || name.endsWith("自治州") || name.endsWith("自治县") || name.endsWith("自治旗")) {
+                name = name.substring(0, name.length() - 3);
+            }
+
+            char lastChar = name.charAt(name.length() - 1);
+            if (lastChar == '区' || lastChar == '县' || lastChar == '市' || lastChar == '旗' || lastChar == '乡') {
+                name = name.substring(0, name.length() - 1);
+            }
+            res.add(name);
+            //System.out.println(name);
+        }
+
+        System.out.println(String.join(",", res));
+
     }
 
 }
