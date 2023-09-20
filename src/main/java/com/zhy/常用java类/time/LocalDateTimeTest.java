@@ -23,6 +23,7 @@ public class LocalDateTimeTest {
 //        System.out.println(date);
         LocalDateTime now = LocalDateTime.now();
         LocalDate date = LocalDate.now();
+        System.out.println(now);
         System.out.println(date);
         System.out.println(LocalTime.now());
 
