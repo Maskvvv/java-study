@@ -24,7 +24,11 @@ public class WriterTest {
 
     @Test
     public void test1() throws IOException {
-        FileWriter fileWriter = new FileWriter("G:\\qst\\qst需求文档\\a.txt");
+        FileWriter fileWriter = new FileWriter("D:\\code\\java\\java-study\\src\\main\\java\\com\\zhy\\java基础\\IO\\readerwriter\\a.txt");
+
+        //fileWriter.write("aaaa");
+        //fileWriter.write("bbb");
+        //fileWriter.write("ccc");
         fileWriter.append("aaaa\n");
         fileWriter.append("bbbb");
         fileWriter.append("ccc", 1, 2);
