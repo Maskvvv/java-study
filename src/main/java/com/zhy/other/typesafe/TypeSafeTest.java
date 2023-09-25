@@ -1,5 +1,6 @@
 package com.zhy.other.typesafe;
 
+import com.alibaba.fastjson.JSON;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigObject;
@@ -48,7 +49,24 @@ public class TypeSafeTest {
         Config mysql = config.getConfig("mysql");
         System.out.println(mysql.getString("username"));
 
+    }
 
+    @Test
+    public void map() {
+        Config config = ConfigFactory.parseResources("type.conf");
+        ConfigObject root = config.root();
+
+        Map<String, Object> unwrapped = root.unwrapped();
+
+        System.out.println(JSON.toJSONString(root));
+        System.out.println(JSON.toJSONString(unwrapped));
+
+
+        Object redis = unwrapped.get("redis");
+        System.out.println(redis.toString());
+        System.out.println(JSON.toJSONString(redis));
+        TypeSafeModel typeSafeModel = JSON.parseObject(JSON.toJSONString(redis), TypeSafeModel.class);
+        System.out.println(typeSafeModel);
     }
 
 }

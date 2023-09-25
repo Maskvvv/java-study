@@ -45,15 +45,19 @@ public class DbTest {
         List<Entity> city = Db.use().findAll("dict_division");
         for (Entity entity : city) {
             String level = entity.getStr("level");
-            if (level.equals("1")) continue;
+            if (!level.equals("2")) continue;
 
             String name = entity.getStr("name");
             if (name.endsWith("自治区") || name.endsWith("自治州") || name.endsWith("自治县") || name.endsWith("自治旗")) {
-                name = name.substring(0, name.length() - 3);
+                continue;
+                //name = name.substring(0, name.length() - 3);
+            }
+            if (name.endsWith("地区") || name.endsWith("半岛")) {
+                name = name.substring(0, name.length() - 2);
             }
 
             char lastChar = name.charAt(name.length() - 1);
-            if (lastChar == '区' || lastChar == '县' || lastChar == '市' || lastChar == '旗' || lastChar == '乡') {
+            if (lastChar == '区' || lastChar == '县' || lastChar == '市' || lastChar == '旗' || lastChar == '乡' || lastChar == '岛') {
                 name = name.substring(0, name.length() - 1);
             }
             res.add(name);
