@@ -2,9 +2,6 @@ package com.zhy.常用java类.string.rgex;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * <p> Java regular expression test </p>
  *
@@ -13,23 +10,14 @@ import java.util.regex.Pattern;
  */
 public class RgexTest {
 
+    /**
+     * 千分位分隔符
+     */
     @Test
-    public void group() {
-
-        String s = "12345678";
-        Pattern pattern = Pattern.compile("(\\d)(?=(\\d{3})+$)");
-
-        Matcher matcher = pattern.matcher(s);
-        while (matcher.find()) {
-            System.out.println(matcher.group(1));
-        }
-    }
-
-    @Test
-    public void groupReplace() {
-        String s = "12345678";
-        Pattern pattern = Pattern.compile("(\\d)(?=(\\d{3})+$)");
-        System.out.println(pattern.matcher(s).replaceAll("$1,"));
+    public void theThousandthSeparator() {
+        String phoneNumber = "123456789";
+        // (\d)(?=((\d{3})+(\D*))$)
+        System.out.println(phoneNumber.replaceAll("(\\d)(?=(\\d{3})+$)", "$1,"));
     }
 
     /**
