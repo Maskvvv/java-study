@@ -70,5 +70,37 @@ public class RgexTest {
         System.out.println(dump);
     }
 
+    /**
+     * 反向引用
+     */
+    @Test
+    public void backreference() {
+
+        /* 这个正则表达式表示 安安静静 这样的叠词 */
+        String regex = "(.)\\1(.)\\2";
+        System.out.println("安安静静".matches(regex));   // true
+        System.out.println("安静安静".matches(regex));   // false
+
+    }
+
+    /**
+     * 反向引用替换
+     */
+    @Test
+    public void backreferenceReplace() {
+
+        String str = "我我...我我...我要..要要...要要...找找找一个....女女女女...朋朋朋朋朋朋...友友友友友..友.友...友...友友！！！";
+
+        /*将 . 去掉*/
+        str = str.replaceAll("\\.+", "");
+        System.out.println(str);
+
+        str = str.replaceAll("(.)\\1+", "$1");
+        System.out.println(str);
+
+
+    }
+
+
 
 }

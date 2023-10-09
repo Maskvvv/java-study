@@ -12,6 +12,28 @@ import java.util.regex.Pattern;
  * @since 2023/10/9 11:25
  */
 public class MatcherTest {
+
+    @Test
+    public void baseMethod() {
+        // 这个正则表达式有两个组，
+        // group(0) 是 \\$\\{([^{}]+?)\\}
+        // group(1) 是 ([^{}]+?)
+        String regex = "\\$\\{([^{}]+?)\\}";
+        Pattern pattern = Pattern.compile(regex);
+        String input = "${name}-babalala-${age}-${address}";
+
+        Matcher matcher = pattern.matcher(input);
+        System.out.println(matcher.groupCount());
+        // find() 像迭代器那样向前遍历输入字符串
+        while (matcher.find()) {
+            System.out.println(matcher.group(0) + ", pos: "
+                    + matcher.start() + "-" + (matcher.end() - 1));
+            System.out.println(matcher.group(1) + ", pos: " +
+                    matcher.start(1) + "-" + (matcher.end(1) - 1));
+        }
+
+    }
+
     @Test
     public void test1() {
         // 按指定模式在字符串查找
