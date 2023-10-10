@@ -8,4 +8,8 @@ package com.zhy.model.git.entity;
 public class Teacher {
 
     private String name;
+
+    public String getName() {
+        return name;
+    }
 }
