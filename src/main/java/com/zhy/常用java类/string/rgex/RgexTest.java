@@ -71,7 +71,7 @@ public class RgexTest {
     }
 
     /**
-     * 反向引用
+     * 回溯引用
      */
     @Test
     public void backreference() {
