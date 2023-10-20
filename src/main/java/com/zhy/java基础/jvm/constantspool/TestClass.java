@@ -9,7 +9,7 @@ package com.zhy.java基础.jvm.constantspool;
 public class TestClass {
     private int m;
 
-    public int inc() {
+    public int inc(String s) {
         int x;
         try {
             x = 1;
