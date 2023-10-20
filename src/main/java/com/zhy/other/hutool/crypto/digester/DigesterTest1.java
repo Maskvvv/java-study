@@ -3,6 +3,7 @@ package com.zhy.other.hutool.crypto.digester;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -12,7 +13,8 @@ import java.io.IOException;
  */
 public class DigesterTest1 {
 
-    public static void main(String[] args) throws IOException {
+    @Test
+    public void test1() throws IOException {
         Digester sha256 = new Digester(DigestAlgorithm.SHA256);
 
         String header = Base64.encode("{\"alg\":\"HS256\",\"typ\":\"JWT\"}");
@@ -28,8 +30,7 @@ public class DigesterTest1 {
 
         System.out.println(header + "." + payload + "." + signature);
 
-
-
-
     }
+
+
 }
