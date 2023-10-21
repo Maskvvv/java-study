@@ -7,6 +7,16 @@ package com.zhy.java基础.jvm.classload.classinit;
  * @since 2023/10/21 17:02
  */
 public class NotInitialization {
+    static {
+        i = 0; // 给变量复制可以正常编译通过
+
+        // 这句编译器会提示“非法向前引用”
+        //System.out.print(i);
+    }
+
+    static int i = 1;
+
+
     public static void main(String[] args) {
         // 下面两种情况不会出发类的初始化过程
 
