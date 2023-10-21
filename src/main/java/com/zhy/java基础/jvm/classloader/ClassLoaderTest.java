@@ -40,5 +40,8 @@ public class ClassLoaderTest {
         Object obj = myLoader.loadClass("com.zhy.java基础.jvm.classloader.ClassLoaderTest").newInstance();
         System.out.println(obj.getClass());
         System.out.println(obj instanceof ClassLoaderTest);
+
+        ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
+        System.out.println(classLoader);
     }
 }
