@@ -2,6 +2,8 @@ package com.zhy.java基础.jvm.bytecodeprecess.dipatch;
 
 /**
  * <p> 方法静态分派演示 </p>
+ * <p>
+ * 和方法的重载有关
  *
  * @author zhouhongyin
  * @since 2023/10/22 16:48
