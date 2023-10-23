@@ -2,6 +2,7 @@ package com.zhy.java基础.gui;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.io.File;
 
 /**
  * <p> JFileChooser </p>
@@ -12,6 +13,7 @@ import javax.swing.filechooser.FileSystemView;
 public class JFileChooserTest {
 
     public static void main(String[] args) {
+        String userHome = System.getProperty("user.dir");
 
         FileSystemView fsv = FileSystemView.getFileSystemView();
 
@@ -20,6 +22,8 @@ public class JFileChooserTest {
         fileChooser.setDialogTitle("请选择要上传的文件...");
         fileChooser.setApproveButtonText("确定");
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setCurrentDirectory(new File(userHome));
+
 
         int result = fileChooser.showOpenDialog(null);
 
