@@ -13,6 +13,21 @@ import java.io.File;
 public class JFileChooserTest {
 
     public static void main(String[] args) {
+        //使用系统的文件管理器
+        if (UIManager.getLookAndFeel().isSupportedLookAndFeel()) {
+            final String platform = UIManager.getSystemLookAndFeelClassName();
+            // If the current Look & Feel does not match the platform Look & Feel,
+            // change it so it does.
+            if (!UIManager.getLookAndFeel().getName().equals(platform)) {
+                try {
+                    UIManager.setLookAndFeel(platform);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        }
+
+
         String userHome = System.getProperty("user.dir");
 
         FileSystemView fsv = FileSystemView.getFileSystemView();
