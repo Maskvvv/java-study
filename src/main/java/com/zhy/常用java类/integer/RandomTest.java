@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Random;
 
 /**
- * <p> </p>
+ * <p> RandomTest </p>
  *
  * @author zhouhongyin
  * @since 2023/10/17 14:54
@@ -23,6 +23,18 @@ public class RandomTest {
             rs.append(r.nextInt(10));
         }
         System.out.println(rs.toString());
+
+    }
+
+    @Test
+    public void test2() {
+
+        int len = 100;
+
+        Random r = new Random();
+        for (int i = 0; i < len; i++) {
+            System.out.println(r.nextInt(100_000));
+        }
 
     }
 
