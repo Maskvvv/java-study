@@ -61,6 +61,7 @@ public class GroovyLoader implements ApplicationContextAware {
     private void applyClz2Spring(String beanName, Class clz) {
 
         AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(clz).getRawBeanDefinition();
+        beanDefinition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
         ((BeanDefinitionRegistry) ((AbstractApplicationContext) ctx).getBeanFactory()).registerBeanDefinition(beanName, beanDefinition);
     }
 
