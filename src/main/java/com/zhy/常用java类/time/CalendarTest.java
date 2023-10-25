@@ -42,7 +42,7 @@ public class CalendarTest {
     @Test
     public void test1() {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date(1640966400000L));
+        //calendar.setTime(new Date(1640966400000L));
 
 
         System.out.println(calendar.get(Calendar.YEAR));
