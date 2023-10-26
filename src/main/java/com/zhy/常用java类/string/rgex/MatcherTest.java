@@ -71,4 +71,13 @@ public class MatcherTest {
         System.out.println(pattern.matcher(s).replaceAll("$1,"));
     }
 
+    @Test
+    public void repeatFileName() {
+        Pattern pattern = Pattern.compile(String.format("(?<=%s)\\((\\d)\\).*", "finalPrefixFileName"));
+        Matcher matcher = pattern.matcher("s");
+        while (matcher.find()) {
+            System.out.println(matcher.group(1));
+        }
+    }
+
 }
