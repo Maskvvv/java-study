@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * Header Test
+ *
  * @author zhouhongyin
  * @since 2022/7/1 16:50
  */
@@ -46,17 +48,19 @@ public class HeaderController {
     }
 
     @GetMapping("content/disposition/word")
-    public void contentDispositionWord(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String contentDispositionWord(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream outputStream = response.getOutputStream();
 
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=a.docx");
         response.setHeader(HttpHeaders.CONTENT_TYPE, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 
-        FileInputStream fileInputStream = new FileInputStream("D:\\UserFiles\\桌面\\转正资料\\转正述职申请流程.docx");
+        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\lenovo\\Desktop\\sql.txt");
         IoUtil.copy(fileInputStream, outputStream);
 
-        IoUtil.close(outputStream);
-        IoUtil.close(fileInputStream);
+        //IoUtil.close(outputStream);
+        //IoUtil.close(fileInputStream);
+
+        return "i am a man";
     }
 
     @GetMapping("content/disposition/html")
