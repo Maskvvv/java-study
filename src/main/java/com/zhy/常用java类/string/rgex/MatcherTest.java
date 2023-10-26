@@ -2,6 +2,8 @@ package com.zhy.常用java类.string.rgex;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,11 +75,37 @@ public class MatcherTest {
 
     @Test
     public void repeatFileName() {
-        Pattern pattern = Pattern.compile(String.format("(?<=%s)\\((\\d)\\).*", "finalPrefixFileName"));
-        Matcher matcher = pattern.matcher("s");
-        while (matcher.find()) {
-            System.out.println(matcher.group(1));
+        String finalPrefixFileName = "报名信息_20231026";
+        String format = String.format("(?<=%s) \\((\\d)\\).*", finalPrefixFileName);
+        //Pattern pattern = Pattern.compile("(?<=报名信息_20231026)\\((\\d)\\).*");
+        Pattern pattern = Pattern.compile(format);
+
+
+        File file = new File("D:\\UserFiles\\桌面");
+
+        String[] list = file.list();
+        System.out.println(Arrays.toString(list));
+
+        for (String name : list) {
+            Matcher matcher = pattern.matcher(name);
+            if (matcher.find()) {
+                System.out.println(matcher.group(1));
+            }
         }
+
+
+        String[] list1 = file.list((f, name) -> {
+            Matcher matcher = pattern.matcher(name);
+            if (matcher.find()) {
+                System.out.println(matcher.group(1));
+                return true;
+            } else {
+                return false;
+            }
+        });
+        System.out.println(Arrays.toString(list1));
+
+
     }
 
 }
