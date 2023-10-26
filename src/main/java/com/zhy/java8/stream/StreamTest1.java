@@ -101,9 +101,16 @@ public class StreamTest1 {
      */
     @Test
     public void streamTest3_3() {
-        List<People> peopleList = ListFactory.getPeopleList();
+        List<People> peopleList = ListFactory.getFlatPeopleList();
 
-        List<Integer> collect = peopleList.stream().flatMap(people -> people.getList().stream()).collect(Collectors.toList());
+        List<Integer> collect = peopleList.stream()
+                .flatMap(people -> {
+                    List<Integer> list = people.getList();
+                    if (list == null) return null;
+                    return list.stream();
+                })
+                .collect(Collectors.toList());
+
         collect.forEach(System.out::println);
     }
 
