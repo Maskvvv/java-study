@@ -1,6 +1,5 @@
 package com.zhy.utils.file;
 
-import cn.hutool.core.text.StrBuilder;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.io.File;
@@ -69,7 +68,7 @@ public class FileRepeatNameUtils {
             }
         }
 
-        StrBuilder finalFileName = new StrBuilder(fileName);
+        StringBuilder finalFileName = new StringBuilder(fileName);
         finalFileName.insert(pointIndex > 0 ? pointIndex : fileName.length(), " (" + (maxOrder + 1) + ")");
 
         return finalFileName.toString();
