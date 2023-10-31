@@ -3,6 +3,8 @@ package com.zhy.utils.file;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +17,7 @@ import java.util.regex.Pattern;
 public class FileRepeatNameUtils {
 
     public static void main(String[] args) {
-        System.out.println(handleRepeatFileName("D:\\UserFiles\\桌面", "报名信息_20231026.xlsx"));
+        System.out.println(handleRepeatFileName("D:\\UserFiles\\桌面", "域名.txt"));
     }
 
 
@@ -57,21 +59,60 @@ public class FileRepeatNameUtils {
 
         File baseFile = new File(basePath);
 
-        int maxOrder = 0;
         String[] list = baseFile.list();
         if (ObjectUtils.isEmpty(list)) return fileName;
+
+        List<Integer> numList = new ArrayList<>();
         for (String name : list) {
             Matcher matcher = pattern.matcher(name);
             if (matcher.find()) {
                 int order = Integer.parseInt(matcher.group(1));
-                maxOrder = Math.max(maxOrder, order);
+                numList.add(order);
             }
         }
 
+        int finalOrder = 1;
+        if (!numList.isEmpty()) {
+            finalOrder = firstMissingPositive(numList);
+        }
+
+
+
         StringBuilder finalFileName = new StringBuilder(fileName);
-        finalFileName.insert(pointIndex > 0 ? pointIndex : fileName.length(), " (" + (maxOrder + 1) + ")");
+        finalFileName.insert(pointIndex > 0 ? pointIndex : fileName.length(), " (" + (finalOrder) + ")");
 
         return finalFileName.toString();
     }
+
+    /**
+     * 算法来自: <a href="https://leetcode.cn/submissions/detail/478439446/">缺失的第一个正数</a>
+     */
+    private static int firstMissingPositive(List<Integer> numList) {
+        int[] nums = new int[numList.size()];
+
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = numList.get(i);
+        }
+
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            while (nums[i] >= 1 && nums[i] <= length && nums[nums[i] - 1] != nums[i]) {
+                swap(nums, i, nums[i] - 1);
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i + 1) return i + 1;
+        }
+
+        return length + 1;
+    }
+
+   private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+   }
+
 
 }
