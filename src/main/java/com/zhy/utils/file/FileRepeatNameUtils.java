@@ -84,6 +84,9 @@ public class FileRepeatNameUtils {
         return finalFileName.toString();
     }
 
+    /**
+     * 算法来自: <a href="https://leetcode.cn/submissions/detail/478439446/">缺失的第一个正数</a>
+     */
     private static int firstMissingPositive(List<Integer> numList) {
         int[] nums = new int[numList.size()];
 
