@@ -68,4 +68,31 @@ public class ByteTest {
     }
 
 
+
+
+    @Test
+    public void byteOperation() {
+
+        int i1 = 0b10000000000000000000000000000000;
+        int i2 = 0b01000000000000000000000000000000;
+        System.out.println(Integer.toBinaryString(i1) + ": " + i1);
+        System.out.println(Integer.toBinaryString(i2) + ": " + i2);
+
+        i1 = i1 >> 4;
+        i2 = i2 >> 4;
+        System.out.println(Integer.toBinaryString(i1) + ": " + i1);
+        System.out.println(Integer.toBinaryString(i2) + ": " + i2);
+
+        System.out.println("--------------------------------");
+
+        i1 = 0b10000000000000000000000000000000;
+        i2 = 0b01000000000000000000000000000000;
+        i1 = i1 >>> 4;
+        i2 = i2 >>> 4;
+        System.out.println(Integer.toBinaryString(i1) + ": " + i1);
+        System.out.println(Integer.toBinaryString(i2) + ": " + i2);
+
+
+    }
+
 }
