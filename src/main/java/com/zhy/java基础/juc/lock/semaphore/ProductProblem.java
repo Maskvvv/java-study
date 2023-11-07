@@ -10,6 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * <p> producer consumer problem </p>
  *
+ * <pre>
+ *     系统中有一组生产者进程和一组消费者进程，生产者进程每次生产一个产品放入缓冲区，
+ *     消费者进程每次从缓冲区中取出一个产品并使用。 (注:这里的“产品”理解为某种数据)生产者、
+ *     消费者共享一个初始为空、大小为n的缓冲区。只有缓冲区没满时，生产者才能把产品放入缓冲区，否则必须等待。
+ * </pre>
+ *
  * @author zhouhongyin
  * @since 2023/11/7 10:40
  */
