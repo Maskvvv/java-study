@@ -58,6 +58,7 @@ public class ProductProblem {
             try {
                 for (int i = 0; i < 100; i++) {
 
+                    // 实现互斥的 p 操作一定需要在实现同步的 p 操作之后
                     empty.acquire();
                     mutex.acquire();
 
@@ -65,8 +66,9 @@ public class ProductProblem {
                     System.out.println("生产者-" + Thread.currentThread().getName() + "-生产");
                     queue.addLast(String.valueOf(message.getAndIncrement()));
 
-                    full.release();
+                    // v 操作不会导致进程阻塞，因此两个 v 操作顺序可以交换
                     mutex.release();
+                    full.release();
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -85,8 +87,8 @@ public class ProductProblem {
 
                     System.out.println("消费者-" + Thread.currentThread().getName() + "-消费: " + queue.removeFirst());
 
-                    empty.release();
                     mutex.release();
+                    empty.release();
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
