@@ -5,7 +5,7 @@ import java.util.concurrent.CyclicBarrier;
 
 /**
  *  CyclicBarrier 的使用
- *
+ * <pre>
  *  和 CountDownLatch 的区别：
  *
  *      CountDownLatch 主要用来解决一个线程等待多个线程的场景，可以类比旅游团团长要等待所有的游客到齐才能去下一个景点；
@@ -15,7 +15,7 @@ import java.util.concurrent.CyclicBarrier;
  *      但 CyclicBarrier 的计数器是可以循环利用的，而且具备自动重置的功能，一旦计数器减到 0 会自动重置到你设置的初始值。
  *
  *      除此之外，CyclicBarrier 还可以设置回调函数，可以说是功能丰富。
- *
+ * </pre>
  * @author zhouhongyin
  * @since 2023/2/15 22:54
  */
