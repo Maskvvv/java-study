@@ -18,4 +18,9 @@ public class MathTest {
         System.out.println(rs);
     }
 
+    @Test
+    public void pow() {
+        System.out.println(Math.pow(2, 10));
+    }
+
 }
