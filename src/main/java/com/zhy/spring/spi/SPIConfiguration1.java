@@ -42,6 +42,7 @@ public class SPIConfiguration1 implements Ordered, BeanDefinitionRegistryPostPro
     }
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        log.info("SPIConfiguration1 postProcessBeanFactory");
     }
 
 
