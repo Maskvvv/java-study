@@ -44,4 +44,13 @@ public class IntegerTest {
 
         System.out.println(i);
     }
+
+    @Test
+    public void pow2() {
+        System.out.println(Math.pow(2, 10));
+        System.out.println(0x000003FF);
+
+        double i = 1e3;
+        System.out.println((int) i);
+    }
 }

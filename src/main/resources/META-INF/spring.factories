@@ -1,0 +1,4 @@
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.zhy.spring.spi.SPIConfiguration1,\
+com.zhy.spring.spi.SPIConfiguration2
