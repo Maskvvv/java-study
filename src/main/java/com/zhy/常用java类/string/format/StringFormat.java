@@ -54,7 +54,7 @@ public class StringFormat {
 
     @Test
     public void test1() {
-        String format = String.format("%04d", 12345);//25为int型
+        String format = String.format("%06d", 12345);//25为int型
 
         System.out.println(format);
 

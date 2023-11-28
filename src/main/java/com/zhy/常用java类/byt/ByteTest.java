@@ -25,6 +25,7 @@ public class ByteTest {
         byte s = Byte.parseByte("9");
         System.out.println(s);
     }
+
     @Test
     public void byt() {
         //二进制
@@ -58,16 +59,14 @@ public class ByteTest {
     @Test
     public void stringToByte() {
         //二进制
-        Integer.valueOf("0101",2).toString();
+        Integer.valueOf("0101", 2).toString();
         //八进制
-        Integer.valueOf("376",8).toString();
+        Integer.valueOf("376", 8).toString();
         //十六进制
-        Integer.valueOf("FFFF",16).toString();
+        Integer.valueOf("FFFF", 16).toString();
 
         byte b = 0b1001;
     }
-
-
 
 
     @Test
@@ -75,6 +74,7 @@ public class ByteTest {
 
         int i1 = 0b10000000000000000000000000000000;
         int i2 = 0b01000000000000000000000000000000;
+        System.out.println(String.format("%s", Integer.toBinaryString(i1)));
         System.out.println(Integer.toBinaryString(i1) + ": " + i1);
         System.out.println(Integer.toBinaryString(i2) + ": " + i2);
 
@@ -87,6 +87,8 @@ public class ByteTest {
 
         i1 = 0b10000000000000000000000000000000;
         i2 = 0b01000000000000000000000000000000;
+        System.out.println(Integer.toBinaryString(i1) + ": " + i1);
+        System.out.println(Integer.toBinaryString(i2) + ": " + i2);
         i1 = i1 >>> 4;
         i2 = i2 >>> 4;
         System.out.println(Integer.toBinaryString(i1) + ": " + i1);
