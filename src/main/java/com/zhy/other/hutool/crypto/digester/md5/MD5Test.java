@@ -1,4 +1,4 @@
-package com.zhy.other.hutool.crypto.md5;
+package com.zhy.other.hutool.crypto.digester.md5;
 
 import cn.hutool.crypto.digest.MD5;
 import org.junit.Test;
