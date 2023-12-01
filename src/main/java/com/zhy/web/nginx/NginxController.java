@@ -18,6 +18,7 @@ import java.io.IOException;
 @RequestMapping("nginx")
 public class NginxController {
 
+
     @GetMapping("timeout")
     public String contentDispositionPdf(HttpServletRequest request, HttpServletResponse response) throws IOException, InterruptedException {
 
@@ -26,4 +27,11 @@ public class NginxController {
         System.out.println("timeout request");
         return "timeout test";
     }
+
+    @GetMapping("time")
+    public long timeout(int time) throws InterruptedException {
+        Thread.sleep(time * 1000L);
+        return System.currentTimeMillis();
+    }
+
 }
