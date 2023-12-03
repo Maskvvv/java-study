@@ -10,19 +10,19 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p> 多线程处理 </p>
- * <P>
+ * <p>
  * - {@code selector.select()}: 在多线程中，会阻塞其他线程对 selector 的操作
  * </P>
  * - {@code selector.wakeup()}: 唤醒阻塞中的 Selector
+ *
  * @author zhouhongyin
  * @since 2023/7/25 11:56
  */
-public class ThreadsServer {
+public class ThreadsServer2 {
     public static void main(String[] args) {
         try (ServerSocketChannel server = ServerSocketChannel.open()) {
             // 当前线程为Boss线程
@@ -36,8 +36,8 @@ public class ThreadsServer {
             Worker[] workers = new Worker[2];
             // 用于负载均衡的原子整数
             AtomicInteger robin = new AtomicInteger(0);
-            for(int i = 0; i < workers.length; i++) {
-                workers[i] = new Worker("worker-"+i);
+            for (int i = 0; i < workers.length; i++) {
+                workers[i] = new Worker("worker-" + i);
             }
             while (true) {
                 boss.select();
@@ -68,10 +68,6 @@ public class ThreadsServer {
         private volatile Selector selector;
         private String name;
         private volatile boolean started = false;
-        /**
-         * 同步队列，用于Boss线程与Worker线程之间的通信
-         */
-        private ConcurrentLinkedQueue<Runnable> queue;
 
         public Worker(String name) {
             this.name = name;
@@ -82,23 +78,13 @@ public class ThreadsServer {
             if (!started) {
                 thread = new Thread(this, name);
                 selector = Selector.open();
-                queue = new ConcurrentLinkedQueue<>();
                 thread.start();
                 started = true;
             }
 
             // 向同步队列中添加SocketChannel的注册事件
             // 在Worker线程中执行注册事件
-            queue.add(() -> {
-                try {
-                    socket.register(selector, SelectionKey.OP_READ);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            // 唤醒被阻塞的Selector
-            // select类似LockSupport中的park，wakeup的原理类似LockSupport中的unpark
-            selector.wakeup();
+            socket.register(selector, SelectionKey.OP_READ);
         }
 
         @Override
@@ -107,15 +93,10 @@ public class ThreadsServer {
                 try {
                     // 在多线程中，select 会阻塞其他线程对 selector 的操作
                     selector.select();
-                    // 通过同步队列获得任务并运行
-                    Runnable task = queue.poll();
-                    if (task != null) {
-                        // 获得任务，执行注册操作
-                        task.run();
-                    }
+
                     Set<SelectionKey> selectionKeys = selector.selectedKeys();
                     Iterator<SelectionKey> iterator = selectionKeys.iterator();
-                    while(iterator.hasNext()) {
+                    while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
                         iterator.remove();
                         // Worker只负责Read事件
