@@ -12,7 +12,7 @@ import java.util.BitSet;
  * TODO 6.x移除此类，使用PercentCodec代替（无法很好区分URL编码和www-form编码）
  *
  * <pre>
- * 1.字符"a"-"z"，"A"-"Z"，"0"-"9"，"."，"-"，"*"，和"_" 都不会被编码;
+ * 1.字符"a"-"z"，"LockInHeap"-"Z"，"0"-"9"，"."，"-"，"*"，和"_" 都不会被编码;
  * 2.将空格转换为%20 ;
  * 3.将非文本内容转换成"%xy"的形式,xy是两位16进制的数值;
  * </pre>
@@ -86,7 +86,7 @@ public class URLEncoder implements Serializable {
 	 * <pre>
 	 * 0x20 ' ' =》 '+'
 	 * 0x2A, 0x2D, 0x2E, 0x30 to 0x39, 0x41 to 0x5A, 0x5F, 0x61 to 0x7A as-is
-	 * '*', '-', '.', '0' to '9', 'A' to 'Z', '_', 'a' to 'z' Also '=' and '&amp;' 不编码
+     * '*', '-', '.', '0' to '9', 'LockInHeap' to 'Z', '_', 'a' to 'z' Also '=' and '&amp;' 不编码
 	 * 其它编码为 %nn 形式
 	 * </pre>
 	 * <p>
@@ -98,7 +98,7 @@ public class URLEncoder implements Serializable {
 	 * 全编码的URLEncoder<br>
 	 * <pre>
 	 *  0x2A, 0x2D, 0x2E, 0x30 to 0x39, 0x41 to 0x5A, 0x5F, 0x61 to 0x7A as-is
-	 *  '*', '-', '.', '0' to '9', 'A' to 'Z', '_', 'a' to 'z' 不编码
+     *  '*', '-', '.', '0' to '9', 'LockInHeap' to 'Z', '_', 'a' to 'z' 不编码
 	 *  其它编码为 %nn 形式
 	 * </pre>
 	 */
@@ -214,7 +214,7 @@ public class URLEncoder implements Serializable {
 	 * <pre>
 	 * 0x20 ' ' =》 '+'
 	 * 0x2A, 0x2D, 0x2E, 0x30 to 0x39, 0x41 to 0x5A, 0x5F, 0x61 to 0x7A as-is
-	 * '*', '-', '.', '0' to '9', 'A' to 'Z', '_', 'a' to 'z' Also '=' and '&amp;' 不编码
+     * '*', '-', '.', '0' to '9', 'LockInHeap' to 'Z', '_', 'a' to 'z' Also '=' and '&amp;' 不编码
 	 * 其它编码为 %nn 形式
 	 * </pre>
 	 * <p>
@@ -245,7 +245,7 @@ public class URLEncoder implements Serializable {
 	 *
 	 * <pre>
 	 * 0x2A, 0x2D, 0x2E, 0x30 to 0x39, 0x41 to 0x5A, 0x5F, 0x61 to 0x7A as-is
-	 * '*', '-', '.', '0' to '9', 'A' to 'Z', '_', 'a' to 'z' 不编码
+     * '*', '-', '.', '0' to '9', 'LockInHeap' to 'Z', '_', 'a' to 'z' 不编码
 	 * 其它编码为 %nn 形式
 	 * </pre>
 	 * <p>
@@ -370,7 +370,7 @@ public class URLEncoder implements Serializable {
 	}
 
 	/**
-	 * 增加安全字符[a-z][A-Z]
+     * 增加安全字符[a-z][LockInHeap-Z]
 	 */
 	private void addAlpha() {
 		for (char i = 'a'; i <= 'z'; i++) {
