@@ -46,12 +46,12 @@ public @interface Excel
     public String separator() default ",";
 
     /**
-     * BigDecimal 精度 默认:-1(默认不开启BigDecimal格式化)
+     * BigDecimalTest 精度 默认:-1(默认不开启BigDecimal格式化)
      */
     public int scale() default -1;
 
     /**
-     * BigDecimal 舍入规则 默认:BigDecimal.ROUND_HALF_EVEN
+     * BigDecimalTest 舍入规则 默认:BigDecimalTest.ROUND_HALF_EVEN
      */
     public int roundingMode() default BigDecimal.ROUND_HALF_EVEN;
 

@@ -46,7 +46,7 @@
 //import java.io.InputStream;
 //import java.io.OutputStream;
 //import java.lang.reflect.Field;
-//import java.math.BigDecimal;
+//import java.math.BigDecimalTest;
 //import java.text.DecimalFormat;
 //import java.util.ArrayList;
 //import java.util.Arrays;
@@ -281,7 +281,7 @@
 //                    {
 //                        val = Convert.toFloat(val);
 //                    }
-//                    else if (BigDecimal.class == fieldType)
+//                    else if (BigDecimalTest.class == fieldType)
 //                    {
 //                        val = Convert.toBigDecimal(val);
 //                    }
@@ -654,9 +654,9 @@
 //                {
 //                    cell.setCellValue(convertDictByExp(Convert.toStr(value), dictType, separator));
 //                }
-//                else if (value instanceof BigDecimal && -1 != attr.scale())
+//                else if (value instanceof BigDecimalTest && -1 != attr.scale())
 //                {
-//                    cell.setCellValue((((BigDecimal) value).setScale(attr.scale(), attr.roundingMode())).toString());
+//                    cell.setCellValue((((BigDecimalTest) value).setScale(attr.scale(), attr.roundingMode())).toString());
 //                }
 //                else
 //                {
@@ -1069,7 +1069,7 @@
 //                    {
 //                        if ((Double) val % 1 != 0)
 //                        {
-//                            val = new BigDecimal(val.toString());
+//                            val = new BigDecimalTest(val.toString());
 //                        }
 //                        else
 //                        {
