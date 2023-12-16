@@ -69,7 +69,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     * arrays
+     * 数组使用
      */
     @Test
     public void spELTest3() {
@@ -107,7 +107,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     * Inline Lists
+     * 集合
      */
     @Test
     public void spELTest4() {
@@ -122,7 +122,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     * Inline Maps
+     * Map 构造
      */
     @Test
     public void spELTest5() {
@@ -136,7 +136,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  Array Construction
+     *  数组构造
      */
     @Test
     public void spELTest6() {
@@ -153,7 +153,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  Methods
+     *  方法调用
      */
     @Test
     public void spELTest7() {
@@ -173,7 +173,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  Constructors
+     *  构造方法
      */
     @Test
     public void spELTest8() {
@@ -193,7 +193,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  Variables
+     *  变量引用
      */
     @Test
     public void spELTest9() {
@@ -209,7 +209,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  Functions 1
+     *  变量方法调用
      */
     @Test
     public void spELTest10() throws NoSuchMethodException {
@@ -223,15 +223,10 @@ public class LanguageReferenceTest implements BeanFactoryAware {
 
         Boolean res = parser.parseExpression("#isName('asdf')").getValue(context, Boolean.class);
         System.out.println(res);
-
-
-
-
-
     }
 
     /**
-     *  Functions 1
+     *  变量方法调用
      */
     @Test
     public void spELTest11() throws NoSuchMethodException {
@@ -249,7 +244,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  Bean References
+     *  引用容器中的 bean
      */
     @Test
     public void spELTest12() {
@@ -263,7 +258,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *   Ternary Operator (If-Then-Else) 1
+     *  三元表达式
      */
     @Test
     public void spELTest13() {
@@ -276,25 +271,26 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  The Elvis Operator
+     *  三元表达式
      */
     @Test
     public void spELTest14() {
         ExpressionParser parser = new SpelExpressionParser();
-        StandardEvaluationContext context = new StandardEvaluationContext();
-
+        Inventor rootObject = new Inventor();
         String name = "Elvis Presley";
+        rootObject.setName(name);
+
         String displayName = (name != null ? name : "Unknown");
 
 
         // alternatively
-        String name1 = parser.parseExpression("name?:'Unknown'").getValue(new Inventor(), String.class);
+        String name1 = parser.parseExpression("name?:'Unknown'").getValue(rootObject, String.class);
         System.out.println(name1);  // 'Unknown'
 
     }
 
     /**
-     *  Collection Selection
+     *  映射成集合
      */
     @Test
     public void spELTest15() {
@@ -319,7 +315,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     *  Collection Projection
+     *  映射成集合
      */
     @Test
     public void spELTest16() {

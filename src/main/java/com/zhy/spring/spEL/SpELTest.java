@@ -143,14 +143,15 @@ public class SpELTest {
         factory.registerSingleton("inventor", bean);
 
         ExpressionParser parser = new SpelExpressionParser();
-        Expression expression = parser.parseExpression("@inventor");
-
         StandardEvaluationContext context = new StandardEvaluationContext();
         context.setBeanResolver(new BeanFactoryResolver(factory));
 
-        Inventor o = expression.getValue(context, Inventor.class);
+
+        Inventor o = parser.parseExpression("@inventor").getValue(context, Inventor.class);
+        String s = parser.parseExpression("@inventor.getName()").getValue(context, String.class);
 
         System.out.println(o);
+        System.out.println(s);
     }
 
 

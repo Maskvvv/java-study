@@ -31,4 +31,36 @@ public class Inventor {
         this.name = name;
         this.people = people;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getPeople() {
+        return people;
+    }
+
+    public void setPeople(String people) {
+        this.people = people;
+    }
+
+    public List<Inventor> getInventors() {
+        return inventors;
+    }
+
+    public void setInventors(List<Inventor> inventors) {
+        this.inventors = inventors;
+    }
 }
