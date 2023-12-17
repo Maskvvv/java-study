@@ -69,7 +69,7 @@ public class LanguageReferenceTest implements BeanFactoryAware {
     }
 
     /**
-     * 数组使用
+     * 集合 和 Map 使用
      */
     @Test
     public void spELTest3() {

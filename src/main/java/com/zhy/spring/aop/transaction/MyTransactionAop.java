@@ -13,6 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author zhouhongyin
@@ -23,6 +24,7 @@ import java.io.IOException;
 @Aspect
 @Component
 public class MyTransactionAop {
+    static ThreadLocal<ReentrantLock> threadLocal = new ThreadLocal<>();
 
     @Pointcut("@annotation(com.zhy.spring.aop.transaction.MyTransaction)")
     public void pointCut() {
@@ -33,7 +35,17 @@ public class MyTransactionAop {
 
         log.info("-----------------around before-----------------");
 
-        Object proceed = joinPoint.proceed();
+        ReentrantLock lock = new ReentrantLock();
+        lock.lock();
+        threadLocal.set(lock);
+
+        Object proceed = null;
+        try {
+            proceed = joinPoint.proceed();
+        } finally {
+            threadLocal.get().unlock();
+            threadLocal.remove();
+        }
         log.info("-----------------around after-----------------");
 
         return proceed;
