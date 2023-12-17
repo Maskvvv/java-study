@@ -17,6 +17,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,31 +79,35 @@ public class LanguageReferenceTest implements BeanFactoryAware {
 
         // Inventions Array
         List<Inventor> inventors = new ArrayList<>();
+        Inventor mike1 = new Inventor("mike1", "1111");
+        Inventor mike2 = new Inventor("mike2", "2222");
+        inventors.add(mike1);
+        inventors.add(mike2);
+
+        // List
+        Inventor invention = parser.parseExpression("#root[0]")
+                .getValue(context, inventors, Inventor.class);
+        System.out.println(invention);
 
 
-        // evaluates to "Induction motor"
-        String invention = parser.parseExpression("inventors[3]").getValue(
+        String name = parser.parseExpression("#this[1].name").getValue(
                 context, inventors, String.class);
-
-        // Members List
-
-        // evaluates to "Nikola Tesla"
-        String name = parser.parseExpression("inventors[0].name").getValue(
-                context, inventors, String.class);
+        System.out.println(name);
 
 
-        // Officer's Dictionary
+        // Map
+        Map<String, Inventor> map = new HashMap<>();
+        map.put("mike1", mike1);
+        context.setVariable("map", map);
 
-        Inventor pupin = parser.parseExpression("officers['president']").getValue(
+        Inventor m = parser.parseExpression("#map['mike1']").getValue(
                 context, Inventor.class);
+        System.out.println(m);
 
-// evaluates to "Idvor"
-        String city = parser.parseExpression("officers['president'].placeOfBirth.city").getValue(
+        String mname = parser.parseExpression("#map['mike1'].name").getValue(
                 context, String.class);
+        System.out.println(mname);
 
-// setting values
-        parser.parseExpression("officers['advisors'][0].placeOfBirth.country").setValue(
-                context, "Croatia");
 
     }
 
