@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 通过导入复用 dependency-lookup-context.xml -->
+    <import resource="dependency-lookup-context.xml"/>
+
+<!--    <bean id="userRepository" class="org.geekbang.thinking.in.spring.ioc.overview.repository.UserRepository"-->
+<!--          autowire="byType"> &lt;!&ndash; Auto-Wiring &ndash;&gt;-->
+<!--        &lt;!&ndash; 手动配置 &ndash;&gt;-->
+<!--        &lt;!&ndash;        <property name="users">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <util:list>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <ref bean="superUser" />&ndash;&gt;-->
+<!--        &lt;!&ndash;                <ref bean="user" />&ndash;&gt;-->
+<!--        &lt;!&ndash;            </util:list>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </property>&ndash;&gt;-->
+
+<!--    </bean>-->
+</beans>
