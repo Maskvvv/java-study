@@ -8,9 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 
 /**
- * Bean 元信息配置示例
- * <p>
- * 通过 properties 配置元信息
+ * 通过 properties 解析 BeanDefinition
  */
 public class BeanMetadataConfigurationDemo {
 
