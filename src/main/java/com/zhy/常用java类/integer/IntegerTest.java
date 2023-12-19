@@ -53,4 +53,12 @@ public class IntegerTest {
         double i = 1e3;
         System.out.println((int) i);
     }
+
+    @Test
+    public void compare() {
+        Integer i1 = 1000;
+        Integer i2 = 10000;
+
+        System.out.println(i1.compareTo(i2));
+    }
 }
