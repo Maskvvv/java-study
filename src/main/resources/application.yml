@@ -23,6 +23,10 @@ spring:
         prefetch: 10
         concurrency: 1
         max-concurrency: 10
+  datasource:
+    url: jdbc:mysql://${host}:3308/test
+    username: root
+    password: 1234567788
 
   sleuth:
     sampler:

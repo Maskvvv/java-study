@@ -7,16 +7,18 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.expression.EvaluationContext;
+import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.SimpleEvaluationContext;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
@@ -27,10 +29,12 @@ import java.lang.reflect.Method;
 @Slf4j
 @Aspect
 @Component
-public class SpELLogAop {
+public class SpELLogAop implements ApplicationContextAware {
 
     @Resource
     private ThreadPoolTaskExecutor spelThreadPoolTaskExecutor;
+
+    private static ApplicationContext applicationContext;
 
     @Bean
     public ThreadPoolTaskExecutor spelThreadPoolTaskExecutor() {
@@ -75,9 +79,10 @@ public class SpELLogAop {
 
     public static String parser(String[] parameterNames, Object[] args, MethodLog annotation) throws NoSuchMethodException {
         ExpressionParser parser = new SpelExpressionParser();
-        EvaluationContext context = SimpleEvaluationContext.forReadOnlyDataBinding().build();
+        StandardEvaluationContext context = new StandardEvaluationContext();
 
         context.setVariable( "json", JSON.class.getMethod("toJSONString", Object.class));
+        context.setBeanResolver(new BeanFactoryResolver(applicationContext));
 
         for (int i = 0; i < parameterNames.length; i++) {
             context.setVariable(parameterNames[i], args[i]);
@@ -86,4 +91,8 @@ public class SpELLogAop {
         return parser.parseExpression(annotation.content(), new TemplateParserContext()).getValue(context, String.class);
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpELLogAop.applicationContext = applicationContext;
+    }
 }
