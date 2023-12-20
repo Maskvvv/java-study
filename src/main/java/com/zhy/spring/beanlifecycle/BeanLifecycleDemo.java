@@ -43,6 +43,8 @@ import javax.annotation.PreDestroy;
  *                {@code destroy-method}
  *
  * </pre>
+ *
+ * <img src="http://qiniu.zhouhongyin.top/2023/12/20/1703059163-20231220155922.png"/>
  */
 public class BeanLifecycleDemo {
 
