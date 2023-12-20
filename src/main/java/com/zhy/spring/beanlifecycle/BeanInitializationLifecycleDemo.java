@@ -19,6 +19,7 @@ package com.zhy.spring.beanlifecycle;
 
 import com.zhy.spring.domain.User;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -35,10 +36,11 @@ import javax.annotation.PostConstruct;
  * <pre>
  * Bean 初始化生命周期({@link AbstractAutowireCapableBeanFactory#initializeBean(String, Object, RootBeanDefinition)}):
  *
- * Aware 回调
+ * -> Aware 回调
  * -> 初始化前 （{@link BeanPostProcessor#postProcessBeforeInitialization(Object, String)}, {@link PostConstruct}）
  * -> 初始化 （{@link InitializingBean}, {@code init-method}）
  * -> 初始化后 （{@link BeanPostProcessor#postProcessAfterInitialization(Object, String)}）
+ * -> 初始化完成 （{@link SmartInitializingSingleton}）
  * </pre>
  *
  *
@@ -69,6 +71,7 @@ public class BeanInitializationLifecycleDemo {
         // 显示地执行 preInstantiateSingletons()
         // SmartInitializingSingleton 通常在 Spring ApplicationContext 场景使用
         // preInstantiateSingletons 将已注册的 BeanDefinition 初始化成 Spring Bean
+        // preInstantiateSingletons 可以确保 Bean 的初始化完成，防止由于 BeanPostProcessor 没有实例化完成，而过早的 getBean 导致 Bean 的生命周期不完整
         beanFactory.preInstantiateSingletons();
 
         // 通过 Bean Id 和类型进行依赖查找
