@@ -18,48 +18,43 @@ package com.zhy.spring.beanlifecycle;
 
 
 import com.zhy.spring.domain.User;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.SmartInitializingSingleton;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
- * Bean 初始化生命周期
- * </p>
+ * Bean 的生命周期:
  *
  * <pre>
- * Bean 初始化生命周期({@link AbstractAutowireCapableBeanFactory#initializeBean(String, Object, RootBeanDefinition)}):
+ * -> Bean 注册 解析
+ * -> Bean 实例化三个阶段
+ * -> Bean 属性赋值前
+ * -> Bean 属性赋值
+ * -> Bean Aware 接口回调
+ * -> Bean 初始化三个阶段
+ * -> Bean 实例化后
+ * -> Bean 的销毁  {@link DestructionAwareBeanPostProcessor}
+ *                {@link PreDestroy}
+ *                {@link DisposableBean#destroy()}
+ *                {@code destroy-method}
  *
- * -> Aware 回调
- * -> 初始化前 （{@link BeanPostProcessor#postProcessBeforeInitialization(Object, String)}, {@link PostConstruct}）
- * -> 初始化 （{@link InitializingBean}, {@code init-method}）
- * -> 初始化后 （{@link BeanPostProcessor#postProcessAfterInitialization(Object, String)}）
- * -> 初始化完成 （{@link SmartInitializingSingleton}）
  * </pre>
- *
- *
  */
-public class BeanInitializationLifecycleDemo {
+public class BeanLifecycleDemo {
 
-    @PostConstruct
-    public static void main(String[] args) {
-
-        executeBeanFactory();
-
-    }
-
-    private static void executeBeanFactory() {
+    public static void main(String[] args) throws InterruptedException {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         // 添加 BeanPostProcessor 实现 MyInstantiationAwareBeanPostProcessor
         beanFactory.addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
-        // 添加 CommonAnnotationBeanPostProcessor 解决 @PostConstruct
+        // 添加 MyDestructionAwareBeanPostProcessor 执行销毁前回调
+        beanFactory.addBeanPostProcessor(new MyDestructionAwareBeanPostProcessor());
+        // 添加 CommonAnnotationBeanPostProcessor 解决 @PostConstruct @PreDestroy
         beanFactory.addBeanPostProcessor(new CommonAnnotationBeanPostProcessor());
+
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         String[] locations = {"META-INF/dependency-lookup-context.xml", "META-INF/bean-constructor-dependency-injection.xml"};
         int beanNumbers = beanDefinitionReader.loadBeanDefinitions(locations);
@@ -67,7 +62,6 @@ public class BeanInitializationLifecycleDemo {
         // 显示地执行 preInstantiateSingletons()
         // SmartInitializingSingleton 通常在 Spring ApplicationContext 场景使用
         // preInstantiateSingletons 将已注册的 BeanDefinition 初始化成 Spring Bean
-        // preInstantiateSingletons 可以确保 Bean 的初始化完成，防止由于 BeanPostProcessor 没有实例化完成，而过早的 getBean 导致 Bean 的生命周期不完整
         beanFactory.preInstantiateSingletons();
 
         // 通过 Bean Id 和类型进行依赖查找
@@ -82,7 +76,18 @@ public class BeanInitializationLifecycleDemo {
 
         System.out.println(userHolder);
 
+        // 执行 Bean 销毁（容器内）
+        beanFactory.destroyBean("userHolder", userHolder);
+        // Bean 销毁并不意味着 Bean 垃圾回收了
+        System.out.println(userHolder);
+
+        // 销毁 BeanFactory 中的单例 Bean
+        beanFactory.destroySingletons();
+        // 强制 GC
+        System.gc();
+        // 等待一段时间
+        Thread.sleep(1000L);
+        // 强制 GC
+        System.gc();
     }
-
 }
-
