@@ -27,6 +27,8 @@ import org.springframework.util.ObjectUtils;
 
 /**
  * Bean 实例化处理器
+ * <p>
+ * Bean 初始化处理器
  */
 public class MyInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
 
