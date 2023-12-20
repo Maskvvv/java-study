@@ -29,11 +29,11 @@ public class RandomTest {
     @Test
     public void test2() {
 
-        int len = 100;
+        int len = 2;
 
         Random r = new Random();
         for (int i = 0; i < len; i++) {
-            System.out.println(r.nextInt(100_000));
+            System.out.println(r.nextInt(3));
         }
 
     }
