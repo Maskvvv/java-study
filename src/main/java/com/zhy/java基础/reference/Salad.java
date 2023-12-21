@@ -3,8 +3,10 @@ package com.zhy.java基础.reference;
 import java.lang.ref.WeakReference;
 
 /**
- * @author: zhouhongyin
- * @time: ${DATE} ${TIME}
+ * <p>  </p>
+ *
+ * @author zhouhongyin
+ * @since 2023/12/21 13:49
  */
 public class Salad extends WeakReference<Apple> {
     public Salad(Apple apple) {
