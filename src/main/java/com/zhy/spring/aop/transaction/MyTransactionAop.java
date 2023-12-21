@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.core.annotation.Order;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,11 +19,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zhouhongyin
  * @since 2023/3/2 22:18
  */
-@Order(1)
 @Slf4j
 @Aspect
 @Component
-public class MyTransactionAop {
+public class MyTransactionAop implements Ordered {
     static ThreadLocal<ReentrantLock> threadLocal = new ThreadLocal<>();
 
     @Pointcut("@annotation(com.zhy.spring.aop.transaction.MyTransaction)")
@@ -76,4 +75,8 @@ public class MyTransactionAop {
         log.info("-------------doAfterReturning------------------");
     }
 
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE - 1;
+    }
 }

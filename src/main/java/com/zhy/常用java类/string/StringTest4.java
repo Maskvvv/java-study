@@ -33,4 +33,12 @@ public class StringTest4 {
 
     }
 
+    @Test
+    public void join() {
+        String s1 = null;
+        String s2 = "111";
+        String s3 = null;
+
+        System.out.println(String.join(":", s1, s2, s3));
+    }
 }

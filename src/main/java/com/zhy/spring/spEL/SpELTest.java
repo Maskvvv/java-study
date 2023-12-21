@@ -10,6 +10,7 @@ import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.SimpleEvaluationContext;
@@ -152,6 +153,24 @@ public class SpELTest {
 
         System.out.println(o);
         System.out.println(s);
+    }
+
+    /**
+     * Parser bean
+     */
+    @Test
+    public void spELTest9() {
+        Inventor bean = new Inventor();
+        bean.setName("my-bean");
+
+        ExpressionParser parser = new SpelExpressionParser();
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("bean", bean);
+
+        String s = parser.parseExpression("#{ #bean.name }", new TemplateParserContext()).getValue(context, String.class);
+        String s1 = parser.parseExpression("#bean.name").getValue(context, String.class);
+        System.out.println(s);
+        System.out.println(s1);
     }
 
 

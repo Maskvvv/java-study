@@ -1,4 +1,4 @@
-package com.zhy.spring.aop.transaction;
+package com.zhy.spring.aop.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,18 @@ public class TransactionController {
         transactionService.test1();
         return response;
 
+    }
+
+    @GetMapping("sort")
+    public String sort() throws SQLException {
+        System.out.println("Aop controller sort");
+        return "success";
+    }
+
+    @GetMapping("lock")
+    public String lock(String key, String queryParam) throws SQLException {
+        String lock = transactionService.lock(key, queryParam);
+        return lock;
     }
 
 
