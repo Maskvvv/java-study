@@ -1,6 +1,5 @@
 package com.zhy.spring.resource;
 
-import com.zhy.spring.resource.loader.ResourceUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.Resource;

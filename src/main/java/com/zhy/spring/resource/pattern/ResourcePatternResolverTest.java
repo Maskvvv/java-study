@@ -1,5 +1,6 @@
-package com.zhy.spring.resource.loader;
+package com.zhy.spring.resource.pattern;
 
+import com.zhy.spring.resource.ResourceUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 

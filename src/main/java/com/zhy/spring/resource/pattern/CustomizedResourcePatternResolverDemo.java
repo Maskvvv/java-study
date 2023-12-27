@@ -1,6 +1,7 @@
-package com.zhy.spring.resource.loader;
+package com.zhy.spring.resource.pattern;
 
 
+import com.zhy.spring.resource.ResourceUtils;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -25,7 +26,7 @@ public class CustomizedResourcePatternResolverDemo {
     public static void main(String[] args) throws IOException {
         // 读取当前 package 对应的所有的 .java 文件
         // *.java
-        String currentPackagePath = "/" + System.getProperty("user.dir") + "/thinking-in-spring/resource/src/main/java/org/geekbang/thinking/in/spring/resource/";
+        String currentPackagePath = System.getProperty("user.dir") + "/src/main/java/com/zhy/spring/resource/";
         String locationPattern = currentPackagePath + "*.java";
         PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver(new FileSystemResourceLoader());
 

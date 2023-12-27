@@ -1,4 +1,4 @@
-package com.zhy.spring.resource.loader;
+package com.zhy.spring.resource;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.Resource;
