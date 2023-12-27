@@ -1,4 +1,4 @@
-package com.zhy.spring.resource.pattern;
+package com.zhy.spring.resource.loader.pattern;
 
 
 import com.zhy.spring.resource.ResourceUtils;
@@ -16,6 +16,8 @@ import java.util.stream.Stream;
 
 /**
  * 自定义 {@link ResourcePatternResolver} 示例
+ * <p>
+ * 相当于对{@link FileSystemResourceLoader} 的增强
  *
  * @see ResourcePatternResolver
  * @see PathMatchingResourcePatternResolver

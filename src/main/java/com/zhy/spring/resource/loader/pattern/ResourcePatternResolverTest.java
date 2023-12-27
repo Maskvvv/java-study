@@ -1,4 +1,4 @@
-package com.zhy.spring.resource.pattern;
+package com.zhy.spring.resource.loader.pattern;
 
 import com.zhy.spring.resource.ResourceUtils;
 import org.springframework.core.io.Resource;
