@@ -20,7 +20,7 @@ public class EncodedFileSystemResourceLoaderDemo {
 
     public static void main(String[] args) throws IOException {
 
-        String currentJavaFilePath = System.getProperty("user.dir") + "/src/main/java/com/zhy/spring/resource/resource/EncodedFileSystemResourceLoaderDemo.java";
+        String currentJavaFilePath = System.getProperty("user.dir") + "/src/main/java/com/zhy/spring/resource/loader/EncodedFileSystemResourceLoaderDemo.java";
         // 新建一个 FileSystemResourceLoader 对象
         FileSystemResourceLoader resourceLoader = new FileSystemResourceLoader();
         // FileSystemResource => WritableResource => Resource
