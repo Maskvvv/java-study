@@ -31,10 +31,10 @@ import java.util.Map;
  * 基于 Java 注解 Spring IoC 容器元信息配置示例
  */
 // 将当前类作为 Configuration Class
-@ImportResource("classpath:/META-INF/dependency-lookup-context.xml")
+@ImportResource("classpath:/META-INF/study/dependency-lookup-context.xml")
 @Import(User.class)
-@PropertySource("classpath:/META-INF/user-bean-definitions.properties") // Java 8+ @Repeatable 支持
-@PropertySource("classpath:/META-INF/user-bean-definitions.properties")
+@PropertySource("classpath:/META-INF/study/user-bean-definitions.properties") // Java 8+ @Repeatable 支持
+@PropertySource("classpath:/META-INF/study/user-bean-definitions.properties")
 // @PropertySources(@PropertySource(...))
 public class AnnotatedSpringIoCContainerMetadataConfigurationDemo {
 

@@ -7,7 +7,7 @@
 
     <bean id="yamlMap" class="org.springframework.beans.factory.config.YamlMapFactoryBean">
         <!-- 关联 user.yaml 配置 -->
-        <property name="resources" value="classpath:/META-INF/user.yaml"/>
+        <property name="resources" value="classpath:/META-INF/study/user.yaml"/>
     </bean>
 
 </beans>

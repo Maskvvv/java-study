@@ -23,7 +23,7 @@
                 <value>SHANGHAI</value>
             </list>
         </property>
-        <property name="configFileLocation" value="classpath:/META-INF/user-config.properties"/>
+        <property name="configFileLocation" value="classpath:/META-INF/study/user-config.properties"/>
     </bean>
 
     <!-- 普通 beanDefinition GenericBeanDefinition -->

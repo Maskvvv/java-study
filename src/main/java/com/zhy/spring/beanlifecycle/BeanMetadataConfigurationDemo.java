@@ -16,7 +16,7 @@ public class BeanMetadataConfigurationDemo {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         // 实例化基于 Properties 资源 BeanDefinitionReader
         PropertiesBeanDefinitionReader beanDefinitionReader = new PropertiesBeanDefinitionReader(beanFactory);
-        String location = "META-INF/user-config.properties";
+        String location = "META-INF/study/user-config.properties";
         // 基于 ClassPath 加载 properties 资源
         Resource resource = new ClassPathResource(location);
         // 指定字符编码 UTF-8

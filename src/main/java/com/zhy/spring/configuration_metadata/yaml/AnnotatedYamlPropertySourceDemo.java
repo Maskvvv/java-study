@@ -29,7 +29,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @PropertySource(
         name = "yamlPropertySource",
-        value = "classpath:/META-INF/user.yaml",
+        value = "classpath:/META-INF/study/user.yaml",
         factory = YamlPropertySourceFactory.class)
 public class AnnotatedYamlPropertySourceDemo {
 

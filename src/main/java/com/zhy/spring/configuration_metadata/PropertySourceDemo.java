@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * property 外部化配置示例
  */
-@PropertySource("classpath:/META-INF/user-bean-definitions.properties")
+@PropertySource("classpath:/META-INF/study/user-bean-definitions.properties")
 public class PropertySourceDemo {
 
     /**

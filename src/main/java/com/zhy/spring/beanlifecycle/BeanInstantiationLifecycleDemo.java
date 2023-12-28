@@ -42,7 +42,7 @@ public class BeanInstantiationLifecycleDemo {
         // 方法二：将 MyInstantiationAwareBeanPostProcessor 作为 Bean 注册
         // 基于 XML 资源 BeanDefinitionReader 实现
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
-        String[] locations = {"META-INF/dependency-lookup-context.xml", "META-INF/bean-constructor-dependency-injection.xml"};
+        String[] locations = {"META-INF/study/dependency-lookup-context.xml", "META-INF/bean-constructor-dependency-injection.xml"};
         int beanNumbers = beanDefinitionReader.loadBeanDefinitions(locations);
         System.out.println("已加载 BeanDefinition 数量：" + beanNumbers);
         // 通过 Bean Id 和类型进行依赖查找
@@ -59,7 +59,7 @@ public class BeanInstantiationLifecycleDemo {
 
     private static void executeApplicationContext() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext();
-        String[] locations = {"META-INF/dependency-lookup-context.xml", "META-INF/bean-constructor-dependency-injection.xml"};
+        String[] locations = {"META-INF/study/dependency-lookup-context.xml", "META-INF/bean-constructor-dependency-injection.xml"};
         applicationContext.setConfigLocations(locations);
         // 启动应用上下文
         applicationContext.refresh();

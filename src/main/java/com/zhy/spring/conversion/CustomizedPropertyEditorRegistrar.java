@@ -16,27 +16,24 @@
  */
 package com.zhy.spring.conversion;
 
-import java.beans.PropertyEditor;
+
+import com.zhy.spring.domain.User;
+import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.PropertyEditorRegistry;
 
 /**
- * {@link PropertyEditor} 示例
+ * 自定义 {@link PropertyEditorRegistrar} 实现
  *
- * @see PropertyEditor
+ * @see PropertyEditorRegistrar
  */
-public class PropertyEditorDemo {
+// @Component // 3. 将其声明为 Spring Bean
+public class CustomizedPropertyEditorRegistrar implements PropertyEditorRegistrar {
 
-    public static void main(String[] args) {
-
-        // 模拟 Spring Framework 操作
-        // 有一段文本 name = zhy;
-        String text = "name = zhy";
-
-        PropertyEditor propertyEditor = new StringToPropertiesPropertyEditor();
-        // 传递 String 类型的内容
-        propertyEditor.setAsText(text);
-
-        System.out.println(propertyEditor.getValue());
-
-        System.out.println(propertyEditor.getAsText());
+    @Override
+    public void registerCustomEditors(PropertyEditorRegistry registry) {
+        // 1. 通用类型转换
+        // 2. Java Bean 属性类型转换
+        //registry.registerCustomEditor(User.class, new StringToPropertiesPropertyEditor());
+        registry.registerCustomEditor(User.class, "context", new StringToPropertiesPropertyEditor());
     }
 }

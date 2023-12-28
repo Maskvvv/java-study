@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  */
 public class InjectingResourceDemo {
 
-    @Value("classpath:/META-INF/user-config.properties")
+    @Value("classpath:/META-INF/study/user-config.properties")
     private Resource defaultPropertiesResource;
 
     /**
