@@ -1,7 +1,7 @@
 package com.zhy.spring.databinding;
 
 
-import com.zhy.spring.model.User;
+import com.zhy.spring.domain.User;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValues;
 import org.springframework.validation.BindingResult;
@@ -28,7 +28,7 @@ public class DataBinderDemo {
         // 2. 创建 PropertyValues
         Map<String, Object> source = new HashMap<>();
         source.put("id", 1);
-        source.put("name", "小马哥");
+        source.put("name", "zhy");
 
         // a. PropertyValues 存在 User 中不存在属性值
         // DataBinder 特性一 : 忽略未知的属性
@@ -41,7 +41,7 @@ public class DataBinderDemo {
         // user.setCompany(compay)
 
 //        source.put("company", new Company());
-        source.put("company.name", "geekbang");
+        source.put("company.name", "qs");
 
         PropertyValues propertyValues = new MutablePropertyValues(source);
 
