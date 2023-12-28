@@ -11,12 +11,12 @@
         https://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 3. 将其声明为 Spring Bean -->
-    <bean class="com.zhy.spring.conversion.CustomizedPropertyEditorRegistrar"/>
+    <bean class="com.zhy.spring.conversion.propertieseditor.CustomizedPropertyEditorRegistrar"/>
 
     <!-- 声明 ConversionServiceFactoryBean 并且 name 必须为 "conversionService" -->
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
-            <bean class="com.zhy.spring.conversion.PropertiesToStringConverter"/>
+            <bean class="com.zhy.spring.conversion.converter.PropertiesToStringConverter"/>
         </property>
     </bean>
 
