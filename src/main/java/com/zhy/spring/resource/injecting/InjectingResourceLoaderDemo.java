@@ -1,4 +1,4 @@
-package com.zhy.spring.resource;
+package com.zhy.spring.resource.injecting;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

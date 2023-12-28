@@ -1,5 +1,6 @@
-package com.zhy.spring.resource;
+package com.zhy.spring.resource.injecting;
 
+import com.zhy.spring.resource.ResourceUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.Resource;
@@ -16,11 +17,11 @@ import java.util.stream.Stream;
  */
 public class InjectingResourceDemo {
 
-    @Value("classpath:/META-INF/default.properties")
+    @Value("classpath:/META-INF/user-config.properties")
     private Resource defaultPropertiesResource;
 
     /**
-     * classpath:/ 表示当前 ClassPath 下的资源，相当于 ClassLoader#getResource 方法
+     * classpath:/ 表示当前（项目） ClassPath 下的资源，相当于 ClassLoader#getResource 方法
      * classpath*:/ 表示所有 ClassPath 下的资源，相当于 ClassLoader#getResources 方法
      */
     @Value("classpath*:/META-INF/*.properties")
