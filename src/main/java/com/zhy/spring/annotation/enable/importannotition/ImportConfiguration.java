@@ -1,4 +1,4 @@
-package com.zhy.spring.annotation.importannotition;
+package com.zhy.spring.annotation.enable.importannotition;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

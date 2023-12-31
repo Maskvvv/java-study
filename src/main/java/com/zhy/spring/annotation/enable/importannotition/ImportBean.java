@@ -1,4 +1,4 @@
-package com.zhy.spring.annotation.importannotition;
+package com.zhy.spring.annotation.enable.importannotition;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

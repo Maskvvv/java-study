@@ -10,9 +10,6 @@ import java.lang.annotation.Target;
 
 /**
  * 激活 "HelloWorld" 模块注解
- *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @since
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
