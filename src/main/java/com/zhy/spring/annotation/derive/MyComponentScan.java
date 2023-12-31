@@ -1,4 +1,4 @@
-package com.zhy.spring.annotation.alias;
+package com.zhy.spring.annotation.derive;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.annotation.AliasFor;
