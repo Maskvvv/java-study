@@ -1,19 +1,16 @@
 package com.zhy.spring.annotation.derive;
 
+import com.zhy.spring.annotation.derive.aliases.MyComponentScan;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ConfigurationClass;
-import org.springframework.context.annotation.ConfigurationClassParser;
 import org.springframework.stereotype.Component;
-
-import java.util.function.Predicate;
 
 /**
  * {@link Component} 扫描示例
  *
  * @see Component
  * @see ComponentScan
- * @see ConfigurationClassParser#doProcessConfigurationClass(ConfigurationClass, ConfigurationClassParser.SourceClass, Predicate)
+//* @see ConfigurationClassParser#doProcessConfigurationClass(ConfigurationClass, ConfigurationClassParser.SourceClass, Predicate)
  */
 @MyComponentScan(scanBasePackages = "com.zhy.spring.annotation.derive") // 指定 Class-Path(s)
 public class ComponentScanDemo {
