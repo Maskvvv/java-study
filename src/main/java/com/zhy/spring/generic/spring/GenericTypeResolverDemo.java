@@ -1,4 +1,5 @@
-package com.zhy.spring.generic;
+package com.zhy.spring.generic.spring;
+
 
 import org.springframework.core.GenericTypeResolver;
 

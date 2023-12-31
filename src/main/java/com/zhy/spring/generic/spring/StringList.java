@@ -1,4 +1,4 @@
-package com.zhy.spring.generic;
+package com.zhy.spring.generic.spring;
 
 import java.util.ArrayList;
 
