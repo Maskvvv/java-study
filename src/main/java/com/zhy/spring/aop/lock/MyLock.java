@@ -21,9 +21,9 @@ public @interface MyLock {
 
     String keySeparator() default ":";
 
-    long timeout() default -1;
+    long leaseTime() default 10 * 1000;
 
     KeyNull ifKeyNull() default KeyNull.FAST_FAIL;
 
-    Class<? extends MyLockProcessor> lockProcessor() default DefaultLockProcessor.class;
+    Class<? extends MyLockProcessor> lockProcessor() default MyLockProcessor.class;
 }

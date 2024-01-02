@@ -2,6 +2,7 @@ package com.zhy.spring.spEL;
 
 import com.zhy.spring.model.Order;
 import com.zhy.spring.spEL.model.Demo;
+import com.zhy.spring.spEL.model.DomainKey;
 import com.zhy.spring.spEL.model.Inventor;
 import com.zhy.spring.spEL.model.Simple;
 import org.junit.Test;
@@ -173,5 +174,18 @@ public class SpELTest {
         System.out.println(s1);
     }
 
+    @Test
+    public void enumTest() {
+        ExpressionParser parser = new SpelExpressionParser();
+        StandardEvaluationContext context = new StandardEvaluationContext();
+
+        for (DomainKey value : DomainKey.values()) {
+            context.setVariable(value.name(), value);
+        }
+
+        Object s = parser.parseExpression("#{ #InsertQuestionWorkCodeLockKey.key('1111') }", new TemplateParserContext()).getValue(context, Object.class);
+
+        System.out.println(s);
+    }
 
 }
