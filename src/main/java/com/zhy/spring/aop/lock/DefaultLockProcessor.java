@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -27,9 +26,11 @@ public class DefaultLockProcessor implements MyLockProcessor {
     }
 
     @Override
-    public boolean tryLock(String key, long timeout) throws Exception {
-        return getLock(key).tryLock(timeout, TimeUnit.MILLISECONDS);
+    public void lock(String key, long leaseTime) throws Exception {
+        getLock(key).lock();
     }
+
+
 
     @Override
     public void unlock(String key) {

@@ -63,26 +63,36 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
         Method method = signature.getMethod();
         MyLock myLockAnno = method.getAnnotation(MyLock.class);
 
+        String key = generateKey(joinPoint);
+
+        return proceedAndLock(joinPoint, myLockAnno, key);
+    }
+
+    private Object proceedAndLock(ProceedingJoinPoint joinPoint, MyLock myLockAnno, String key) throws Throwable {
+
         Class<? extends MyLockProcessor> lockClazz = myLockAnno.lockProcessor();
         MyLockProcessor myLockProcessor = lockMap.get(lockClazz);
 
-        String key = generateKey(joinPoint);
-
         Object result;
-        try {
-            if (myLockAnno.timeout() > 0) {
-                if (!myLockProcessor.tryLock(key, myLockAnno.timeout())) {
-                    return null;
-                }
-            } else {
-                myLockProcessor.lock(key);
+
+        if (lockClazz == null) {
+            synchronized (key.intern()) {
+                result = joinPoint.proceed();
             }
 
-            result = joinPoint.proceed();
-        } finally {
-            myLockProcessor.unlock(key);
-        }
+        } else {
+            try {
+                if (myLockAnno.leaseTime() > 0) {
+                    myLockProcessor.lock(key, myLockAnno.leaseTime());
+                } else {
+                    myLockProcessor.lock(key);
+                }
 
+                result = joinPoint.proceed();
+            } finally {
+                myLockProcessor.unlock(key);
+            }
+        }
         return result;
     }
 
@@ -127,16 +137,6 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
         return parser.parseExpression(expressionString, new TemplateParserContext("${", "}")).getValue(context, String.class);
     }
 
-    @Override
-    public void setApplicationContext(@NotNull ApplicationContext applicationContext) throws BeansException {
-        MyLockAspect.applicationContext = applicationContext;
-    }
-
-    @Override
-    public int getOrder() {
-        return Ordered.LOWEST_PRECEDENCE - 1;
-    }
-
     private String keyJoin(String delimiter, KeyNull keyNull, String... keys) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -160,6 +160,14 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
         throw new RuntimeException("lock key is null!");
     }
 
+    @Override
+    public void setApplicationContext(@NotNull ApplicationContext applicationContext) throws BeansException {
+        MyLockAspect.applicationContext = applicationContext;
+    }
 
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE - 1;
+    }
 }
 

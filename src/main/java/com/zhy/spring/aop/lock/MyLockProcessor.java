@@ -10,7 +10,7 @@ public interface MyLockProcessor {
 
     void lock(String key);
 
-    boolean tryLock(String key, long timeout) throws Exception;
+    void lock(String key, long leaseTime) throws Exception;
 
     void unlock(String key);
 
