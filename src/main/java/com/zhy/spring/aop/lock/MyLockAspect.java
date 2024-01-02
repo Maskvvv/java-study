@@ -61,16 +61,16 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        MyLock myLockAnno = method.getAnnotation(MyLock.class);
+        MyLock annotation = method.getAnnotation(MyLock.class);
 
         String key = generateKey(joinPoint);
 
-        return proceedAndLock(joinPoint, myLockAnno, key);
+        return lockAndProceed(joinPoint, annotation, key);
     }
 
-    private Object proceedAndLock(ProceedingJoinPoint joinPoint, MyLock myLockAnno, String key) throws Throwable {
+    private Object lockAndProceed(ProceedingJoinPoint joinPoint, MyLock annotation, String key) throws Throwable {
 
-        Class<? extends MyLockProcessor> lockClazz = myLockAnno.lockProcessor();
+        Class<? extends MyLockProcessor> lockClazz = annotation.lockProcessor();
         MyLockProcessor myLockProcessor = lockMap.get(lockClazz);
 
         Object result;
@@ -82,8 +82,8 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
 
         } else {
             try {
-                if (myLockAnno.leaseTime() > 0) {
-                    myLockProcessor.lock(key, myLockAnno.leaseTime());
+                if (annotation.leaseTime() > 0) {
+                    myLockProcessor.lock(key, annotation.leaseTime());
                 } else {
                     myLockProcessor.lock(key);
                 }
