@@ -41,8 +41,10 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
 
     private final Map<Class<?>, MyLockProcessor> lockMap = new HashMap<>();
     private final Map<Class<?>, KeyConvert> keyConvertMap = new HashMap<>();
+    private final List<MyLockSpELContextPostProcessor> contextPostProcessors;
 
-    public MyLockAspect(List<MyLockProcessor> lockList, List<KeyConvert> keyConvertList) {
+    public MyLockAspect(List<MyLockProcessor> lockList, List<KeyConvert> keyConvertList, List<MyLockSpELContextPostProcessor> contextPostProcessors) {
+        this.contextPostProcessors = contextPostProcessors;
         for (MyLockProcessor myLockProcessor : lockList) {
             lockMap.put(myLockProcessor.getClass(), myLockProcessor);
         }
@@ -134,6 +136,11 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
         for (int i = 0; i < parameterNames.length; i++) {
             context.setVariable(parameterNames[i], args[i]);
         }
+
+        for (MyLockSpELContextPostProcessor contextPostProcessor : contextPostProcessors) {
+            contextPostProcessor.postProcess(context);
+        }
+
         return parser.parseExpression(expressionString, new TemplateParserContext("${", "}")).getValue(context, String.class);
     }
 
