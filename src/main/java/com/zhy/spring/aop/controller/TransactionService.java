@@ -2,6 +2,8 @@ package com.zhy.spring.aop.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zhy.spring.aop.lock.AthenaLock;
+import com.zhy.spring.aop.model.LockBody;
+import com.zhy.spring.aop.model.LockParam;
 import com.zhy.spring.aop.transaction.MyTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,9 +38,25 @@ public class TransactionService {
 
     }
 
-    @AthenaLock(spEl = "${ #key }")
+    @AthenaLock(spEl = "#{ #TestLockKey.key(#param.id + #lockBody.name + #lockBody.age) }")
     @Transactional
-    public String lock(String key, String queryParam) throws SQLException {
+    public String lock(LockParam param, LockBody lockBody) throws SQLException {
+        String sql = "SELECT * FROM `user`;";
+
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
+        System.out.println(maps);
+
+        String id = String.valueOf(random.nextInt());
+        String insert = String.format("INSERT INTO `test`.`user` (`id`, `name`, `age`) VALUES (%s, '%s', %s);", id, id, id) ;
+        jdbcTemplate.execute(insert);
+
+        return JSON.toJSONString(maps);
+
+    }
+
+    @AthenaLock(keyConvert = TestKeyConvert.class)
+    @Transactional
+    public String lockV2(LockParam param, LockBody lockBody) throws SQLException {
         String sql = "SELECT * FROM `user`;";
 
         List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);

@@ -7,5 +7,5 @@ package com.zhy.spring.aop.lock;
  * @since 2023/12/21 11:12
  */
 public interface KeyConvert {
-    String getKey(Object... param);
+    String getKey(Object... params);
 }
