@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Lazy;
  *
  * @see ObjectFactory
  * @see ObjectProvider
- * @since
  */
 public class ObjectFactoryLazyLookupDemo {
 
@@ -60,7 +59,7 @@ public class ObjectFactoryLazyLookupDemo {
     public static User user() {
         User user = new User();
         user.setId("1");
-        user.setName("小马哥");
+        user.setName("mask");
         return user;
     }
 }
