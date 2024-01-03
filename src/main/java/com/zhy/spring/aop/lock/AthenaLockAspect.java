@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <p> 分布式锁切面</p>
+ *
  * @author zhouhongyin
  * @since 2023/3/2 22:18
  */
@@ -71,27 +73,7 @@ public class AthenaLockAspect implements Ordered {
             lockProcessor = lockMap.get(lockClazzs[0]);
         }
 
-        Object result;
-
-        if (lockProcessor == null) {
-            synchronized (key.intern()) {
-                result = joinPoint.proceed();
-            }
-
-        } else {
-            try {
-                if (annotation.leaseTime() > 0) {
-                    lockProcessor.lock(key, annotation.leaseTime());
-                } else {
-                    lockProcessor.lock(key);
-                }
-
-                result = joinPoint.proceed();
-            } finally {
-                lockProcessor.unlock(key);
-            }
-        }
-        return result;
+        return lockProcessor.proceed(joinPoint, key, annotation.leaseTime());
     }
 
     private String generateKey(ProceedingJoinPoint joinPoint) {

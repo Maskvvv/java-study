@@ -1,56 +1,21 @@
 package com.zhy.spring.aop.lock;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.stereotype.Component;
 
 /**
- * <p> </p>
+ * <p> Lock 单机实现(没有锁的过期时间) </p>
  *
  * @author zhouhongyin
  * @since 2023/12/21 10:59
  */
-//@Primary
-//@Service
+@Component
 public class DefaultLockProcessor implements AthenaLockProcessor {
 
-    private static final Map<String, ReentrantLock> lockMap = new HashMap<>();
-
-    // TODO-zhouhy 2023/12/21 lock expired
-    // TODO-zhouhy 2023/12/21 lock remove
-
     @Override
-    public void lock(String key) {
-        getLock(key).lock();
-    }
-
-    @Override
-    public void lock(String key, long leaseTime) throws Exception {
-        getLock(key).lock();
-    }
-
-
-
-    @Override
-    public void unlock(String key) {
-        ReentrantLock lock = getLock(key);
-        lock.unlock();
-    }
-
-
-    private ReentrantLock getLock(String key) {
-        ReentrantLock lock = lockMap.get(key);
-
-        if (lock == null) {
-            synchronized (key.intern()) {
-                lock = lockMap.get(key);
-                if (lock != null) return lock;
-
-                lock = new ReentrantLock();
-                lockMap.put(key, lock);
-            }
+    public Object proceed(ProceedingJoinPoint joinPoint, String key, long leaseTime) throws Throwable {
+        synchronized (key.intern()) {
+            return joinPoint.proceed();
         }
-
-        return lock;
     }
 }
