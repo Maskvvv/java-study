@@ -186,7 +186,7 @@ public class SpELTest {
         context.setVariable("id", "idiididi");
         context.setVariable("name", "namename");
 
-        Object s = parser.parseExpression("#{ #InsertQuestionWorkCodeLockKey.key(#name + #id) + 'aaaa' }", new TemplateParserContext()).getValue(context, Object.class);
+        Object s = parser.parseExpression("#{ #TestLockKey.key(#name, #id, 'bbb') + 'aaaa' }", new TemplateParserContext()).getValue(context, Object.class);
 
         System.out.println(s);
     }
