@@ -1,7 +1,7 @@
 package com.zhy.spring.aop.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.zhy.spring.aop.lock.MyLock;
+import com.zhy.spring.aop.lock.AthenaLock;
 import com.zhy.spring.aop.transaction.MyTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,7 +36,7 @@ public class TransactionService {
 
     }
 
-    @MyLock(spEl = "${ #key }")
+    @AthenaLock(spEl = "${ #key }")
     @Transactional
     public String lock(String key, String queryParam) throws SQLException {
         String sql = "SELECT * FROM `user`;";

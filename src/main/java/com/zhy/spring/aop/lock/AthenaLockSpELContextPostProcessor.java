@@ -8,7 +8,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
  * @author zhouhongyin
  * @since 2024/1/2 14:58
  */
-public interface MyLockSpELContextPostProcessor {
+public interface AthenaLockSpELContextPostProcessor {
 
     void postProcess(StandardEvaluationContext context);
 

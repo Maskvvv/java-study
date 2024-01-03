@@ -1,6 +1,6 @@
 package com.zhy.spring.aop.lock;
 
-import com.zhy.spring.spEL.model.DomainKey;
+import com.alibaba.fastjson.JSON;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +11,16 @@ import org.springframework.stereotype.Component;
  * @since 2024/1/2 15:01
  */
 @Component
-public class DomainKeySpELContextPostProcessor implements AthenaLockSpELContextPostProcessor {
+public class JsonSpELContextPostProcessor implements AthenaLockSpELContextPostProcessor {
 
 
     @Override
     public void postProcess(StandardEvaluationContext context) {
-        for (DomainKey value : DomainKey.values()) {
-            context.setVariable(value.name(), value);
+        try {
+            context.setVariable("json", JSON.class.getMethod("toJSONString", Object.class));
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
     }
+
 }

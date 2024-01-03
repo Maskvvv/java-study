@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MyLock {
+public @interface AthenaLock {
 
     String prefix() default "";
 
@@ -23,7 +23,5 @@ public @interface MyLock {
 
     long leaseTime() default 10 * 1000;
 
-    KeyNull ifKeyNull() default KeyNull.FAST_FAIL;
-
-    Class<? extends MyLockProcessor> lockProcessor() default MyLockProcessor.class;
+    Class<? extends AthenaLockProcessor>[] lockProcessor() default {};
 }

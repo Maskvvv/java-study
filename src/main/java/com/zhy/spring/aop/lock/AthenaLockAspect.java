@@ -1,6 +1,5 @@
 package com.zhy.spring.aop.lock;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -9,11 +8,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.expression.BeanFactoryResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.common.TemplateParserContext;
@@ -25,7 +20,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author zhouhongyin
@@ -34,19 +28,19 @@ import java.util.UUID;
 @Slf4j
 @Aspect
 @Component
-public class MyLockAspect implements ApplicationContextAware, Ordered {
+public class AthenaLockAspect implements Ordered {
 
-    private static ApplicationContext applicationContext;
-
-
-    private final Map<Class<?>, MyLockProcessor> lockMap = new HashMap<>();
+    private final AthenaLockProcessor lock;
+    private final Map<Class<?>, AthenaLockProcessor> lockMap = new HashMap<>();
     private final Map<Class<?>, KeyConvert> keyConvertMap = new HashMap<>();
-    private final List<MyLockSpELContextPostProcessor> contextPostProcessors;
+    private final List<AthenaLockSpELContextPostProcessor> contextPostProcessors;
 
-    public MyLockAspect(List<MyLockProcessor> lockList, List<KeyConvert> keyConvertList, List<MyLockSpELContextPostProcessor> contextPostProcessors) {
+    public AthenaLockAspect(List<AthenaLockProcessor> lockList, List<KeyConvert> keyConvertList,
+                            @Autowired(required = false) AthenaLockProcessor lock, List<AthenaLockSpELContextPostProcessor> contextPostProcessors) {
+        this.lock = lock;
         this.contextPostProcessors = contextPostProcessors;
-        for (MyLockProcessor myLockProcessor : lockList) {
-            lockMap.put(myLockProcessor.getClass(), myLockProcessor);
+        for (AthenaLockProcessor athenaLockProcessor : lockList) {
+            lockMap.put(athenaLockProcessor.getClass(), athenaLockProcessor);
         }
 
         for (KeyConvert keyConvert : keyConvertList) {
@@ -55,7 +49,7 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
     }
 
 
-    @Pointcut("@annotation(com.zhy.spring.aop.lock.MyLock)")
+    @Pointcut("@annotation(com.zhy.spring.aop.lock.AthenaLock)")
     public void pointCut() {
     }
 
@@ -63,21 +57,23 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        MyLock annotation = method.getAnnotation(MyLock.class);
+        AthenaLock annotation = method.getAnnotation(AthenaLock.class);
 
         String key = generateKey(joinPoint);
 
         return lockAndProceed(joinPoint, annotation, key);
     }
 
-    private Object lockAndProceed(ProceedingJoinPoint joinPoint, MyLock annotation, String key) throws Throwable {
-
-        Class<? extends MyLockProcessor> lockClazz = annotation.lockProcessor();
-        MyLockProcessor myLockProcessor = lockMap.get(lockClazz);
+    private Object lockAndProceed(ProceedingJoinPoint joinPoint, AthenaLock annotation, String key) throws Throwable {
+        Class<? extends AthenaLockProcessor>[] lockClazzs = annotation.lockProcessor();
+        AthenaLockProcessor lockProcessor = lock;
+        if (lockClazzs.length > 0) {
+            lockProcessor = lockMap.get(lockClazzs[0]);
+        }
 
         Object result;
 
-        if (lockClazz == null) {
+        if (lockProcessor == null) {
             synchronized (key.intern()) {
                 result = joinPoint.proceed();
             }
@@ -85,33 +81,33 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
         } else {
             try {
                 if (annotation.leaseTime() > 0) {
-                    myLockProcessor.lock(key, annotation.leaseTime());
+                    lockProcessor.lock(key, annotation.leaseTime());
                 } else {
-                    myLockProcessor.lock(key);
+                    lockProcessor.lock(key);
                 }
 
                 result = joinPoint.proceed();
             } finally {
-                myLockProcessor.unlock(key);
+                lockProcessor.unlock(key);
             }
         }
         return result;
     }
 
-    private String generateKey(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
+    private String generateKey(ProceedingJoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String[] parameterNames = signature.getParameterNames();
         Object[] args = joinPoint.getArgs();
         Method method = signature.getMethod();
-        MyLock annotation = method.getAnnotation(MyLock.class);
+        AthenaLock annotation = method.getAnnotation(AthenaLock.class);
 
         String prefix = annotation.prefix();
         String convertKey = parserKeyConvert(annotation, args);
         String spELKey = parserSpEL(parameterNames, args, annotation);
-        return keyJoin(annotation.keySeparator(), annotation.ifKeyNull(), prefix, convertKey, spELKey);
+        return keyJoin(annotation.keySeparator(), prefix, convertKey, spELKey);
     }
 
-    private String parserKeyConvert(MyLock annotation, Object[] args) {
+    private String parserKeyConvert(AthenaLock annotation, Object[] args) {
         Class<? extends KeyConvert>[] classes = annotation.keyConvert();
         if (ObjectUtils.isEmpty(classes)) {
             return "";
@@ -123,28 +119,25 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
         return keyConvert.getKey(args);
     }
 
-    private String parserSpEL(String[] parameterNames, Object[] args, MyLock annotation) throws NoSuchMethodException {
+    private String parserSpEL(String[] parameterNames, Object[] args, AthenaLock annotation) {
         String expressionString = annotation.spEl();
         if (StringUtils.isEmpty(expressionString)) return expressionString;
 
         ExpressionParser parser = new SpelExpressionParser();
         StandardEvaluationContext context = new StandardEvaluationContext();
 
-        context.setVariable("json", JSON.class.getMethod("toJSONString", Object.class));
-        context.setBeanResolver(new BeanFactoryResolver(applicationContext));
-
         for (int i = 0; i < parameterNames.length; i++) {
             context.setVariable(parameterNames[i], args[i]);
         }
 
-        for (MyLockSpELContextPostProcessor contextPostProcessor : contextPostProcessors) {
+        for (AthenaLockSpELContextPostProcessor contextPostProcessor : contextPostProcessors) {
             contextPostProcessor.postProcess(context);
         }
 
-        return parser.parseExpression(expressionString, new TemplateParserContext("${", "}")).getValue(context, String.class);
+        return parser.parseExpression(expressionString, new TemplateParserContext()).getValue(context, String.class);
     }
 
-    private String keyJoin(String delimiter, KeyNull keyNull, String... keys) {
+    private String keyJoin(String delimiter, String... keys) {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < keys.length; i++) {
@@ -154,22 +147,12 @@ public class MyLockAspect implements ApplicationContextAware, Ordered {
             }
         }
 
-
         if (stringBuilder.length() > 1) {
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
             return stringBuilder.toString();
         }
 
-        if (keyNull.equals(KeyNull.UUID)) {
-            return UUID.randomUUID().toString();
-        }
-
         throw new RuntimeException("lock key is null!");
-    }
-
-    @Override
-    public void setApplicationContext(@NotNull ApplicationContext applicationContext) throws BeansException {
-        MyLockAspect.applicationContext = applicationContext;
     }
 
     @Override

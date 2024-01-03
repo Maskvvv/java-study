@@ -1,7 +1,5 @@
 package com.zhy.spring.aop.lock;
 
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
@@ -12,8 +10,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zhouhongyin
  * @since 2023/12/21 10:59
  */
-@Service
-public class DefaultLockProcessor implements MyLockProcessor {
+//@Primary
+//@Service
+public class DefaultLockProcessor implements AthenaLockProcessor {
 
     private static final Map<String, ReentrantLock> lockMap = new HashMap<>();
 

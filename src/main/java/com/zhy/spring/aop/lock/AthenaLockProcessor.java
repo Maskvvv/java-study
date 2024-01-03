@@ -6,7 +6,7 @@ package com.zhy.spring.aop.lock;
  * @author zhouhongyin
  * @since 2023/12/21 10:52
  */
-public interface MyLockProcessor {
+public interface AthenaLockProcessor {
 
     void lock(String key);
 
