@@ -1,4 +1,4 @@
-package com.zhy.spring.aop;
+package com.zhy.spring.aop.web;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

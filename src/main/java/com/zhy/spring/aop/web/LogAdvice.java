@@ -1,4 +1,4 @@
-package com.zhy.spring.aop;
+package com.zhy.spring.aop.web;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ public class LogAdvice {
     /**
      *
      */
-    @Pointcut("@annotation(com.zhy.spring.aop.AopAnnotation)")
+    @Pointcut("@annotation(com.zhy.spring.aop.web.AopAnnotation)")
     public void matchAnnotation() {
     }
 

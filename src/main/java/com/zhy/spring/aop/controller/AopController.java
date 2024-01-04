@@ -2,8 +2,8 @@ package com.zhy.spring.aop.controller;
 
 import cn.hutool.core.io.IoUtil;
 import com.alibaba.fastjson.JSON;
-import com.zhy.spring.aop.AopAnnotation;
-import com.zhy.spring.aop.AopBody;
+import com.zhy.spring.aop.web.AopAnnotation;
+import com.zhy.spring.aop.web.AopBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

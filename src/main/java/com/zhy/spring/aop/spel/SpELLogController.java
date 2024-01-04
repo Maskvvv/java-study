@@ -1,7 +1,7 @@
 package com.zhy.spring.aop.spel;
 
 import com.alibaba.fastjson.JSON;
-import com.zhy.spring.aop.AopBody;
+import com.zhy.spring.aop.web.AopBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
