@@ -14,24 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zhy.spring.aop.study.basic;
+package com.zhy.spring.aop.study.overview.proxy;
+
+import com.zhy.spring.aop.study.common.DefaultEchoService;
+import com.zhy.spring.aop.study.common.EchoService;
 
 /**
- * 类加载示例
+ * 静态代理示例
+ *
  */
-public class ClassLoadingDemo {
+public class StaticProxyDemo {
 
     public static void main(String[] args) {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        System.out.println(classLoader);
-
-        ClassLoader parentClassLoader = classLoader;
-        while (true) {
-            parentClassLoader = parentClassLoader.getParent();
-            if (parentClassLoader == null) { // Bootstrap ClassLoader
-                break;
-            }
-            System.out.println(parentClassLoader);
-        }
+        EchoService echoService = new ProxyEchoService(new DefaultEchoService());
+        echoService.echo("Hello,World");
     }
 }
