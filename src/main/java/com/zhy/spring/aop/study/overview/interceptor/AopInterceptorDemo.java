@@ -35,6 +35,7 @@ public class AopInterceptorDemo {
         Object proxy = Proxy.newProxyInstance(classLoader, new Class[]{EchoService.class}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                Object result = null;
                 if (EchoService.class.isAssignableFrom(method.getDeclaringClass())) {
                     // 前置拦截器
                     BeforeInterceptor beforeInterceptor = new BeforeInterceptor() {
@@ -45,7 +46,6 @@ public class AopInterceptorDemo {
                     };
                     Long startTime = 0L;
                     Long endTime = 0L;
-                    Object result = null;
                     try {
                         // 前置拦截
                         startTime = (Long) beforeInterceptor.before(proxy, method, args);
@@ -75,12 +75,14 @@ public class AopInterceptorDemo {
                     }
 
                 }
-                return null;
+                return result;
             }
         });
 
         EchoService echoService = (EchoService) proxy;
-        echoService.echo("Hello,World");
+        String echo = echoService.echo("Hello,World");
+
+        System.out.println(echo);
     }
 }
 
