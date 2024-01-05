@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * 注解方式 Aspect
+ * 注解方式创建 Aspect
  */
 @Aspect        // 声明为 Aspect 切面
 @Configuration // Configuration class
