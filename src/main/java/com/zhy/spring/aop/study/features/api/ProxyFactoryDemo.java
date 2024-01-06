@@ -14,27 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zhy.spring.aop.study.features;
+package com.zhy.spring.aop.study.features.api;
 
+
+import com.zhy.spring.aop.study.common.DefaultEchoService;
 import com.zhy.spring.aop.study.common.EchoService;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.zhy.spring.aop.study.features.interceptor.EchoServiceMethodInterceptor;
+import org.springframework.aop.framework.ProxyFactory;
 
 /**
- * <p> XML配置驱动 - 创建AOP代理 </p>
+ * 标准代理工厂API - ProxyFactory
  */
-@Aspect        // 声明为 Aspect 切面
-@Configuration // Configuration class
-public class ProxyFactoryBeanDemo {
+public class ProxyFactoryDemo {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/META-INF/study/aop/spring-aop-context.xml");
-
-        EchoService echoService = context.getBean("echoServiceProxyFactoryBean", EchoService.class);
-
+        DefaultEchoService defaultEchoService = new DefaultEchoService();
+        // 注入目标对象（被代理）
+        ProxyFactory proxyFactory = new ProxyFactory(defaultEchoService);
+        proxyFactory.setTargetClass(DefaultEchoService.class);
+        // 添加 Advice 实现 MethodInterceptor < Interceptor < Advice
+        proxyFactory.addAdvice(new EchoServiceMethodInterceptor());
+        // 获取代理对象
+        EchoService echoService = (EchoService) proxyFactory.getProxy();
         System.out.println(echoService.echo("Hello,World"));
-
-        context.close();
     }
 }

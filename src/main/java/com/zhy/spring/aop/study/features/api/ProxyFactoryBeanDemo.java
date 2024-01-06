@@ -14,27 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zhy.spring.aop.study.features;
+package com.zhy.spring.aop.study.features.api;
 
+import com.zhy.spring.aop.study.common.EchoService;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- *  <p> @AspectJ 注解驱动 </p>
+ * <p> XML配置驱动 - 创建AOP代理 </p>
  */
 @Aspect        // 声明为 Aspect 切面
 @Configuration // Configuration class
-@EnableAspectJAutoProxy // 激活 Aspect 注解自动代理
-public class AspectJAnnotationDemo {
+public class ProxyFactoryBeanDemo {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(AspectJAnnotationDemo.class);
-        context.refresh();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/META-INF/study/aop/spring-aop-context.xml");
 
-        AspectJAnnotationDemo aspectJAnnotationDemo = context.getBean(AspectJAnnotationDemo.class);
+        EchoService echoService = context.getBean("echoServiceProxyFactoryBean", EchoService.class);
+
+        System.out.println(echoService.echo("Hello,World"));
 
         context.close();
     }

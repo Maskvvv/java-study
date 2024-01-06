@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zhy.spring.aop.study.features;
+package com.zhy.spring.aop.study.features.autoconfig;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Configuration;
