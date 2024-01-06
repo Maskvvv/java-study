@@ -16,26 +16,26 @@
  */
 package com.zhy.spring.aop.study.features;
 
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+import com.zhy.spring.aop.study.common.DefaultEchoService;
+import com.zhy.spring.aop.study.common.EchoService;
+import com.zhy.spring.aop.study.features.interceptor.EchoServiceMethodInterceptor;
+import org.springframework.aop.framework.ProxyFactory;
 
 /**
- *  <p> @AspectJ 注解驱动 </p>
+ * 标准代理工厂API - ProxyFactory
  */
-@Aspect        // 声明为 Aspect 切面
-@Configuration // Configuration class
-@EnableAspectJAutoProxy // 激活 Aspect 注解自动代理
-public class AspectJAnnotationDemo {
+public class ProxyFactoryDemo {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(AspectJAnnotationDemo.class);
-        context.refresh();
-
-        AspectJAnnotationDemo aspectJAnnotationDemo = context.getBean(AspectJAnnotationDemo.class);
-
-        context.close();
+        DefaultEchoService defaultEchoService = new DefaultEchoService();
+        // 注入目标对象（被代理）
+        ProxyFactory proxyFactory = new ProxyFactory(defaultEchoService);
+        proxyFactory.setTargetClass(DefaultEchoService.class);
+        // 添加 Advice 实现 MethodInterceptor < Interceptor < Advice
+        proxyFactory.addAdvice(new EchoServiceMethodInterceptor());
+        // 获取代理对象
+        EchoService echoService = (EchoService) proxyFactory.getProxy();
+        System.out.println(echoService.echo("Hello,World"));
     }
 }

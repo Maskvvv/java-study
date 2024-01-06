@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Aspectj API 创建 Aspect
+ * 编程方式创建 @AspectJ代理
  */
 public class AspectJAnnotationUsingAPIDemo {
 
