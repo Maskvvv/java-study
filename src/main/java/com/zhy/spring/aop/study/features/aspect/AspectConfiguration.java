@@ -26,8 +26,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 
-import java.util.Random;
-
 /**
  * Aspect 配置类
  *
@@ -49,11 +47,11 @@ public class AspectConfiguration {
 
     @Before("anyPublicMethod()")          // Join Point 拦截动作
     public void beforeAnyPublicMethod() throws Throwable {
-        Random random = new Random();
-
-        if (random.nextBoolean()) {
-            throw new RuntimeException("For Purpose.");
-        }
+        //Random random = new Random();
+        //
+        //if (random.nextBoolean()) {
+        //    throw new RuntimeException("For Purpose.");
+        //}
         System.out.println("@Before any public method.");
     }
 

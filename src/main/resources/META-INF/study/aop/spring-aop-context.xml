@@ -33,7 +33,7 @@
     </bean>
 
     <bean id="echoServiceMethodInterceptor"
-          class="com.zhy.spring.aop.study.features.interceptor.EchoServiceMethodInterceptor"/>
+          class="com.zhy.spring.aop.study.features.advice.EchoServiceMethodInterceptor"/>
 
     <bean id="targetSource" class="org.springframework.aop.target.HotSwappableTargetSource">
         <constructor-arg ref="echoService"/>

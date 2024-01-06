@@ -19,7 +19,7 @@ package com.zhy.spring.aop.study.features.pointcut.api;
 
 import com.zhy.spring.aop.study.common.DefaultEchoService;
 import com.zhy.spring.aop.study.common.EchoService;
-import com.zhy.spring.aop.study.features.interceptor.EchoServiceMethodInterceptor;
+import com.zhy.spring.aop.study.features.advice.EchoServiceMethodInterceptor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.ComposablePointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;

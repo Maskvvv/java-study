@@ -14,21 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zhy.spring.aop.study.features.interceptor;
+package com.zhy.spring.aop.study.features.pointcut;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-
-import java.lang.reflect.Method;
+import com.zhy.spring.aop.study.common.EchoService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ * 基于 XML 配置 Pointcut 示例
  */
-public class EchoServiceMethodInterceptor implements MethodInterceptor {
+public class AspectJXmlBasedPointcutDemo {
 
-    @Override
-    public Object invoke(MethodInvocation invocation) throws Throwable {
-        Method method = invocation.getMethod();
-        System.out.println("拦截 EchoService 的方法：" + method);
-        return invocation.proceed();
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext context =
+                new ClassPathXmlApplicationContext("classpath:/META-INF/study/aop/spring-aop-context.xml");
+
+        context.refresh();
+
+        EchoService echoService = context.getBean("echoService", EchoService.class);
+
+        System.out.println(echoService.echo("Hello,World"));
+
+        context.close();
     }
 }
