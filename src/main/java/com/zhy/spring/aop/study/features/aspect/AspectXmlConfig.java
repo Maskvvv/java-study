@@ -18,18 +18,16 @@ package com.zhy.spring.aop.study.features.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
-import java.util.Random;
-
 /**
  * Aspect XML 配置类
  */
 public class AspectXmlConfig {
 
     public Object aroundAnyPublicMethod(ProceedingJoinPoint pjp) throws Throwable {
-        Random random = new Random();
-        if (random.nextBoolean()) {
-            throw new RuntimeException("For Purpose from XML configuration.");
-        }
+        //Random random = new Random();
+        //if (random.nextBoolean()) {
+        //    throw new RuntimeException("For Purpose from XML configuration.");
+        //}
         System.out.println("@Around any public method : " + pjp.getSignature());
         return pjp.proceed();
     }
