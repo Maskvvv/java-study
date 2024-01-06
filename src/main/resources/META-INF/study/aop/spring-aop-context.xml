@@ -10,7 +10,7 @@
 
     <aop:aspectj-autoproxy/>
 
-    <bean id="aspectXmlConfig" class="org.geekbang.thinking.in.spring.aop.features.aspect.AspectXmlConfig"/>
+    <bean id="aspectXmlConfig" class="com.zhy.spring.aop.study.features.aspect.AspectXmlConfig"/>
 
     <aop:config>
         <!--        <aop:pointcut id="allPointcut" expression="execution(* * *(..))"/>-->
@@ -27,13 +27,13 @@
     </aop:config>
 
 
-    <bean id="echoService" class="org.geekbang.thinking.in.spring.aop.overview.DefaultEchoService">
+    <bean id="echoService" class="com.zhy.spring.aop.study.common.DefaultEchoService">
         <!-- CGLIB 字节码提升的方式，类同于 @Configuration -->
         <!--  <aop:scoped-proxy/> -->
     </bean>
 
     <bean id="echoServiceMethodInterceptor"
-          class="org.geekbang.thinking.in.spring.aop.features.interceptor.EchoServiceMethodInterceptor"/>
+          class="com.zhy.spring.aop.study.interceptor.EchoServiceMethodInterceptor"/>
 
     <bean id="targetSource" class="org.springframework.aop.target.HotSwappableTargetSource">
         <constructor-arg ref="echoService"/>
