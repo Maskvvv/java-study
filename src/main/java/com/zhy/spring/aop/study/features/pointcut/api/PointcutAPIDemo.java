@@ -20,12 +20,25 @@ package com.zhy.spring.aop.study.features.pointcut.api;
 import com.zhy.spring.aop.study.common.DefaultEchoService;
 import com.zhy.spring.aop.study.common.EchoService;
 import com.zhy.spring.aop.study.features.advice.EchoServiceMethodInterceptor;
+import org.aopalliance.aop.Advice;
+import org.springframework.aop.Advisor;
+import org.springframework.aop.Pointcut;
+import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.ComposablePointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 
 /**
  * API实现Pointcut
+ *
+ * <pre>
+ *     Advisor 是 Advice 和 Pointcut 则组合
+ * </pre>
+ *
+ * @see Advisor
+ * @see Advice
+ * @see Pointcut
+ * @see PointcutAdvisor
  */
 public class PointcutAPIDemo {
 
