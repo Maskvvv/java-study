@@ -26,7 +26,10 @@ import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.ComposablePointcut;
+import org.springframework.aop.support.ControlFlowPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.aop.support.JdkRegexpMethodPointcut;
+import org.springframework.aop.support.StaticMethodMatcherPointcut;
 
 /**
  * API实现Pointcut
@@ -39,6 +42,9 @@ import org.springframework.aop.support.DefaultPointcutAdvisor;
  * @see Advice
  * @see Pointcut
  * @see PointcutAdvisor
+ * @see StaticMethodMatcherPointcut 静态 pointCut 值判断 method
+ * @see JdkRegexpMethodPointcut 正则表达式 poinCut
+ * @see ControlFlowPointcut 控制流 pointCut
  */
 public class PointcutAPIDemo {
 
@@ -46,10 +52,13 @@ public class PointcutAPIDemo {
 
         EchoServicePointcut echoServicePointcut = new EchoServicePointcut("echo", EchoService.class);
 
-        ComposablePointcut pointcut = new ComposablePointcut(EchoServiceEchoMethodPointcut.INSTANCE);
+        // 组合（与或非）多个 pointCut
+        ComposablePointcut pointcut = new ComposablePointcut();
         // 组合实现
-        pointcut.intersection(echoServicePointcut.getClassFilter());
-        pointcut.intersection(echoServicePointcut.getMethodMatcher());
+        //pointcut.intersection(echoServicePointcut.getClassFilter());
+        //pointcut.intersection(echoServicePointcut.getMethodMatcher());
+        pointcut.intersection((Pointcut) echoServicePointcut);
+        pointcut.intersection(EchoServiceEchoMethodPointcut.INSTANCE);
 
         // 将 Pointcut 适配成 Advisor
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, new EchoServiceMethodInterceptor());
