@@ -24,6 +24,7 @@ import org.aopalliance.aop.Advice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.ComposablePointcut;
 import org.springframework.aop.support.ControlFlowPointcut;
@@ -45,6 +46,7 @@ import org.springframework.aop.support.StaticMethodMatcherPointcut;
  * @see StaticMethodMatcherPointcut 静态 pointCut 值判断 method
  * @see JdkRegexpMethodPointcut 正则表达式 poinCut
  * @see ControlFlowPointcut 控制流 pointCut
+ * @see AspectJExpressionPointcut 支持 AspectJExpress pointut
  */
 public class PointcutAPIDemo {
 
