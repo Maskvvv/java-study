@@ -17,10 +17,13 @@
 package com.zhy.spring.aop.study.features.advisor;
 
 import com.zhy.spring.aop.study.common.EchoService;
+import org.aopalliance.aop.Advice;
+import org.aopalliance.intercept.Interceptor;
 import org.springframework.aop.IntroductionAdvisor;
 import org.springframework.aop.IntroductionInfo;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.framework.adapter.AdvisorAdapter;
 import org.springframework.aop.support.DefaultIntroductionAdvisor;
 
 import java.lang.reflect.Method;
@@ -30,6 +33,10 @@ import java.util.Map;
  * {@link IntroductionAdvisor} 示例
  * <p>
  * 用来限定了生成的代理对象所实现的接口
+ *
+ * <pre>
+ *     {@link AdvisorAdapter} 用来将 {@link Advice} 转换为合适的 {@link Interceptor}
+ * </pre>
  */
 public class IntroductionAdvisorDemo extends Object implements EchoService, Comparable<IntroductionAdvisorDemo> {
 
