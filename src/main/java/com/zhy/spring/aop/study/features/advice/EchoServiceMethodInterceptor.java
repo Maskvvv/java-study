@@ -24,6 +24,8 @@ import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.BeforeAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.ThrowsAdvice;
+import org.springframework.aop.aspectj.AspectJAfterAdvice;
+import org.springframework.aop.aspectj.AspectJAfterReturningAdvice;
 import org.springframework.aop.aspectj.AspectJMethodBeforeAdvice;
 import org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor;
 import org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor;
@@ -48,6 +50,8 @@ import java.lang.reflect.Method;
  *     2. {@link AfterReturningAdvice}
  *     3. {@link AfterReturningAdviceInterceptor}
  *     4. {@link ThrowsAdvice}
+ *     4. {@link AspectJAfterAdvice} Aspect 实现
+ *     4. {@link AspectJAfterReturningAdvice} Aspect 实现
  * </pre>
  *
  * @see Interceptor
