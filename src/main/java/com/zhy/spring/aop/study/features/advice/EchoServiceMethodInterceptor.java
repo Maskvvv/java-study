@@ -16,12 +16,32 @@
  */
 package com.zhy.spring.aop.study.features.advice;
 
+import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.aop.AfterAdvice;
+import org.springframework.aop.BeforeAdvice;
+import org.springframework.aop.MethodBeforeAdvice;
+import org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor;
 
 import java.lang.reflect.Method;
 
 /**
+ * <p> Advice 执行动作 </p>
+ *
+ *
+ * <pre>
+ *     before :
+ *     1. {@link BeforeAdvice}
+ *     2. {@link MethodBeforeAdvice}
+ *     3. {@link MethodInterceptor}
+ *     4. {@link MethodBeforeAdviceInterceptor} 该类是前两的组合
+ * </pre>
+ *
+ * @see Interceptor
+ * @see AfterAdvice
+ * @see BeforeAdvice
+ *
  */
 public class EchoServiceMethodInterceptor implements MethodInterceptor {
 
