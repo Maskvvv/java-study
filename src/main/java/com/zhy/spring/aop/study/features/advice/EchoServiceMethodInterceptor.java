@@ -22,6 +22,7 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.AfterAdvice;
 import org.springframework.aop.BeforeAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
+import org.springframework.aop.aspectj.AspectJMethodBeforeAdvice;
 import org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor;
 
 import java.lang.reflect.Method;
@@ -36,6 +37,7 @@ import java.lang.reflect.Method;
  *     2. {@link MethodBeforeAdvice}
  *     3. {@link MethodInterceptor}
  *     4. {@link MethodBeforeAdviceInterceptor} 该类是前两的组合
+ *     4. {@link AspectJMethodBeforeAdvice} Aspect 实现
  * </pre>
  *
  * @see Interceptor
