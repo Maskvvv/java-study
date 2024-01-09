@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zhy.spring.aop.study.features.api;
+package com.zhy.spring.aop.study.features.proxy.manual;
 
 import com.zhy.spring.aop.study.common.DefaultEchoService;
 import com.zhy.spring.aop.study.common.EchoService;
