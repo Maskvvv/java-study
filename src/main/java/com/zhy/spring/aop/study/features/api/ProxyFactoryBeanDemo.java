@@ -18,11 +18,15 @@ package com.zhy.spring.aop.study.features.api;
 
 import com.zhy.spring.aop.study.common.EchoService;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * <p> XML配置驱动 - 创建AOP代理 </p>
+ * ProxyFactoryBean 用来和 Spring IOC 做整合
+ *
+ * @see ProxyFactoryBean
  */
 @Aspect        // 声明为 Aspect 切面
 @Configuration // Configuration class
