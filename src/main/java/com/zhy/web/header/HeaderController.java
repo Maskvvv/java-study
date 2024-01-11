@@ -29,7 +29,7 @@ public class HeaderController {
     public void contentDispositionPdf(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream outputStream = response.getOutputStream();
 
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;奥利普奇智.zip");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;\\/:*?\"<>|.xlsx");
         //response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=a.pdf");
         //response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline;filename="+ new String("富 雨的 简历1653869894.pdf".getBytes(), "ISO8859-1"));
 
@@ -37,7 +37,7 @@ public class HeaderController {
         //response.setHeader(HttpHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE);
         //response.setHeader(HttpHeaders.CONTENT_TYPE, "application/pdf");
 
-        FileInputStream fileInputStream = new FileInputStream("E:\\需求文档\\file\\奥利普奇智.zip");
+        FileInputStream fileInputStream = new FileInputStream("D:\\UserFiles\\桌面\\1111.xlsx");
         IoUtil.copy(fileInputStream, outputStream);
 
         System.out.println("copy final");
@@ -79,5 +79,14 @@ public class HeaderController {
         IoUtil.close(byteArrayInputStream);
     }
 
+    public static void main(String[] args) {
+        String s = "\\/:*?\"<>|123";
+        System.out.println(s);
+
+        System.out.println("\\\\/:*?\"<>|]");
+
+        String s1 = s.replaceAll("[\\\\/:*?\"<>|]", "");
+        System.out.println(s1);
+    }
 
 }

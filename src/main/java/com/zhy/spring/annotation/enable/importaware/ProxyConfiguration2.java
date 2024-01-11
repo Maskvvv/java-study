@@ -16,7 +16,7 @@ public class ProxyConfiguration2 implements ImportAware {
     @Bean
     public User user2() {
         User proxyMode = new User();
-        proxyMode.setName(info.getString("name") + 2);
+        //proxyMode.setName(info.getString("name") + 2);
         return proxyMode;
     }
 
