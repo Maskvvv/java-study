@@ -18,6 +18,7 @@ import org.springframework.expression.spel.support.SimpleEvaluationContext;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 /**
  * @author zhouhongyin
@@ -174,6 +175,9 @@ public class SpELTest {
         System.out.println(s1);
     }
 
+    /**
+     * enum
+     */
     @Test
     public void enumTest() {
         ExpressionParser parser = new SpelExpressionParser();
@@ -189,6 +193,26 @@ public class SpELTest {
         Object s = parser.parseExpression("#{ #TestLockKey.key(#name, #id, 'bbb') + 'aaaa' }", new TemplateParserContext()).getValue(context, Object.class);
 
         System.out.println(s);
+    }
+
+    /**
+     * map
+     */
+    @Test
+    public void mapTest() {
+        Inventor model = new Inventor("Nikola Tesla", "Serbian");
+
+        ExpressionParser parser = new SpelExpressionParser();
+
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("model", model);
+
+
+        String expressionString = "#{ {name:#model.name, people:#model.name} }";
+        Map<?, ?> map = parser.parseExpression(expressionString, new TemplateParserContext()).getValue(context, Map.class);
+
+        System.out.println(map.get("name"));
+        System.out.println(map);
     }
 
 }
