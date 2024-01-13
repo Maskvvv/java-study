@@ -16,7 +16,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableMyRegistry(basePackages = "com.zhy.spring.scan.model")
 @EnableAsync
 @ServletComponentScan
-@SpringBootApplication(scanBasePackages = {"org.jodconverter.boot.autoconfigure", "org.jodconverter", "com.zhy"})
+@SpringBootApplication(scanBasePackages = {"org.jodconverter.boot.autoconfigure", "org.jodconverter", "com.zhy"},
+excludeName = "com.zhy.spring.aop.study")
 public class JavaStudyApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaStudyApplication.class, args);

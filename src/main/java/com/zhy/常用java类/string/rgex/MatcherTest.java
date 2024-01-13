@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,6 +65,31 @@ public class MatcherTest {
         while (matcher.find()) {
             System.out.println(matcher.group(1));
         }
+    }
+
+    @Test
+    public void groupPlaceholder() {
+        String content = "没有通过{0}报名！参赛赛道：{1}，参赛团队：{2}";
+        List<String> args = Arrays.asList("111", "222", "333");
+
+
+        Matcher matcher = Pattern.compile("\\{(\\d+?)\\}").matcher(content);
+        while (matcher.find()) {
+            int index = Integer.parseInt(matcher.group(1));
+            System.out.println(index);
+
+
+
+
+
+            //if (index < 0 || index >= args.size()) {
+            //    matcher.replaceFirst("null");
+            //} else {
+            //    matcher.replaceFirst(args.get(index));
+            //}
+
+        }
+        System.out.println(matcher.toString());
     }
 
     @Test
