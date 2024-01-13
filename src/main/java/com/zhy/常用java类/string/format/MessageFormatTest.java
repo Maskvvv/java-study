@@ -1,4 +1,4 @@
-package com.zhy.常用java类.string;
+package com.zhy.常用java类.string.format;
 
 import org.junit.Test;
 
