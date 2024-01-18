@@ -2,6 +2,8 @@ package com.zhy.常用java类.string.format;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 /**
  * <p> String format test </p>
  *
@@ -54,7 +56,13 @@ public class StringFormat {
 
     @Test
     public void test1() {
-        String format = String.format("%06d", 12345);//25为int型
+        Random random = new Random();
+
+        int next = random.nextInt(99999);
+
+        System.out.println(next);
+
+        String format = String.format("%05d", next);//25为int型
 
         System.out.println(format);
 
