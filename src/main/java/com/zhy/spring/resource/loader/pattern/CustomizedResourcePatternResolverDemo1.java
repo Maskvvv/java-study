@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  */
 public class CustomizedResourcePatternResolverDemo1 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         // 读取当前 package 对应的所有的 .java 文件
         String currentPackagePath = "D:/资料/blog/springboot/**/**.**";
         PathMatchingResourcePatternResolver resourcePatternResolver =
@@ -32,6 +32,15 @@ public class CustomizedResourcePatternResolverDemo1 {
 
         Stream.of(resources).forEach(resource -> {
 
+            try {
+                System.out.println(resource.getURI().getPath());
+                System.out.println(resource.getURL().getPath());
+                System.out.println(resource.getURL().getFile());
+                System.out.println(resource.getFile().getPath());
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println(resource.getFilename());
         });
     }
