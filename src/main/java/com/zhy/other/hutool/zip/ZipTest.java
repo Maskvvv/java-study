@@ -1,6 +1,10 @@
 package com.zhy.other.hutool.zip;
 
 
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.ZipUtil;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -20,6 +24,14 @@ public class ZipTest {
 
         //ZipUtil.zip(target, new FileOutputStream("F:\\压缩文件\\my.zip2"));
 
+
+
+    }
+
+    @Test
+    public void unzip() {
+        ZipUtil.unzip("C:\\Users\\Qstest\\AppData\\Local\\Temp\\jetty-docbase.8088.9322025331285751285\\upload\\importResume900ebae4caf64a18a18895b620a35628\\附件简历.zip",
+                "C:\\Users\\Qstest\\AppData\\Local\\Temp\\jetty-docbase.8088.9322025331285751285\\upload\\importResume900ebae4caf64a18a18895b620a35628\\out", CharsetUtil.CHARSET_GBK);
 
 
     }
