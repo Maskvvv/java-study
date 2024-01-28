@@ -57,31 +57,32 @@ public class CompletableFutureTest {
     }
 
     @Test
-    public void allOf() {
-        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+    public void allOf() throws ExecutionException, InterruptedException {
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             System.out.println("future1完成！");
-            return "future1完成！";
+            return 1;
         });
 
-        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> {
             System.out.println("future2完成！");
-            return "future2完成！";
+            return 2;
         });
 
-        CompletableFuture<Void> combindFuture = CompletableFuture.allOf(future1, future2);
+        CompletableFuture<Void> completableFuture = CompletableFuture.allOf(future1, future2).thenAccept(res -> {
+            // null
+            System.out.println(res);
 
-        try {
-            combindFuture.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        });
+
+
+        System.out.println("get before");
+        completableFuture.get();
+
     }
 
     /**
