@@ -1,9 +1,14 @@
 package com.zhy.java基础.juc.completablefuture;
 
+import io.netty.util.concurrent.DefaultThreadFactory;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
@@ -16,8 +21,32 @@ import java.util.function.Function;
  */
 public class CompletableFutureTest {
 
-    // TODO-zhouhy 2023/2/16 CompletableFuture 的使用
-    public static void main(String[] args) {
+    private ExecutorService executorService = Executors.newFixedThreadPool(10, new DefaultThreadFactory("completableFuture"));
+
+    @Test
+    public void runAsync() throws Exception {
+        List<CompletableFuture<Void>> completableFutures = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            completableFutures.add(
+                    CompletableFuture.runAsync(() -> {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.println(Thread.currentThread().getName() + " is run!");
+                    }, executorService)
+            );
+        }
+        CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0]));
+        voidCompletableFuture.get(); // 阻塞
+
+        System.out.println("all of run");
+    }
+
+    @Test
+    public void anyOf() {
         CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(() -> "1");
         CompletableFuture<String> completableFuture2 = CompletableFuture.supplyAsync(() -> "2");
         CompletableFuture<String> completableFuture3 = CompletableFuture.supplyAsync(() -> "3");
@@ -28,7 +57,7 @@ public class CompletableFutureTest {
     }
 
     @Test
-    public void test1() {
+    public void allOf() {
         CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(2);
