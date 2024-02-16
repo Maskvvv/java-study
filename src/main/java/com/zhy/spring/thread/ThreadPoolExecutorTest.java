@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2022/12/11 20:15
  */
 @Slf4j
-public class ThreadPoolExecutor {
+public class ThreadPoolExecutorTest {
 
     @Test
     public void scheduledExecutorService() throws IOException {
