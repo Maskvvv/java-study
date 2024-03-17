@@ -21,6 +21,7 @@ public class ReaderTest {
 
         System.out.println(bufferedReader.readLine());
 
+        //InputStream is = Files.newInputStream(Paths.get(generatorLogoPath));
     }
 
 }

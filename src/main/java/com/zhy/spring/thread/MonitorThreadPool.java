@@ -3,7 +3,6 @@ package com.zhy.spring.thread;
 
 import io.netty.util.concurrent.DefaultThreadFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
@@ -22,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class MonitorThreadPool {
 
-    @Bean
+    //@Bean
     public ScheduledExecutorService printThreadPoolStatus(Map<String, ThreadPoolExecutor> threadPools) {
 
 

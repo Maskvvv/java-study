@@ -29,6 +29,7 @@ class MyWorker implements Runnable {
 
     @Override
     public void run() {
+
         try {
             semaphore.acquire();
             System.out.println("Executed!");
