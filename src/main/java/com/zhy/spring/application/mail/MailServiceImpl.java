@@ -44,7 +44,7 @@ public class MailServiceImpl implements MailService {
     public void sendAttachFileMail(String to, String subject, String content, File file) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
             //邮件发送人
             messageHelper.setFrom(from);
             //邮件接收人
@@ -68,7 +68,7 @@ public class MailServiceImpl implements MailService {
     public void sendHtmlMail(String to, String subject, String content) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
             //邮件发送人
             messageHelper.setFrom(from);
             //邮件接收人
@@ -84,4 +84,5 @@ public class MailServiceImpl implements MailService {
             e.printStackTrace();
         }
     }
+
 }
