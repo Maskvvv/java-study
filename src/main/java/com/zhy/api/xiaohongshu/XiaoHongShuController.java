@@ -28,7 +28,7 @@ import java.util.Objects;
 @RequestMapping("xiaohongshu")
 public class XiaoHongShuController {
 
-    public static final String token = "90f15e35e28f4d2c51495363558ae4c3";
+    public static final String token = "";
 
     @PostMapping("/testSign")
     public Object testSign(@RequestBody byte[] body, HttpServletRequest request) {
