@@ -2,6 +2,8 @@ package com.zhy.model.git.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  *
  * @author zhouhongyin
@@ -38,4 +40,8 @@ public class People {
 
     private String revert;
 
+
+    public String test(List<String> list, String name) {
+        return list.get(0);
+    }
 }
