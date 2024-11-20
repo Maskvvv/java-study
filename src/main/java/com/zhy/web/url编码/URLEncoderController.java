@@ -33,13 +33,8 @@ public class URLEncoderController {
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
 
-
         IoUtil.copy(inputStream, outputStream);
 
-
-
-
     }
-
 
 }
