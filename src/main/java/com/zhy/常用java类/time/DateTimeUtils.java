@@ -82,5 +82,6 @@ public class DateTimeUtils {
 
         System.out.println(FastDateFormat.getInstance("dd MMM yyyy").format(new Date()));
         System.out.println(FastDateFormat.getInstance("dd MMM yyyy", Locale.ENGLISH).format(new Date()));
+        System.out.println(FastDateFormat.getInstance("EEE dd MMM yyyy·HH:mm", Locale.ENGLISH).format(new Date()));
     }
 }
