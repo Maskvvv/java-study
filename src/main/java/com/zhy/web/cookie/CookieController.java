@@ -27,6 +27,7 @@ public class CookieController {
         log.info(JSON.toJSONString(cookies));
 
         Cookie cookie = new Cookie("cookieId", IdUtil.simpleUUID());
+        cookie.setMaxAge(10);
         response.addCookie(cookie);
 
         return "set_cookie";
