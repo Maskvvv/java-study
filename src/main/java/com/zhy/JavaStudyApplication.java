@@ -21,6 +21,6 @@ excludeName = "com.zhy.spring.aop.study")
 public class JavaStudyApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaStudyApplication.class, args);
-        System.out.println("启动成功");
+//        System.out.println("启动成功");
     }
 }
