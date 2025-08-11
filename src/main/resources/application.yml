@@ -34,7 +34,8 @@ spring:
   zipkin:
     enabled: false
     base-url: http://127.0.0.1:9411/  #指定zipkin的地址
-
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
 
 jodconverter:
   local:
