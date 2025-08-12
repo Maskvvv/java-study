@@ -1,9 +1,12 @@
 package com.zhy.mybatis.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.zhy.mybatis.enums.TypeString;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import com.zhy.mybatis.enums.DeleteStatus;
+import com.zhy.mybatis.enums.UserStatus;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -47,27 +50,31 @@ public class User implements Serializable {
     private Integer age;
 
     /**
-     * 状态：0-禁用，1-启用
+     * 状态：DISABLED-禁用，ENABLED-启用
      */
-    @TableField("status")
-    private Integer status;
+    @TableField(value = "status")
+    private UserStatus status;
 
     /**
-     * 逻辑删除：0-未删除，1-已删除
+     * 删除状态：0-未删除，1-已删除
      */
-    @TableLogic
-    @TableField("deleted")
-    private Integer deleted;
+    @TableField(value = "deleted")
+    private DeleteStatus deleted;
 
     /**
      * 创建时间
      */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @TableField(value = "create_time")
     private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "update_time")
     private LocalDateTime updateTime;
+
+
+    private TypeString typeString;
+
+
 }

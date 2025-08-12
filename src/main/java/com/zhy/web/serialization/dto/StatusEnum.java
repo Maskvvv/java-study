@@ -1,6 +1,8 @@
 package com.zhy.web.serialization.dto;
 
-public enum StatusEnum implements SupEnum {
+import com.zhy.mybatis.enums.BaseEnum;
+
+public enum StatusEnum implements BaseEnum<Integer> {
     ACTIVE(1, "活跃"),
     INACTIVE(0, "不活跃"),
     DELETED(-1, "已删除");

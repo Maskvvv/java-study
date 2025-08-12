@@ -7,14 +7,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
 
+import com.zhy.mybatis.enums.BaseEnum;
 import com.zhy.web.serialization.dto.StatusEnum;
-import com.zhy.web.serialization.dto.SupEnum;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-public class CodeEnumDeserializer extends JsonDeserializer<SupEnum> implements ContextualDeserializer {
+public class CodeEnumDeserializer<T> extends JsonDeserializer<BaseEnum<T>> implements ContextualDeserializer {
 
     private Class<?> enumClass;
 
@@ -36,21 +35,21 @@ public class CodeEnumDeserializer extends JsonDeserializer<SupEnum> implements C
             // 备用方案：从上下文获取类型
             targetClass = ctxt.getContextualType().getRawClass();
         }
-        
-        if (targetClass != null && SupEnum.class.isAssignableFrom(targetClass)) {
+
+        if (targetClass != null && BaseEnum.class.isAssignableFrom(targetClass)) {
             return new CodeEnumDeserializer(targetClass);
         }
-        
+
         return this;
     }
 
     @Override
-    public SupEnum deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        Integer code = p.getIntValue();
+    public BaseEnum<T> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        Object code = p.readValueAs(Object.class);
         if (code == null) {
             return null;
         }
-        
+
         // 使用通过createContextual方法获取的枚举类型
         Class<?> targetEnumClass = this.enumClass;
         if (targetEnumClass == null) {
@@ -64,9 +63,9 @@ public class CodeEnumDeserializer extends JsonDeserializer<SupEnum> implements C
         try {
             // 通过反射调用枚举类的 values 静态方法
 //            Method method = targetEnumClass.getMethod("values");
-            SupEnum[] supEnums = (SupEnum[]) targetEnumClass.getEnumConstants();
+            BaseEnum<T>[] supEnums = (BaseEnum<T>[]) targetEnumClass.getEnumConstants();
             if (supEnums != null) {
-                for (SupEnum supEnum : supEnums) {
+                for (BaseEnum<T> supEnum : supEnums) {
                     if (supEnum != null && supEnum.getCode() != null && supEnum.getCode().equals(code)) {
                         return supEnum;
                     }
@@ -83,7 +82,7 @@ public class CodeEnumDeserializer extends JsonDeserializer<SupEnum> implements C
 //        Method method = StatusEnum.class.getMethod("values");
 //        SupEnum[] supEnums = (SupEnum[]) method.invoke(null);
         StatusEnum[] supEnums = StatusEnum.class.getEnumConstants();
-        for (SupEnum supEnum : supEnums) {
+        for (BaseEnum supEnum : supEnums) {
             if (supEnum != null && supEnum.getCode() != null && supEnum.getCode().equals(1)) {
                 System.out.println(supEnum);
             }

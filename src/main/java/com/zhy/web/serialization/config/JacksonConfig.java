@@ -3,7 +3,7 @@ package com.zhy.web.serialization.config;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.zhy.web.serialization.dto.SupEnum;
+import com.zhy.mybatis.enums.BaseEnum;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +48,7 @@ public class JacksonConfig {
             builder.deserializers(new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT)));
 
             // 注册自定义的序列化器和反序列化器
-            builder.mixIn(SupEnum.class, EnumMixIn.class);
+            builder.mixIn(BaseEnum.class, EnumMixIn.class);
         };
     }
 }

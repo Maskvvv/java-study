@@ -1,7 +1,11 @@
 package com.zhy.mybatis.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhy.mybatis.entity.User;
+import com.zhy.mybatis.enums.UserStatus;
 import com.zhy.mybatis.mapper.UserMapper;
 import com.zhy.mybatis.service.UserService;
 import org.springframework.stereotype.Service;
@@ -52,6 +56,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .filter(userId -> userId > 0)
                 .map(this::removeById)
                 .orElse(false);
+    }
+
+    @Override
+    public IPage<User> findByStatus(UserStatus status, long current, long size) {
+        Page<User> page = new Page<>(current, size);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status", status.getCode());
+        return baseMapper.selectPage(page, queryWrapper);
+    }
+
+    @Override
+    public List<User> findByStatus(UserStatus status) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status", status.getCode());
+        return baseMapper.selectList(queryWrapper);
     }
 
     /**

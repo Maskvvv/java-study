@@ -1,9 +1,11 @@
 package com.zhy.mybatis.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.zhy.mybatis.handler.BaseEnumTypeHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +24,14 @@ import java.time.LocalDateTime;
 @MapperScan("com.zhy.mybatis.mapper")
 public class MybatisConfig {
 
+    @Bean
+    public ConfigurationCustomizer configurationCustomizer() {
+        return configuration -> {
+            // 注册通用枚举处理器
+            configuration.getTypeHandlerRegistry().setDefaultEnumTypeHandler(BaseEnumTypeHandler.class);
+        };
+    }
+
     /**
      * 分页插件配置
      * 
@@ -34,6 +44,9 @@ public class MybatisConfig {
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }
+
+    // 注意：通用的BaseEnumTypeHandler会通过@TableField注解自动应用
+    // 无需在此处手动注册TypeHandler
 
     /**
      * 自动填充处理器

@@ -1,7 +1,9 @@
 package com.zhy.mybatis.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhy.mybatis.entity.User;
+import com.zhy.mybatis.enums.UserStatus;
 
 import java.util.List;
 
@@ -45,4 +47,22 @@ public interface UserService extends IService<User> {
      * @return 是否成功
      */
     boolean deleteUser(Long id);
+
+    /**
+     * 根据状态查询用户列表（分页）
+     * 
+     * @param status 用户状态
+     * @param current 当前页
+     * @param size 每页大小
+     * @return 用户分页列表
+     */
+    IPage<User> findByStatus(UserStatus status, long current, long size);
+
+    /**
+     * 根据状态查询用户列表
+     * 
+     * @param status 用户状态
+     * @return 用户列表
+     */
+    List<User> findByStatus(UserStatus status);
 }
