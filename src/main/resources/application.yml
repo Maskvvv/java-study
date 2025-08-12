@@ -24,9 +24,10 @@ spring:
         concurrency: 1
         max-concurrency: 10
   datasource:
-    url: jdbc:mysql://${host}:3308/test
+    url: jdbc:mysql://${host}:33060/test
     username: root
     password: 1234567788
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   sleuth:
     sampler:
@@ -36,6 +37,44 @@ spring:
     base-url: http://127.0.0.1:9411/  #指定zipkin的地址
 #  jackson:
 #    date-format: yyyy-MM-dd HH:mm:ss
+
+# MyBatis配置
+mybatis:
+  # 指定mapper xml文件位置
+  mapper-locations: classpath:mapper/*.xml
+  # 指定实体类包路径
+  type-aliases-package: com.zhy.mybatis.entity
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 开启二级缓存
+    cache-enabled: true
+    # 打印SQL语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# MyBatis Plus配置
+mybatis-plus:
+  # 指定mapper xml文件位置
+  mapper-locations: classpath:mapper/*.xml
+  # 指定实体类包路径
+  type-aliases-package: com.zhy.mybatis.entity
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 开启二级缓存
+    cache-enabled: true
+    # 打印SQL语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 主键策略：自增
+      id-type: auto
+      # 逻辑删除字段
+      logic-delete-field: deleted
+      # 逻辑删除值
+      logic-delete-value: 1
+      # 逻辑未删除值
+      logic-not-delete-value: 0
 
 jodconverter:
   local:

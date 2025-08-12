@@ -63,8 +63,8 @@ public class CodeEnumDeserializer extends JsonDeserializer<SupEnum> implements C
         }
         try {
             // 通过反射调用枚举类的 values 静态方法
-            Method method = targetEnumClass.getMethod("values");
-            SupEnum[] supEnums = (SupEnum[]) method.invoke(null);
+//            Method method = targetEnumClass.getMethod("values");
+            SupEnum[] supEnums = (SupEnum[]) targetEnumClass.getEnumConstants();
             if (supEnums != null) {
                 for (SupEnum supEnum : supEnums) {
                     if (supEnum != null && supEnum.getCode() != null && supEnum.getCode().equals(code)) {
@@ -80,8 +80,9 @@ public class CodeEnumDeserializer extends JsonDeserializer<SupEnum> implements C
     }
 
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method method = StatusEnum.class.getMethod("values");
-        SupEnum[] supEnums = (SupEnum[]) method.invoke(null);
+//        Method method = StatusEnum.class.getMethod("values");
+//        SupEnum[] supEnums = (SupEnum[]) method.invoke(null);
+        StatusEnum[] supEnums = StatusEnum.class.getEnumConstants();
         for (SupEnum supEnum : supEnums) {
             if (supEnum != null && supEnum.getCode() != null && supEnum.getCode().equals(1)) {
                 System.out.println(supEnum);

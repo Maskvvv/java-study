@@ -1,6 +1,7 @@
 package com.zhy;
 
 import com.zhy.spring.scan.EnableMyRegistry;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -16,8 +17,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableMyRegistry(basePackages = "com.zhy.spring.scan.model")
 @EnableAsync
 @ServletComponentScan
-@SpringBootApplication(scanBasePackages = {"org.jodconverter.boot.autoconfigure", "org.jodconverter", "com.zhy"},
-excludeName = "com.zhy.spring.aop.study")
+@SpringBootApplication(scanBasePackages = {"org.jodconverter.boot.autoconfigure", "org.jodconverter", "com.zhy"}, excludeName = "com.zhy.spring.aop.study")
+//@MapperScan("com.zhy.mybatis.mapper")
 public class JavaStudyApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaStudyApplication.class, args);
