@@ -3,8 +3,11 @@ package com.zhy.mybatis.config;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.zhy.mybatis.entity.JsonDto;
+import com.zhy.mybatis.enums.UserStatus;
 import com.zhy.mybatis.handler.BaseEnumTypeHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.mybatis.spring.annotation.MapperScan;
@@ -29,6 +32,7 @@ public class MybatisConfig {
         return configuration -> {
             // 注册通用枚举处理器
             configuration.getTypeHandlerRegistry().setDefaultEnumTypeHandler(BaseEnumTypeHandler.class);
+            configuration.getTypeHandlerRegistry().register(JsonDto.class, JacksonTypeHandler.class);
         };
     }
 

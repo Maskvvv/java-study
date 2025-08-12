@@ -76,5 +76,7 @@ public class User implements Serializable {
 
     private TypeString typeString;
 
+    private JsonDto jsonDto;
+
 
 }
