@@ -3,6 +3,7 @@ package com.zhy.other.groovy.loader;
 import cn.hutool.core.io.IoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -17,13 +18,13 @@ import java.io.FileInputStream;
  * @author zhouhongyin
  * @since 2023/5/20 11:54
  */
-//@Component
+@Component
 public class MyLoader implements ILoader {
 
     @Autowired
     private AutowiredBean autowiredBean;
 
-    public String getLoaderName() throws Exception {
+    public String process() throws Exception {
         autowiredBean.print();
 
         HttpServletResponse response = getResponse();

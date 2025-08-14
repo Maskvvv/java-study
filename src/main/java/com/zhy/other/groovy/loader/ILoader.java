@@ -8,5 +8,5 @@ package com.zhy.other.groovy.loader;
  */
 public interface ILoader {
 
-    String getLoaderName() throws Exception;
+    String process() throws Exception;
 }
